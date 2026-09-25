@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Every Heartbeat ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+}
+
+/* BLURRED BACKGROUND */
+.blur-bg{
+    position:fixed;
+    inset:-35px;
+    width:calc(100% + 70px);
+    height:calc(100% + 70px);
+    object-fit:cover;
+    object-position:center;
+    filter:blur(25px) brightness(0.45);
+    transform:scale(1.08);
+    z-index:-3;
+}
+
+/* MAIN PHOTO - NO CROP */
+.main-photo{
+    position:fixed;
+    top:50%;
+    left:50%;
+    width:100%;
+    height:100%;
+    transform:translate(-50%,-50%);
+    object-fit:contain;
+    object-position:center center;
+    z-index:-2;
+    filter:brightness(0.72);
+}
+
+/* DARK ROMANTIC OVERLAY */
+.overlay{
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,0,100,0.08),
+            rgba(0,0,0,0.48)
+        ),
+        linear-gradient(
+            135deg,
+            rgba(20,0,20,0.25),
+            rgba(0,0,0,0.55)
+        );
+    z-index:-1;
+}
+
+/* CONTENT */
+.container{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.card{
+    width:min(700px,92%);
+    padding:45px 30px;
+    border-radius:30px;
+    background:rgba(15,0,20,0.48);
+    border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    box-shadow:
+        0 25px 80px rgba(0,0,0,0.55),
+        inset 0 0 40px rgba(255,0,100,0.08);
+}
+
+/* HEART */
+.heart-area{
+    position:relative;
+    width:180px;
+    height:180px;
+    margin:0 auto 25px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.heart{
+    font-size:85px;
+    animation:heartbeat 1.2s infinite;
+    filter:
+        drop-shadow(0 0 12px #ff2f75)
+        drop-shadow(0 0 35px rgba(255,0,100,0.8));
+    z-index:5;
+}
+
+.ring{
+    position:absolute;
+    width:100px;
+    height:100px;
+    border:2px solid rgba(255,70,130,0.7);
+    border-radius:50%;
+    animation:ring 2.5s infinite;
+}
+
+.ring:nth-child(2){
+    animation-delay:.8s;
+}
+
+.ring:nth-child(3){
+    animation-delay:1.6s;
+}
+
+@keyframes heartbeat{
+    0%,100%{
+        transform:scale(1);
+    }
+    15%{
+        transform:scale(1.18);
+    }
+    30%{
+        transform:scale(1);
+    }
+    45%{
+        transform:scale(1.12);
+    }
+    60%{
+        transform:scale(1);
+    }
+}
+
+@keyframes ring{
+    0%{
+        transform:scale(.6);
+        opacity:.9;
+    }
+    100%{
+        transform:scale(2.2);
+        opacity:0;
+    }
+}
+
+/* TEXT */
+.small-title{
+    color:#ff9bbb;
+    font-size:15px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+h1{
+    color:white;
+    font-size:clamp(30px,6vw,58px);
+    line-height:1.15;
+    margin-bottom:20px;
+    text-shadow:0 0 25px rgba(255,70,130,0.5);
+}
+
+.message{
+    color:rgba(255,255,255,0.88);
+    font-size:clamp(15px,2.5vw,19px);
+    line-height:1.7;
+    max-width:570px;
+    margin:auto;
+}
+
+.names{
+    margin-top:22px;
+    font-size:22px;
+    color:#ffb6cf;
+    font-weight:bold;
+    text-shadow:0 0 15px rgba(255,70,130,0.8);
+}
+
+/* BUTTON */
+.continue-btn{
+    margin-top:30px;
+    padding:15px 30px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#ff2f75,#ff0066);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:
+        0 10px 30px rgba(255,0,100,0.4);
+    transition:.3s ease;
+}
+
+.continue-btn:hover{
+    transform:translateY(-3px) scale(1.04);
+    box-shadow:
+        0 15px 40px rgba(255,0,100,0.65);
+}
+
+/* FLOATING HEARTS */
+.floating-heart{
+    position:fixed;
+    bottom:-40px;
+    color:#ff6b9d;
+    font-size:20px;
+    opacity:.7;
+    animation:floatUp linear forwards;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(0) scale(.7);
+        opacity:0;
+    }
+    15%{
+        opacity:.8;
+    }
+    to{
+        transform:translateY(-110vh) translateX(50px) scale(1.3);
+        opacity:0;
+    }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+    .main-photo{
+        width:100%;
+        height:100%;
+        object-fit:contain;
+        transform:translate(-50%,-50%);
+    }
+
+    .card{
+        padding:32px 20px;
+        border-radius:25px;
+    }
+
+    .heart-area{
+        width:145px;
+        height:145px;
+        margin-bottom:15px;
+    }
+
+    .heart{
+        font-size:70px;
+    }
+
+    h1{
+        font-size:32px;
+    }
+
+    .message{
+        font-size:15px;
+        line-height:1.6;
+    }
+
+    .names{
+        font-size:19px;
+    }
+
+    .continue-btn{
+        padding:14px 24px;
+        font-size:15px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- BLURRED PHOTO BACKGROUND -->
+
+<img
+src="./photos/Chhaya%2010.jpeg"
+class="blur-bg"
+alt=""
+
+>
+
+<!-- FULL PHOTO - NO CROP -->
+
+<img
+src="./photos/Chhaya%2010.jpeg"
+class="main-photo"
+alt="Chhaya"
+
+>
+
+<div class="overlay"></div>
+
+<div class="container">
+
+```
+<div class="card">
+
+    <div class="small-title">
+        A Little Moment
+    </div>
+
+    <div class="heart-area">
+
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+
+        <div class="heart">
+            ❤️
+        </div>
+
+    </div>
+
+    <h1>
+        Every Heartbeat<br>
+        Has A Story...
+    </h1>
+
+    <p class="message">
+        And somewhere between all those little moments,
+        two hearts found their way to each other.
+    </p>
+
+    <div class="names">
+        Rohit ❤️ Chhaya
+    </div>
+
+    <button class="continue-btn" onclick="continueStory()">
+        💕 Continue Our Story →
+    </button>
+
+</div>
+```
+
+</div>
+
+<script>
+
+/* CONTINUE */
+function continueStory(){
+
+    document.body.style.transition = "opacity 0.8s ease";
+    document.body.style.opacity = "0";
+
+    setTimeout(function(){
+        window.location.href = "./propose.html";
+    },800);
+}
+
+
+/* FLOATING HEARTS */
+function createHeart(){
+
+    const heart = document.createElement("div");
+
+    heart.className = "floating-heart";
+
+    const hearts = ["❤️","💕","💗","💖","💘"];
+
+    heart.innerHTML =
+        hearts[Math.floor(Math.random()*hearts.length)];
+
+    heart.style.left =
+        Math.random()*100 + "vw";
+
+    heart.style.fontSize =
+        (14 + Math.random()*18) + "px";
+
+    heart.style.animationDuration =
+        (5 + Math.random()*5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(function(){
+        heart.remove();
+    },10000);
+}
+
+setInterval(createHeart,500);
+
+</script>
+
+</body>
+</html>

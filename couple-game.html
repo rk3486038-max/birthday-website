@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Couple Game ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#08000f;
+    color:white;
+}
+
+/* BACKGROUND */
+
+.background{
+    position:fixed;
+    inset:0;
+
+    background:
+        linear-gradient(
+            rgba(8,0,18,.72),
+            rgba(8,0,18,.9)
+        ),
+        url("./photos/Chhaya%2010.jpeg")
+        center/cover no-repeat;
+
+    transform:scale(1.03);
+
+    z-index:-3;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,50,150,.17),
+            transparent 48%
+        );
+
+    z-index:-2;
+}
+
+/* STARS */
+
+.star{
+    position:fixed;
+
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+
+    background:white;
+
+    opacity:.7;
+
+    animation:
+        twinkle 2s infinite alternate;
+
+    z-index:-1;
+}
+
+@keyframes twinkle{
+
+    from{
+        opacity:.2;
+        transform:scale(.7);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.4);
+    }
+}
+
+/* CONTAINER */
+
+.container{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:25px 15px;
+}
+
+.card{
+    width:min(850px,96%);
+
+    padding:35px 25px 40px;
+
+    text-align:center;
+
+    border-radius:30px;
+
+    background:rgba(20,5,30,.7);
+
+    border:1px solid rgba(255,130,200,.25);
+
+    box-shadow:
+        0 0 50px rgba(255,40,150,.16),
+        inset 0 0 40px rgba(255,80,170,.04);
+
+    backdrop-filter:blur(13px);
+}
+
+/* STEP */
+
+.step{
+    display:inline-block;
+
+    padding:7px 18px;
+
+    border-radius:30px;
+
+    background:rgba(255,60,150,.1);
+
+    border:1px solid rgba(255,110,190,.35);
+
+    color:#ff9bc7;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(34px,6vw,58px);
+
+    margin-bottom:10px;
+
+    text-shadow:
+        0 0 25px rgba(255,50,150,.75);
+}
+
+.subtitle{
+    color:#e8cbdc;
+
+    font-size:16px;
+
+    line-height:1.6;
+
+    margin-bottom:25px;
+}
+
+/* GAME TOP */
+
+.game-top{
+    max-width:650px;
+
+    margin:0 auto 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.progress-text{
+    color:#ffc0da;
+
+    font-size:14px;
+}
+
+.score{
+    padding:9px 18px;
+
+    border-radius:30px;
+
+    background:rgba(255,60,150,.1);
+
+    border:1px solid rgba(255,100,180,.25);
+
+    color:#ffd2e5;
+
+    font-weight:bold;
+}
+
+/* PROGRESS */
+
+.progress{
+    width:100%;
+
+    height:7px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    max-width:650px;
+
+    margin:0 auto 30px;
+}
+
+.progress-bar{
+    width:20%;
+
+    height:100%;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff197d,
+            #b72cff
+        );
+
+    transition:.5s;
+}
+
+/* QUESTION */
+
+.question-box{
+    max-width:650px;
+
+    margin:auto;
+
+    padding:28px 22px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.045);
+
+    border:1px solid rgba(255,130,190,.16);
+}
+
+.question-number{
+    color:#ff8fbe;
+
+    font-size:13px;
+
+    letter-spacing:1px;
+
+    margin-bottom:12px;
+}
+
+.question{
+    font-size:24px;
+
+    line-height:1.4;
+
+    margin-bottom:25px;
+}
+
+/* OPTIONS */
+
+.options{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:13px;
+}
+
+.option{
+    border:1px solid rgba(255,130,190,.22);
+
+    background:rgba(255,255,255,.05);
+
+    color:#ffe5ef;
+
+    padding:15px 12px;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.25s;
+}
+
+.option:hover{
+    transform:translateY(-3px);
+
+    background:rgba(255,50,150,.13);
+
+    border-color:
+        rgba(255,120,190,.55);
+}
+
+.option.correct{
+    background:rgba(30,200,110,.2);
+
+    border-color:#5cffad;
+
+    color:#baffd9;
+}
+
+.option.wrong{
+    background:rgba(255,40,80,.2);
+
+    border-color:#ff6680;
+
+    color:#ffd0d8;
+}
+
+.option.disabled{
+    pointer-events:none;
+}
+
+/* RESULT */
+
+.result{
+    display:none;
+
+    max-width:650px;
+
+    margin:25px auto 0;
+
+    padding:30px 20px;
+
+    border-radius:22px;
+
+    background:rgba(255,50,150,.08);
+
+    border:1px solid rgba(255,100,180,.25);
+
+    animation:resultIn .7s ease;
+}
+
+@keyframes resultIn{
+
+    from{
+        opacity:0;
+        transform:scale(.9);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.result-heart{
+    font-size:70px;
+
+    filter:
+        drop-shadow(
+            0 0 20px #ff197d
+        );
+
+    animation:
+        heartBeat .9s infinite;
+}
+
+@keyframes heartBeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    30%{
+        transform:scale(1.18);
+    }
+
+    50%{
+        transform:scale(1);
+    }
+
+    70%{
+        transform:scale(1.12);
+    }
+}
+
+.result h2{
+    margin:12px 0;
+
+    color:#ff9ac7;
+}
+
+.result p{
+    color:#ead4df;
+
+    line-height:1.7;
+
+    font-size:16px;
+}
+
+/* BUTTON */
+
+.next-btn{
+    margin-top:25px;
+
+    padding:14px 32px;
+
+    border:0;
+
+    border-radius:40px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff197d,
+            #9d2cff
+        );
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 25px rgba(255,40,140,.35);
+
+    transition:.3s;
+}
+
+.next-btn:hover{
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    box-shadow:
+        0 0 38px rgba(255,40,140,.65);
+}
+
+/* HEARTS */
+
+.float-heart{
+    position:fixed;
+
+    bottom:-30px;
+
+    pointer-events:none;
+
+    z-index:20;
+
+    animation:
+        floatUp linear forwards;
+}
+
+@keyframes floatUp{
+
+    0%{
+        transform:
+            translateY(0)
+            scale(.5);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translateY(-110vh)
+            rotate(25deg)
+            scale(1.3);
+
+        opacity:0;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .container{
+        padding:18px 10px;
+    }
+
+    .card{
+        padding:27px 14px 32px;
+
+        border-radius:24px;
+    }
+
+    h1{
+        font-size:34px;
+    }
+
+    .subtitle{
+        font-size:14px;
+    }
+
+    .game-top{
+        margin-bottom:18px;
+    }
+
+    .question{
+        font-size:20px;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+    }
+
+    .option{
+        padding:14px 10px;
+    }
+
+    .next-btn{
+        width:90%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="overlay"></div>
+
+<div class="container">
+
+<div class="card">
+
+<div class="step">
+STEP 7 • COUPLE GAME
+</div>
+
+<h1>How Well Do You Know Us? 💕</h1>
+
+<p class="subtitle">
+Let's see how well you remember
+<br>
+our little love story. ❤️
+</p>
+
+
+<!-- GAME TOP -->
+
+<div class="game-top">
+
+<div class="progress-text" id="progressText">
+Question 1 of 5
+</div>
+
+<div class="score">
+❤️ Score: <span id="score">0</span>
+</div>
+
+</div>
+
+
+<div class="progress">
+
+<div
+class="progress-bar"
+id="progressBar"
+></div>
+
+</div>
+
+
+<!-- QUESTION -->
+
+<div
+class="question-box"
+id="questionBox"
+>
+
+<div
+class="question-number"
+id="questionNumber"
+>
+QUESTION 1
+</div>
+
+<div
+class="question"
+id="question"
+>
+When did our story officially begin?
+</div>
+
+<div
+class="options"
+id="options"
+></div>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div
+class="result"
+id="result"
+>
+
+<div class="result-heart">
+❤️
+</div>
+
+<h2 id="resultTitle">
+Our Love Story Wins!
+</h2>
+
+<p id="resultText">
+</p>
+
+<button
+class="next-btn"
+onclick="continueNext()"
+>
+Measure Our Love ❤️
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+
+/* STARS */
+
+for(let i=0;i<90;i++){
+
+    const star=
+        document.createElement("div");
+
+    star.className="star";
+
+    star.style.left=
+        Math.random()*100+"%";
+
+    star.style.top=
+        Math.random()*100+"%";
+
+    star.style.animationDelay=
+        Math.random()*3+"s";
+
+    document.body.appendChild(star);
+}
+
+
+/* QUESTIONS */
+
+const questions=[
+
+{
+    question:
+    "When did our story officially begin?",
+
+    options:[
+        "09/02/2026",
+        "15/02/2026",
+        "14/02/2026",
+        "01/01/2026"
+    ],
+
+    answer:0
+},
+
+{
+    question:
+    "When did we have our first conversation?",
+
+    options:[
+        "09/02/2026",
+        "10/02/2026",
+        "15/02/2026",
+        "20/02/2026"
+    ],
+
+    answer:2
+},
+
+{
+    question:
+    "What is the one thing that makes our story special?",
+
+    options:[
+        "The memories",
+        "The laughter",
+        "The little moments",
+        "All of these ❤️"
+    ],
+
+    answer:3
+},
+
+{
+    question:
+    "If our story had one destination, where would it be?",
+
+    options:[
+        "Somewhere beautiful",
+        "Our favorite place",
+        "Forever ♾️",
+        "The stars"
+    ],
+
+    answer:2
+},
+
+{
+    question:
+    "What does Rohit choose every single time?",
+
+    options:[
+        "Happiness",
+        "Success",
+        "Chhaya ❤️",
+        "Sleep 😴"
+    ],
+
+    answer:2
+}
+
+];
+
+
+let currentQuestion=0;
+
+let score=0;
+
+let answered=false;
+
+
+/* ELEMENTS */
+
+const questionNumber=
+document.getElementById("questionNumber");
+
+const question=
+document.getElementById("question");
+
+const options=
+document.getElementById("options");
+
+const progressText=
+document.getElementById("progressText");
+
+const progressBar=
+document.getElementById("progressBar");
+
+const scoreElement=
+document.getElementById("score");
+
+const questionBox=
+document.getElementById("questionBox");
+
+const result=
+document.getElementById("result");
+
+const resultText=
+document.getElementById("resultText");
+
+
+/* LOAD QUESTION */
+
+function loadQuestion(){
+
+    answered=false;
+
+    const q=
+        questions[currentQuestion];
+
+    questionNumber.textContent=
+        "QUESTION "
+        +(currentQuestion+1);
+
+    question.textContent=
+        q.question;
+
+    progressText.textContent=
+        "Question "
+        +(currentQuestion+1)
+        +" of "
+        +questions.length;
+
+    progressBar.style.width=
+        ((currentQuestion+1)
+        /questions.length*100)
+        +"%";
+
+    options.innerHTML="";
+
+    q.options.forEach(
+        function(optionText,index){
+
+            const button=
+                document.createElement("button");
+
+            button.className="option";
+
+            button.textContent=
+                optionText;
+
+            button.onclick=function(){
+
+                selectAnswer(
+                    index,
+                    button
+                );
+
+            };
+
+            options.appendChild(button);
+
+        }
+    );
+}
+
+
+/* ANSWER */
+
+function selectAnswer(
+    selectedIndex,
+    selectedButton
+){
+
+    if(answered) return;
+
+    answered=true;
+
+    const q=
+        questions[currentQuestion];
+
+    const allOptions=
+        document.querySelectorAll(".option");
+
+    allOptions.forEach(
+        function(button){
+
+            button.classList.add(
+                "disabled"
+            );
+
+        }
+    );
+
+
+    if(selectedIndex===q.answer){
+
+        selectedButton.classList.add(
+            "correct"
+        );
+
+        score++;
+
+        scoreElement.textContent=
+            score;
+
+        heartBurst(15);
+
+    }else{
+
+        selectedButton.classList.add(
+            "wrong"
+        );
+
+        allOptions[
+            q.answer
+        ].classList.add(
+            "correct"
+        );
+
+    }
+
+
+    setTimeout(function(){
+
+        currentQuestion++;
+
+        if(
+            currentQuestion<
+            questions.length
+        ){
+
+            loadQuestion();
+
+        }else{
+
+            showResult();
+
+        }
+
+    },1000);
+}
+
+
+/* RESULT */
+
+function showResult(){
+
+    questionBox.style.display=
+        "none";
+
+    result.style.display=
+        "block";
+
+    if(score===5){
+
+        resultText.innerHTML=
+        "5/5! You remembered everything. ❤️<br><br>"+
+        "Maybe the real reason you know every answer..."+
+        " is because these memories live in your heart. ♾️";
+
+    }else if(score>=3){
+
+        resultText.innerHTML=
+        score+"/5! Not bad at all. 💕<br><br>"+
+        "Some memories may need a little reminder..."+
+        " but the love is still there. ❤️";
+
+    }else{
+
+        resultText.innerHTML=
+        score+"/5! Looks like we need another memory date. 😄❤️<br><br>"+
+        "But don't worry — every beautiful story gets"+
+        " better with more memories.";
+
+    }
+
+    heartBurst(45);
+}
+
+
+/* HEART BURST */
+
+function heartBurst(amount){
+
+    for(
+        let i=0;
+        i<amount;
+        i++
+    ){
+
+        setTimeout(
+            function(){
+
+                createHeart();
+
+            },
+            i*35
+        );
+
+    }
+}
+
+
+/* FLOATING HEART */
+
+function createHeart(){
+
+    const heart=
+        document.createElement("div");
+
+    heart.className=
+        "float-heart";
+
+    const hearts=[
+        "❤️",
+        "💗",
+        "💕",
+        "💖",
+        "💘",
+        "💝"
+    ];
+
+    heart.innerHTML=
+        hearts[
+            Math.floor(
+                Math.random()*hearts.length
+            )
+        ];
+
+    heart.style.left=
+        Math.random()*100+"%";
+
+    heart.style.fontSize=
+        (14+Math.random()*20)+"px";
+
+    heart.style.animationDuration=
+        (4+Math.random()*4)+"s";
+
+    document.body.appendChild(
+        heart
+    );
+
+    setTimeout(
+        function(){
+
+            heart.remove();
+
+        },
+        8000
+    );
+}
+
+
+/* CONTINUOUS HEARTS */
+
+setInterval(
+    function(){
+
+        createHeart();
+
+    },
+    1400
+);
+
+
+/* NEXT PAGE */
+
+function continueNext(){
+
+    heartBurst(50);
+
+    setTimeout(
+        function(){
+
+            window.location.href=
+                "./love-meter.html";
+
+        },
+        1800
+    );
+}
+
+
+/* START */
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

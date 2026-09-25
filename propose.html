@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Question For Chhaya ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#12001f,#2b003d,#4b005c);
+    color:white;
+    overflow:hidden;
+}
+
+.container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:850px;
+    padding:45px 30px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:0 0 50px rgba(255,0,150,0.3);
+    text-align:center;
+}
+
+.title{
+    font-size:45px;
+    margin-bottom:30px;
+    color:#ff4fa3;
+    text-shadow:0 0 20px #ff0080;
+}
+
+.photos{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin-bottom:30px;
+}
+
+.photo-box{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    overflow:hidden;
+    border:5px solid #ff4fa3;
+    box-shadow:0 0 30px rgba(255,0,150,0.7);
+}
+
+.photo-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.question{
+    font-size:30px;
+    margin:25px 0;
+    font-weight:bold;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    position:relative;
+    min-height:70px;
+}
+
+button{
+    border:none;
+    padding:16px 30px;
+    border-radius:50px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.yes{
+    background:#ff2f92;
+    color:white;
+    box-shadow:0 0 25px rgba(255,0,150,0.8);
+}
+
+.yes:hover{
+    transform:scale(1.1);
+}
+
+.no{
+    background:white;
+    color:#ff2f92;
+    position:relative;
+}
+
+.success{
+    display:none;
+}
+
+.success h2{
+    font-size:50px;
+    color:#ff4fa3;
+    margin-bottom:20px;
+    text-shadow:0 0 20px #ff0080;
+}
+
+.success p{
+    font-size:22px;
+    margin-bottom:30px;
+}
+
+.continue{
+    background:#ff2f92;
+    color:white;
+    box-shadow:0 0 25px rgba(255,0,150,0.8);
+}
+
+.heart{
+    position:fixed;
+    bottom:-30px;
+    font-size:25px;
+    animation:float 6s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    animation:confettiFall 3s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes confettiFall{
+    0%{
+        transform:translateY(-20px) rotate(0deg);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
+@media(max-width:600px){
+
+    .card{
+        padding:30px 15px;
+    }
+
+    .title{
+        font-size:32px;
+    }
+
+    .photos{
+        gap:15px;
+    }
+
+    .photo-box{
+        width:130px;
+        height:130px;
+    }
+
+    .question{
+        font-size:22px;
+    }
+
+    .buttons{
+        gap:15px;
+    }
+
+    button{
+        padding:13px 20px;
+        font-size:15px;
+    }
+
+    .success h2{
+        font-size:35px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card" id="questionCard">
+
+<h1 class="title">A Question For Chhaya ❤️</h1>
+
+<div class="photos">
+
+<div class="photo-box">
+<img src="./photos/Rohit.jpeg" alt="Rohit">
+</div>
+
+<div class="photo-box">
+<img src="./photos/Chhaya%201.jpeg" alt="Chhaya">
+</div>
+
+</div>
+
+<div class="question">
+Chhaya, will you stay with me forever? ❤️
+</div>
+
+<div class="buttons">
+
+<button class="yes" id="yesBtn">
+Yes, Forever! ❤️
+</button>
+
+<button class="no" id="noBtn">
+No 😜
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card success" id="successCard">
+
+<h2>She Said YES! 🎉</h2>
+
+<p>
+And that's all I ever wanted to hear. ❤️
+</p>
+
+<button class="continue" id="continueBtn">
+Continue Our Love Story ❤️ →
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+const questionCard = document.getElementById("questionCard");
+const successCard = document.getElementById("successCard");
+
+const continueBtn = document.getElementById("continueBtn");
+
+
+function createHeart(){
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random()*100 + "vw";
+
+    heart.style.fontSize = (15 + Math.random()*25) + "px";
+
+    heart.style.animationDuration =
+        (4 + Math.random()*4) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },8000);
+
+}
+
+setInterval(createHeart,700);
+
+
+noBtn.addEventListener("mouseover",function(){
+
+    const maxX = window.innerWidth - noBtn.offsetWidth - 30;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 30;
+
+    noBtn.style.position = "fixed";
+
+    noBtn.style.left = Math.random()*maxX + "px";
+
+    noBtn.style.top = Math.random()*maxY + "px";
+
+});
+
+
+noBtn.addEventListener("click",function(){
+
+    const maxX = window.innerWidth - noBtn.offsetWidth - 30;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 30;
+
+    noBtn.style.position = "fixed";
+
+    noBtn.style.left = Math.random()*maxX + "px";
+
+    noBtn.style.top = Math.random()*maxY + "px";
+
+});
+
+
+function createConfetti(){
+
+    const confetti = document.createElement("div");
+
+    confetti.className = "confetti";
+
+    confetti.style.left = Math.random()*100 + "vw";
+
+    confetti.style.background =
+        ["#ff2f92","#ffcc00","#00eaff","#7cff00","#ffffff"]
+        [Math.floor(Math.random()*5)];
+
+    confetti.style.animationDuration =
+        (2 + Math.random()*2) + "s";
+
+    document.body.appendChild(confetti);
+
+    setTimeout(()=>{
+        confetti.remove();
+    },4000);
+
+}
+
+
+yesBtn.addEventListener("click",function(){
+
+    questionCard.style.display = "none";
+
+    successCard.style.display = "block";
+
+    for(let i=0;i<100;i++){
+
+        setTimeout(createConfetti,i*20);
+
+    }
+
+});
+
+
+continueBtn.addEventListener(
+    "click",
+    function(){
+
+        window.location.href =
+            "./lovequiz.html";
+
+    }
+);
+
+</script>
+
+</body>
+</html>

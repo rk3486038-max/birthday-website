@@ -1,0 +1,1399 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Special Birthday Surprise ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            color: white;
+            background: #09000f;
+        }
+
+
+        /* =====================================================
+           FULL BACKGROUND PHOTO
+        ===================================================== */
+
+        .background-blur {
+            position: fixed;
+            inset: -30px;
+
+            background-image:
+                linear-gradient(
+                    rgba(15, 0, 25, 0.45),
+                    rgba(20, 0, 30, 0.55)
+                ),
+                url("./photos/Chhaya%2010.jpeg");
+
+            background-size: cover;
+            background-position: center;
+
+            filter: blur(22px);
+            transform: scale(1.08);
+
+            z-index: -10;
+        }
+
+
+        /*
+           Main photo is NOT cropped.
+           It stays fully visible.
+        */
+
+        .background-photo {
+            position: fixed;
+
+            top: 50%;
+            left: 50%;
+
+            width: 100%;
+            height: 100%;
+
+            transform: translate(-50%, -50%);
+
+            object-fit: contain;
+            object-position: center;
+
+            z-index: -9;
+
+            opacity: 0.92;
+
+            filter: brightness(0.72);
+
+            pointer-events: none;
+        }
+
+
+        /* Dark cinematic overlay */
+
+        .dark-overlay {
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255, 0, 140, 0.08),
+                    transparent 45%
+                ),
+                linear-gradient(
+                    rgba(5, 0, 12, 0.15),
+                    rgba(8, 0, 15, 0.55)
+                );
+
+            z-index: -8;
+
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           GLOW
+        ===================================================== */
+
+        .glow {
+            position: fixed;
+
+            width: 320px;
+            height: 320px;
+
+            border-radius: 50%;
+
+            filter: blur(100px);
+
+            opacity: 0.20;
+
+            pointer-events: none;
+
+            z-index: -7;
+        }
+
+        .glow.one {
+            background: #ff1493;
+            top: -120px;
+            left: -120px;
+        }
+
+        .glow.two {
+            background: #8b00ff;
+            bottom: -120px;
+            right: -120px;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+            min-height: 100vh;
+
+            width: 100%;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 35px 15px;
+        }
+
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .card {
+            width: min(94%, 570px);
+
+            padding: 38px 28px 32px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(30, 0, 35, 0.72),
+                    rgba(12, 0, 20, 0.62)
+                );
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            border: 1px solid rgba(255,255,255,0.18);
+
+            border-radius: 32px;
+
+            box-shadow:
+                0 30px 90px rgba(0,0,0,0.55),
+                inset 0 0 35px rgba(255,255,255,0.025);
+
+            animation: cardIn 1.2s ease;
+        }
+
+
+        @keyframes cardIn {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(35px)
+                    scale(0.94);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        /* =====================================================
+           TOP BADGE
+        ===================================================== */
+
+        .badge {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 7px;
+
+            padding: 8px 15px;
+
+            margin-bottom: 17px;
+
+            border-radius: 50px;
+
+            background: rgba(255,255,255,0.08);
+
+            border: 1px solid rgba(255,255,255,0.14);
+
+            color: #ffd5ec;
+
+            font-size: 12px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #ff5cad;
+
+            box-shadow:
+                0 0 12px #ff5cad;
+
+            animation: blink 1.5s infinite;
+        }
+
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.35;
+            }
+        }
+
+
+        /* =====================================================
+           HEADING
+        ===================================================== */
+
+        .small-title {
+            font-size: 14px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            color: #ffb8dd;
+
+            margin-bottom: 10px;
+        }
+
+
+        h1 {
+            font-size:
+                clamp(38px, 9vw, 65px);
+
+            line-height: 1.08;
+
+            margin-bottom: 13px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #ff91cb,
+                    #ffffff,
+                    #dba2ff
+                );
+
+            background-size: 250%;
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: textGlow 5s linear infinite;
+        }
+
+
+        @keyframes textGlow {
+
+            0% {
+                background-position: 0%;
+            }
+
+            100% {
+                background-position: 250%;
+            }
+        }
+
+
+        .subtitle {
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            color: #f4d9e9;
+
+            max-width: 440px;
+
+            margin: auto auto 25px;
+        }
+
+
+        /* =====================================================
+           PHOTO
+        ===================================================== */
+
+        .photo-wrapper {
+
+            width: 175px;
+            height: 175px;
+
+            margin: 0 auto 22px;
+
+            padding: 5px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff4da6,
+                    #ffffff,
+                    #a855f7,
+                    #ff4da6
+                );
+
+            box-shadow:
+                0 0 30px rgba(255,50,160,0.40),
+                0 0 70px rgba(180,50,255,0.20);
+
+            animation:
+                photoFloat 4s ease-in-out infinite;
+        }
+
+
+        @keyframes photoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+
+        .photo-wrapper img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 4px solid #160019;
+
+            display: block;
+        }
+
+
+        /* =====================================================
+           SPECIAL MESSAGE
+        ===================================================== */
+
+        .special-message {
+
+            font-size: 13px;
+
+            color: #ffcce6;
+
+            margin-bottom: 18px;
+
+            opacity: 0.9;
+        }
+
+
+        /* =====================================================
+           NAME SECTION
+        ===================================================== */
+
+        .name-section {
+
+            max-width: 390px;
+
+            margin: auto;
+        }
+
+
+        .name-label {
+
+            display: block;
+
+            font-size: 15px;
+
+            color: #ffe0ef;
+
+            margin-bottom: 10px;
+        }
+
+
+        .name-input {
+
+            width: 100%;
+
+            height: 53px;
+
+            padding: 0 18px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            background:
+                rgba(255,255,255,0.09);
+
+            color: white;
+
+            outline: none;
+
+            text-align: center;
+
+            font-size: 16px;
+
+            transition: 0.3s ease;
+        }
+
+
+        .name-input::placeholder {
+            color:
+                rgba(255,255,255,0.52);
+        }
+
+
+        .name-input:focus {
+
+            border-color: #ff62b4;
+
+            background:
+                rgba(255,255,255,0.13);
+
+            box-shadow:
+                0 0 25px
+                rgba(255,70,170,0.25);
+        }
+
+
+        /* Error */
+
+        .error-message {
+
+            min-height: 22px;
+
+            margin-top: 9px;
+
+            font-size: 13px;
+
+            color: #ff91bd;
+
+            opacity: 0;
+
+            transition: 0.3s ease;
+        }
+
+
+        .error-message.show {
+
+            opacity: 1;
+
+            animation:
+                shake 0.35s ease;
+        }
+
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-6px);
+            }
+
+            75% {
+                transform: translateX(6px);
+            }
+        }
+
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
+
+        .start-btn {
+
+            width: 100%;
+
+            max-width: 390px;
+
+            min-height: 56px;
+
+            margin-top: 4px;
+
+            border: none;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff3f9f,
+                    #b52cff
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 13px 35px
+                rgba(255,40,150,0.35);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .start-btn:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 20px 45px
+                rgba(255,40,150,0.50);
+        }
+
+
+        .start-btn:active {
+
+            transform:
+                scale(0.97);
+        }
+
+
+        .start-btn:disabled {
+
+            opacity: 0.9;
+
+            cursor: default;
+        }
+
+
+        /* =====================================================
+           BOTTOM
+        ===================================================== */
+
+        .bottom-text {
+
+            margin-top: 20px;
+
+            font-size: 12px;
+
+            color:
+                rgba(255,255,255,0.55);
+        }
+
+
+        .secret-text {
+
+            margin-top: 8px;
+
+            font-size: 11px;
+
+            color:
+                rgba(255,190,220,0.45);
+        }
+
+
+        /* =====================================================
+           FLOATING HEARTS
+        ===================================================== */
+
+        .heart {
+
+            position: fixed;
+
+            bottom: -30px;
+
+            pointer-events: none;
+
+            z-index: 20;
+
+            animation:
+                floatHeart linear forwards;
+        }
+
+
+        @keyframes floatHeart {
+
+            0% {
+
+                transform:
+                    translateY(0)
+                    scale(0.7)
+                    rotate(0deg);
+
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            100% {
+
+                transform:
+                    translateY(-110vh)
+                    scale(1.3)
+                    rotate(360deg);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* =====================================================
+           SPARKLES
+        ===================================================== */
+
+        .sparkle {
+
+            position: fixed;
+
+            width: 4px;
+            height: 4px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            box-shadow:
+                0 0 10px
+                rgba(255,255,255,0.9);
+
+            pointer-events: none;
+
+            animation:
+                sparkleMove linear infinite;
+        }
+
+
+        @keyframes sparkleMove {
+
+            0% {
+
+                transform:
+                    translateY(100vh)
+                    scale(0.3);
+
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            100% {
+
+                transform:
+                    translateY(-10vh)
+                    scale(1);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* =====================================================
+           SUCCESS HEART BURST
+        ===================================================== */
+
+        .burst-heart {
+
+            position: fixed;
+
+            left: 50%;
+            top: 50%;
+
+            pointer-events: none;
+
+            z-index: 100;
+
+            font-size: 25px;
+
+            animation:
+                burst 1.4s ease-out forwards;
+        }
+
+
+        @keyframes burst {
+
+            from {
+
+                transform:
+                    translate(-50%, -50%)
+                    scale(0.5);
+
+                opacity: 1;
+            }
+
+            to {
+
+                transform:
+                    translate(
+                        calc(-50% + var(--x)),
+                        calc(-50% + var(--y))
+                    )
+                    scale(1.4)
+                    rotate(180deg);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* =====================================================
+           INTRO SCREEN
+        ===================================================== */
+
+        .intro {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #260020,
+                    #08000d
+                );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            z-index: 200;
+
+            transition:
+                opacity 1s ease;
+        }
+
+
+        .intro-content {
+            text-align: center;
+        }
+
+
+        .intro-heart {
+
+            font-size: 70px;
+
+            animation:
+                introHeart 1.4s infinite;
+        }
+
+
+        .intro-text {
+
+            margin-top: 10px;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+            color: #ffd2e8;
+        }
+
+
+        @keyframes introHeart {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.22);
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .main {
+
+                align-items: flex-start;
+
+                padding:
+                    25px 12px 35px;
+            }
+
+
+            .card {
+
+                padding:
+                    30px 18px;
+
+                border-radius: 26px;
+            }
+
+
+            .badge {
+
+                font-size: 9px;
+
+                letter-spacing: 1px;
+            }
+
+
+            .small-title {
+
+                font-size: 10px;
+
+                letter-spacing: 2px;
+            }
+
+
+            h1 {
+
+                font-size:
+                    clamp(37px, 12vw, 55px);
+            }
+
+
+            .subtitle {
+
+                font-size: 14px;
+            }
+
+
+            .photo-wrapper {
+
+                width: 145px;
+                height: 145px;
+            }
+
+
+            .name-input {
+
+                height: 51px;
+            }
+
+
+            .start-btn {
+
+                min-height: 54px;
+
+                font-size: 15px;
+            }
+        }
+
+
+        @media (max-height: 700px) {
+
+            .main {
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="background-blur"></div>
+
+    <img
+        class="background-photo"
+        src="./photos/Chhaya%2010.jpeg"
+        alt=""
+    >
+
+    <div class="dark-overlay"></div>
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
+
+    <!-- =====================================================
+         INTRO
+    ====================================================== -->
+
+    <div class="intro" id="intro">
+
+        <div class="intro-content">
+
+            <div class="intro-heart">
+                ❤️
+            </div>
+
+            <div class="intro-text">
+                A little surprise is waiting...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main">
+
+        <section class="card">
+
+
+            <div class="badge">
+
+                <span class="badge-dot"></span>
+
+                Made With Love
+
+                <span>❤️</span>
+
+            </div>
+
+
+            <div class="small-title">
+                A Special Day For Someone Special
+            </div>
+
+
+            <h1>
+                Happy Birthday Chhaya
+                ❤️
+            </h1>
+
+
+            <p class="subtitle">
+
+                Today isn't just another day...
+
+                It's a little journey filled with
+                memories, love and surprises,
+                created especially for you. ✨
+
+            </p>
+
+
+            <!-- PHOTO -->
+
+            <div class="photo-wrapper">
+
+                <img
+                    src="./photos/Chhaya%201.jpeg"
+                    alt="Chhaya"
+                >
+
+            </div>
+
+
+            <div class="special-message">
+
+                ✨ Someone very special is about to unlock
+                something magical... ✨
+
+            </div>
+
+
+            <!-- NAME -->
+
+            <div class="name-section">
+
+                <label
+                    class="name-label"
+                    for="nameInput"
+                >
+
+                    💕 First, tell me your name
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="nameInput"
+                    class="name-input"
+                    placeholder="Enter your name..."
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+
+
+                <div
+                    id="errorMessage"
+                    class="error-message"
+                >
+
+                    This surprise is only for Chhaya ❤️
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="button"
+                    class="start-btn"
+                    onclick="startJourney()"
+                >
+
+                    🎁 Open Your Birthday Surprise →
+
+                </button>
+
+            </div>
+
+
+            <div class="bottom-text">
+
+                Made with ❤️ especially for Chhaya
+
+            </div>
+
+
+            <div class="secret-text">
+
+                🔐 A little secret awaits beyond this door...
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+
+        /* =====================================================
+           INTRO
+        ====================================================== */
+
+        window.addEventListener("load", function () {
+
+            setTimeout(function () {
+
+                const intro =
+                    document.getElementById("intro");
+
+                intro.style.opacity = "0";
+
+                setTimeout(function () {
+
+                    intro.style.display = "none";
+
+                }, 1000);
+
+            }, 1200);
+
+        });
+
+
+
+        /* =====================================================
+           FLOATING HEARTS
+        ====================================================== */
+
+        function createHeart() {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className = "heart";
+
+            const hearts = [
+                "❤️",
+                "💖",
+                "💕",
+                "💗",
+                "💓",
+                "💞",
+                "💘"
+            ];
+
+            heart.innerHTML =
+                hearts[
+                    Math.floor(
+                        Math.random() * hearts.length
+                    )
+                ];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.fontSize =
+                (12 + Math.random() * 18) + "px";
+
+            heart.style.animationDuration =
+                (5 + Math.random() * 5) + "s";
+
+            document.body.appendChild(heart);
+
+
+            setTimeout(function () {
+
+                heart.remove();
+
+            }, 10000);
+        }
+
+
+        setInterval(createHeart, 850);
+
+
+
+        /* =====================================================
+           SPARKLES
+        ====================================================== */
+
+        function createSparkle() {
+
+            const sparkle =
+                document.createElement("div");
+
+            sparkle.className = "sparkle";
+
+            sparkle.style.left =
+                Math.random() * 100 + "vw";
+
+            sparkle.style.animationDuration =
+                (6 + Math.random() * 8) + "s";
+
+            sparkle.style.animationDelay =
+                Math.random() * 5 + "s";
+
+            document.body.appendChild(sparkle);
+
+
+            setTimeout(function () {
+
+                sparkle.remove();
+
+            }, 16000);
+        }
+
+
+        for (let i = 0; i < 30; i++) {
+
+            createSparkle();
+
+        }
+
+
+
+        /* =====================================================
+           HEART BURST
+        ====================================================== */
+
+        function heartBurst() {
+
+            const symbols = [
+                "❤️",
+                "💖",
+                "💕",
+                "💗",
+                "✨"
+            ];
+
+
+            for (let i = 0; i < 28; i++) {
+
+                const heart =
+                    document.createElement("div");
+
+                heart.className =
+                    "burst-heart";
+
+                heart.innerHTML =
+                    symbols[
+                        Math.floor(
+                            Math.random() *
+                            symbols.length
+                        )
+                    ];
+
+
+                const angle =
+                    Math.random() * Math.PI * 2;
+
+                const distance =
+                    100 + Math.random() * 250;
+
+
+                heart.style.setProperty(
+                    "--x",
+                    Math.cos(angle) * distance + "px"
+                );
+
+
+                heart.style.setProperty(
+                    "--y",
+                    Math.sin(angle) * distance + "px"
+                );
+
+
+                document.body.appendChild(heart);
+
+
+                setTimeout(function () {
+
+                    heart.remove();
+
+                }, 1500);
+            }
+        }
+
+
+
+        /* =====================================================
+           NAME VALIDATION
+        ====================================================== */
+
+        function startJourney() {
+
+            const input =
+                document.getElementById("nameInput");
+
+            const error =
+                document.getElementById("errorMessage");
+
+            const button =
+                document.querySelector(".start-btn");
+
+
+            const name =
+                input.value.trim();
+
+
+            /*
+                ONLY CHHAYA ACCEPTED
+            */
+
+            if (
+                name.toLowerCase() !==
+                "chhaya"
+            ) {
+
+                error.classList.add("show");
+
+                input.style.borderColor =
+                    "#ff4f9d";
+
+
+                input.focus();
+
+
+                setTimeout(function () {
+
+                    input.style.borderColor =
+                        "rgba(255,255,255,0.20)";
+
+                }, 1200);
+
+
+                return;
+            }
+
+
+
+            /* =================================================
+               CORRECT NAME
+            ================================================= */
+
+            error.classList.remove("show");
+
+            input.style.borderColor =
+                "#ff65b5";
+
+
+            button.innerHTML =
+                "❤️ Welcome Chhaya...";
+
+
+            button.disabled = true;
+
+
+            heartBurst();
+
+
+            /*
+                Small delay makes the
+                transition feel magical.
+            */
+
+            setTimeout(function () {
+
+                window.location.href =
+                    "./cake.html";
+
+            }, 1300);
+
+        }
+
+
+
+        /* =====================================================
+           ENTER KEY
+        ====================================================== */
+
+        document
+            .getElementById("nameInput")
+            .addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key === "Enter"
+                    ) {
+
+                        startJourney();
+
+                    }
+
+                }
+            );
+
+
+    </script>
+
+</body>
+</html>
+```

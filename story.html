@@ -1,0 +1,994 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Love Story ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            background: #100008;
+            overflow-x: hidden;
+        }
+
+        /* =========================================
+           BACKGROUND
+           ========================================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255, 55, 120, 0.22),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 70%,
+                    rgba(255, 0, 90, 0.18),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #170009,
+                    #3d0019,
+                    #100005
+                );
+
+            z-index: -20;
+        }
+
+        /* =========================================
+           FLOATING HEARTS
+           ========================================= */
+
+        .heart {
+            position: fixed;
+
+            bottom: -50px;
+
+            color: #ff5c91;
+
+            font-size: 20px;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            z-index: 1;
+
+            animation:
+                floatHeart linear forwards;
+        }
+
+        @keyframes floatHeart {
+
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(0deg)
+                    scale(.7);
+
+                opacity: 0;
+            }
+
+            15% {
+                opacity: .8;
+            }
+
+            100% {
+                transform:
+                    translateY(-110vh)
+                    rotate(360deg)
+                    scale(1.3);
+
+                opacity: 0;
+            }
+        }
+
+        /* =========================================
+           HERO
+           ========================================= */
+
+        .hero {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            position: relative;
+        }
+
+        .hero-content {
+
+            max-width: 850px;
+
+            animation:
+                heroAppear 1.5s ease;
+        }
+
+        @keyframes heroAppear {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(50px)
+                    scale(.95);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        .hero-heart {
+
+            font-size: 80px;
+
+            animation:
+                heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .hero h1 {
+
+            font-size:
+                clamp(45px, 9vw, 90px);
+
+            margin: 20px 0;
+
+            text-shadow:
+                0 0 30px
+                rgba(255, 70, 130, .7);
+        }
+
+        .hero p {
+
+            font-size:
+                clamp(18px, 3vw, 25px);
+
+            line-height: 1.7;
+
+            color: #ffdce8;
+
+            max-width: 700px;
+
+            margin: auto;
+        }
+
+        .scroll-text {
+
+            position: absolute;
+
+            bottom: 30px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            color: #ffc5d9;
+
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            animation:
+                scrollPulse 1.5s infinite;
+        }
+
+        @keyframes scrollPulse {
+
+            0%,
+            100% {
+                opacity: .5;
+                transform:
+                    translateX(-50%)
+                    translateY(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform:
+                    translateX(-50%)
+                    translateY(8px);
+            }
+        }
+
+        /* =========================================
+           STORY SECTION
+           ========================================= */
+
+        .story-section {
+
+            width: min(1000px, 92%);
+
+            margin: auto;
+
+            padding:
+                100px 0
+                80px;
+        }
+
+        .section-title {
+
+            text-align: center;
+
+            margin-bottom: 90px;
+        }
+
+        .section-title h2 {
+
+            font-size:
+                clamp(35px, 6vw, 60px);
+
+            margin-bottom: 15px;
+
+            text-shadow:
+                0 0 20px
+                rgba(255, 70, 130, .6);
+        }
+
+        .section-title p {
+
+            color: #ffcddd;
+
+            font-size: 18px;
+        }
+
+        /* =========================================
+           TIMELINE
+           ========================================= */
+
+        .timeline {
+
+            position: relative;
+
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 0;
+            bottom: 0;
+
+            width: 3px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    transparent,
+                    #ff5c91,
+                    #ff1744,
+                    #ff5c91,
+                    transparent
+                );
+
+            transform:
+                translateX(-50%);
+
+            box-shadow:
+                0 0 15px
+                rgba(255, 60, 120, .6);
+        }
+
+        /* =========================================
+           STORY CARD
+           ========================================= */
+
+        .story-item {
+
+            width: 50%;
+
+            padding:
+                20px 45px;
+
+            position: relative;
+
+            opacity: 0;
+
+            transform:
+                translateY(60px);
+
+            transition:
+                opacity .8s ease,
+                transform .8s ease;
+        }
+
+        .story-item.show {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+        .story-item:nth-child(odd) {
+
+            left: 0;
+
+            text-align: right;
+        }
+
+        .story-item:nth-child(even) {
+
+            left: 50%;
+
+            text-align: left;
+        }
+
+        /* Timeline dot */
+
+        .story-item::after {
+
+            content: "❤️";
+
+            position: absolute;
+
+            top: 28px;
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: #ff1744;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 18px;
+
+            box-shadow:
+                0 0 20px
+                rgba(255, 50, 110, .8);
+
+            z-index: 3;
+        }
+
+        .story-item:nth-child(odd)::after {
+
+            right: -21px;
+        }
+
+        .story-item:nth-child(even)::after {
+
+            left: -21px;
+        }
+
+        /* =========================================
+           CARD
+           ========================================= */
+
+        .story-card {
+
+            padding: 28px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.12),
+                    rgba(255,255,255,.04)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,.15);
+
+            backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 15px 40px
+                rgba(0,0,0,.35);
+
+            transition:
+                .4s ease;
+        }
+
+        .story-card:hover {
+
+            transform:
+                translateY(-8px)
+                scale(1.02);
+
+            box-shadow:
+                0 20px 50px
+                rgba(255,30,100,.18);
+        }
+
+        .story-number {
+
+            display: inline-block;
+
+            padding:
+                7px 14px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,75,130,.2);
+
+            color: #ff9fc0;
+
+            font-size: 13px;
+
+            margin-bottom: 15px;
+        }
+
+        .story-card h3 {
+
+            font-size: 27px;
+
+            margin-bottom: 12px;
+
+            color: #fff;
+        }
+
+        .story-card p {
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            color: #ffdce8;
+        }
+
+        /* =========================================
+           FINAL MESSAGE
+           ========================================= */
+
+        .final-message {
+
+            text-align: center;
+
+            padding:
+                80px 20px
+                120px;
+        }
+
+        .final-message .big-heart {
+
+            font-size: 80px;
+
+            animation:
+                heartbeat 1.3s infinite;
+        }
+
+        .final-message h2 {
+
+            font-size:
+                clamp(35px, 7vw, 65px);
+
+            margin:
+                20px 0;
+
+            text-shadow:
+                0 0 25px
+                rgba(255,60,130,.7);
+        }
+
+        .final-message p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #ffd7e4;
+
+            line-height: 1.8;
+
+            font-size: 18px;
+        }
+
+        /* =========================================
+           NEXT BUTTON
+           ========================================= */
+
+        .next-btn {
+
+            margin-top: 40px;
+
+            padding:
+                16px 30px;
+
+            border: none;
+
+            border-radius: 35px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff4f91,
+                    #ff1744
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 30px
+                rgba(255,0,80,.35);
+
+            transition: .3s;
+        }
+
+        .next-btn:hover {
+
+            transform:
+                scale(1.08);
+
+            box-shadow:
+                0 15px 40px
+                rgba(255,0,80,.55);
+        }
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 700px) {
+
+            .hero {
+
+                min-height: 90vh;
+            }
+
+            .hero-heart {
+
+                font-size: 60px;
+            }
+
+            .timeline::before {
+
+                left: 18px;
+            }
+
+            .story-item,
+            .story-item:nth-child(even),
+            .story-item:nth-child(odd) {
+
+                width: 100%;
+
+                left: 0;
+
+                padding:
+                    20px 0 20px 55px;
+
+                text-align: left;
+            }
+
+            .story-item::after,
+            .story-item:nth-child(odd)::after,
+            .story-item:nth-child(even)::after {
+
+                left: -3px;
+
+                right: auto;
+
+                width: 42px;
+
+                height: 42px;
+            }
+
+            .story-card {
+
+                padding: 22px;
+            }
+
+            .story-card h3 {
+
+                font-size: 23px;
+            }
+
+            .story-card p {
+
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background -->
+
+    <div class="background"></div>
+
+    <!-- =========================================
+         HERO
+         ========================================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-heart">
+                ❤️
+            </div>
+
+            <h1>
+                Our Love Story
+            </h1>
+
+            <p>
+                Some stories are written in books...
+                <br>
+                ours is written in little moments,
+                beautiful memories and lots of love. ❤️
+            </p>
+
+        </div>
+
+        <div class="scroll-text">
+            ↓ SCROLL TO OUR STORY ↓
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         STORY
+         ========================================= -->
+
+    <section class="story-section">
+
+        <div class="section-title">
+
+            <h2>
+                From Then To Forever ❤️
+            </h2>
+
+            <p>
+                Every moment became a part of our story.
+            </p>
+
+        </div>
+
+
+        <div class="timeline">
+
+            <!-- Story 1 -->
+
+            <div class="story-item">
+
+                <div class="story-card">
+
+                    <span class="story-number">
+                        Chapter 01
+                    </span>
+
+                    <h3>
+                        The Beginning 🌸
+                    </h3>
+
+                    <p>
+                        Every beautiful story has a beginning.
+                        And somehow, our story became one of
+                        my favorite chapters of life.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Story 2 -->
+
+            <div class="story-item">
+
+                <div class="story-card">
+
+                    <span class="story-number">
+                        Chapter 02
+                    </span>
+
+                    <h3>
+                        Getting Closer 💕
+                    </h3>
+
+                    <p>
+                        Slowly, conversations became longer,
+                        smiles became more special and
+                        your presence started meaning more.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Story 3 -->
+
+            <div class="story-item">
+
+                <div class="story-card">
+
+                    <span class="story-number">
+                        Chapter 03
+                    </span>
+
+                    <h3>
+                        Special Memories 📸
+                    </h3>
+
+                    <p>
+                        Little moments turned into memories
+                        that I would never want to forget.
+                        Every picture has a story behind it.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Story 4 -->
+
+            <div class="story-item">
+
+                <div class="story-card">
+
+                    <span class="story-number">
+                        Chapter 04
+                    </span>
+
+                    <h3>
+                        You Became Special ❤️
+                    </h3>
+
+                    <p>
+                        Somewhere between all those little
+                        moments, you became someone I never
+                        wanted to lose.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Story 5 -->
+
+            <div class="story-item">
+
+                <div class="story-card">
+
+                    <span class="story-number">
+                        Chapter 05
+                    </span>
+
+                    <h3>
+                        Today 🎂
+                    </h3>
+
+                    <p>
+                        Today we have another beautiful memory
+                        to celebrate — your birthday.
+                        And I hope this is just another chapter
+                        of many more to come.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Story 6 -->
+
+            <div class="story-item">
+
+                <div class="story-card">
+
+                    <span class="story-number">
+                        Chapter 06
+                    </span>
+
+                    <h3>
+                        Forever ♾️
+                    </h3>
+
+                    <p>
+                        The story isn't ending here.
+                        There are still countless memories
+                        waiting for us.
+                        This is just the beginning. ❤️
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         FINAL
+         ========================================= -->
+
+    <section class="final-message">
+
+        <div class="big-heart">
+            ❤️
+        </div>
+
+        <h2>
+            Our Story Continues...
+        </h2>
+
+        <p>
+            And now it's time to open the next chapter —
+            the memories that made our journey even more
+            beautiful. 📸❤️
+        </p>
+
+        <!-- LINK TO MEMORIES.HTML -->
+
+        <button
+            class="next-btn"
+            onclick="goToMemories()"
+        >
+            Continue To Our Memories 📸 →
+        </button>
+
+    </section>
+
+
+    <script>
+
+        /* =========================================
+           FLOATING HEARTS
+           ========================================= */
+
+        function createHeart() {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className = "heart";
+
+            const symbols = [
+                "❤️",
+                "💕",
+                "💗",
+                "💖",
+                "💓"
+            ];
+
+            heart.innerHTML =
+                symbols[
+                    Math.floor(
+                        Math.random() *
+                        symbols.length
+                    )
+                ];
+
+            heart.style.left =
+                Math.random() * 100 + "%";
+
+            heart.style.fontSize =
+                (14 + Math.random() * 25) + "px";
+
+            heart.style.animationDuration =
+                (5 + Math.random() * 5) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 10000);
+        }
+
+        setInterval(createHeart, 800);
+
+
+        /* =========================================
+           SCROLL ANIMATION
+           ========================================= */
+
+        const storyItems =
+            document.querySelectorAll(
+                ".story-item"
+            );
+
+        const observer =
+            new IntersectionObserver(
+                (entries) => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add(
+                                "show"
+                            );
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.15
+                }
+            );
+
+        storyItems.forEach(item => {
+
+            observer.observe(item);
+
+        });
+
+
+        /* =========================================
+           NEXT PAGE
+           ========================================= */
+
+        function goToMemories() {
+
+            window.location.href =
+                "memories.html";
+
+        }
+
+    </script>
+
+</body>
+</html>
+```

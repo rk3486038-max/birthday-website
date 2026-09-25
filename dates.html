@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Special Moments ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    font-family:Arial,sans-serif;
+    overflow-x:hidden;
+}
+
+/* ===============================
+   BLURRED BACKGROUND
+================================ */
+
+.blur-bg{
+    position:fixed;
+    inset:-35px;
+    width:calc(100% + 70px);
+    height:calc(100% + 70px);
+
+    object-fit:cover;
+    object-position:center;
+
+    filter:blur(25px) brightness(.42);
+
+    transform:scale(1.08);
+
+    z-index:-3;
+}
+
+
+/* ===============================
+   MAIN PHOTO - NO CROP
+================================ */
+
+.main-photo{
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    width:100%;
+    height:100%;
+
+    transform:translate(-50%,-50%);
+
+    object-fit:contain;
+    object-position:center;
+
+    filter:brightness(.72);
+
+    z-index:-2;
+}
+
+
+/* ===============================
+   DARK OVERLAY
+================================ */
+
+.overlay{
+    position:fixed;
+    inset:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(30,0,25,.30),
+            rgba(0,0,0,.60)
+        );
+
+    z-index:-1;
+}
+
+
+/* ===============================
+   MAIN CONTAINER
+================================ */
+
+.container{
+    min-height:100vh;
+
+    padding:
+        35px
+        15px
+        50px;
+
+    display:flex;
+
+    justify-content:center;
+}
+
+.content{
+    width:min(850px,95%);
+
+    text-align:center;
+}
+
+
+/* ===============================
+   HEADER
+================================ */
+
+.badge{
+
+    display:inline-block;
+
+    padding:8px 17px;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,80,140,.15);
+
+    color:#ffabc7;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    margin-bottom:14px;
+}
+
+
+h1{
+
+    color:white;
+
+    font-size:
+        clamp(
+            32px,
+            6vw,
+            55px
+        );
+
+    text-shadow:
+        0 0 25px
+        rgba(255,50,120,.5);
+
+    margin-bottom:10px;
+}
+
+
+.subtitle{
+
+    color:
+        rgba(255,255,255,.78);
+
+    line-height:1.6;
+
+    font-size:15px;
+
+    margin-bottom:40px;
+}
+
+
+/* ===============================
+   TIMELINE
+================================ */
+
+.timeline{
+
+    position:relative;
+
+    max-width:750px;
+
+    margin:auto;
+}
+
+
+/* CENTER LINE */
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:0;
+
+    bottom:0;
+
+    width:2px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(255,100,160,.8),
+            transparent
+        );
+
+    transform:
+        translateX(-50%);
+}
+
+
+/* ===============================
+   EVENT
+================================ */
+
+.event{
+
+    position:relative;
+
+    width:50%;
+
+    padding:
+        0
+        35px
+        45px;
+}
+
+
+.event:nth-child(odd){
+
+    left:0;
+
+    text-align:right;
+}
+
+
+.event:nth-child(even){
+
+    left:50%;
+
+    text-align:left;
+}
+
+
+/* ===============================
+   TIMELINE DOT
+================================ */
+
+.dot{
+
+    position:absolute;
+
+    top:5px;
+
+    width:17px;
+    height:17px;
+
+    border-radius:50%;
+
+    background:#ff3d7a;
+
+    box-shadow:
+        0 0 10px #ff3d7a,
+        0 0 25px
+        rgba(255,0,100,.8);
+}
+
+
+.event:nth-child(odd) .dot{
+
+    right:-8px;
+}
+
+
+.event:nth-child(even) .dot{
+
+    left:-8px;
+}
+
+
+/* ===============================
+   EVENT CARD
+================================ */
+
+.event-card{
+
+    padding:22px;
+
+    border-radius:22px;
+
+    background:
+        rgba(15,0,20,.60);
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,.4);
+
+    transition:.35s ease;
+}
+
+
+.event-card:hover{
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(255,100,160,.5);
+
+    box-shadow:
+        0 20px 55px
+        rgba(255,0,100,.18);
+}
+
+
+/* ===============================
+   DATE
+================================ */
+
+.date{
+
+    color:#ff86ad;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    margin-bottom:9px;
+}
+
+
+/* ===============================
+   ICON
+================================ */
+
+.icon{
+
+    font-size:30px;
+
+    margin-bottom:8px;
+}
+
+
+.event-card h2{
+
+    color:white;
+
+    font-size:20px;
+
+    margin-bottom:8px;
+}
+
+
+.event-card p{
+
+    color:
+        rgba(255,255,255,.75);
+
+    line-height:1.6;
+
+    font-size:14px;
+}
+
+
+/* ===============================
+   END MESSAGE
+================================ */
+
+.end-message{
+
+    margin:
+        25px
+        auto
+        0;
+
+    max-width:600px;
+
+    padding:28px;
+
+    border-radius:25px;
+
+    background:
+        rgba(15,0,20,.62);
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
+}
+
+
+.end-message h2{
+
+    color:white;
+
+    margin-bottom:10px;
+}
+
+
+.end-message p{
+
+    color:
+        rgba(255,255,255,.78);
+
+    line-height:1.7;
+}
+
+
+/* ===============================
+   BUTTON
+================================ */
+
+.next-btn{
+
+    margin-top:25px;
+
+    padding:
+        15px
+        30px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff2f75,
+            #ff0066
+        );
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 30px
+        rgba(255,0,100,.4);
+
+    transition:.3s;
+}
+
+
+.next-btn:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.04);
+}
+
+
+/* ===============================
+   FLOATING HEARTS
+================================ */
+
+.floating-heart{
+
+    position:fixed;
+
+    bottom:-30px;
+
+    pointer-events:none;
+
+    animation:
+        floatUp
+        linear
+        forwards;
+
+    z-index:5;
+}
+
+
+@keyframes floatUp{
+
+    from{
+
+        transform:
+            translateY(0)
+            scale(.7);
+
+        opacity:0;
+    }
+
+    15%{
+
+        opacity:.7;
+    }
+
+    to{
+
+        transform:
+            translateY(-110vh)
+            translateX(40px)
+            scale(1.2);
+
+        opacity:0;
+    }
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media(max-width:650px){
+
+    .container{
+
+        padding-top:25px;
+    }
+
+
+    /* Move timeline line to left */
+
+    .timeline::before{
+
+        left:15px;
+    }
+
+
+    .event,
+    .event:nth-child(odd),
+    .event:nth-child(even){
+
+        width:100%;
+
+        left:0;
+
+        padding-left:45px;
+
+        padding-right:0;
+
+        text-align:left;
+    }
+
+
+    .event:nth-child(odd) .dot,
+    .event:nth-child(even) .dot{
+
+        left:7px;
+
+        right:auto;
+    }
+
+
+    .event-card{
+
+        padding:19px;
+    }
+
+
+    .event-card h2{
+
+        font-size:18px;
+    }
+
+
+    .main-photo{
+
+        object-fit:contain;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =================================
+     BLURRED BACKGROUND PHOTO
+================================= -->
+
+<img
+src="./photos/Chhaya%2010.jpeg"
+class="blur-bg"
+alt=""
+
+>
+
+<!-- =================================
+     MAIN PHOTO
+     NO CROPPING
+================================= -->
+
+<img
+src="./photos/Chhaya%2010.jpeg"
+class="main-photo"
+alt="Chhaya"
+
+>
+
+<div class="overlay"></div>
+
+<!-- =================================
+     MAIN CONTENT
+================================= -->
+
+<div class="container">
+
+<div class="content">
+
+<!-- HEADER -->
+
+<div class="badge">
+    💕 OUR JOURNEY
+</div>
+
+
+<h1>
+    Our Special Moments
+</h1>
+
+
+<p class="subtitle">
+
+    Some moments become memories.<br>
+
+    Some memories become forever. ❤️
+
+</p>
+
+
+
+<!-- =================================
+     TIMELINE
+================================= -->
+
+<div class="timeline">
+
+
+    <!-- =================================
+         1. ENGAGEMENT
+    ================================= -->
+
+    <div class="event">
+
+        <div class="dot"></div>
+
+
+        <div class="event-card">
+
+            <div class="date">
+                09/02/2026
+            </div>
+
+
+            <div class="icon">
+                💍
+            </div>
+
+
+            <h2>
+                Our Engagement
+            </h2>
+
+
+            <p>
+
+                09 February 2026 —
+                a beautiful day that became
+                one of the most special chapters
+                of our journey together. ❤️
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         2. FIRST CONVERSATION
+    ================================= -->
+
+    <div class="event">
+
+        <div class="dot"></div>
+
+
+        <div class="event-card">
+
+            <div class="date">
+                15/02/2026
+            </div>
+
+
+            <div class="icon">
+                💬
+            </div>
+
+
+            <h2>
+                Our First Conversation
+            </h2>
+
+
+            <p>
+
+                15 February 2026 —
+                the day our first conversation
+                became the beginning of many
+                beautiful conversations. 💕
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         3. SOMETHING SPECIAL
+    ================================= -->
+
+    <div class="event">
+
+        <div class="dot"></div>
+
+
+        <div class="event-card">
+
+            <div class="date">
+                SOMETHING SPECIAL
+            </div>
+
+
+            <div class="icon">
+                ❤️
+            </div>
+
+
+            <h2>
+                We Became "Us"
+            </h2>
+
+
+            <p>
+
+                Somewhere along the way,
+                friendship became feelings
+                and moments became memories.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         4. BEAUTIFUL MEMORIES
+    ================================= -->
+
+    <div class="event">
+
+        <div class="dot"></div>
+
+
+        <div class="event-card">
+
+            <div class="date">
+                BEAUTIFUL MEMORIES
+            </div>
+
+
+            <div class="icon">
+                📸
+            </div>
+
+
+            <h2>
+                Moments We Keep
+            </h2>
+
+
+            <p>
+
+                Every smile, every photo,
+                every little moment became
+                a part of our story.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         5. TODAY
+    ================================= -->
+
+    <div class="event">
+
+        <div class="dot"></div>
+
+
+        <div class="event-card">
+
+            <div class="date">
+                TODAY
+            </div>
+
+
+            <div class="icon">
+                🎂
+            </div>
+
+
+            <h2>
+                Your Special Day
+            </h2>
+
+
+            <p>
+
+                Today isn't just another day.
+                It's a celebration of you
+                and everything you mean to me.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         6. FUTURE
+    ================================= -->
+
+    <div class="event">
+
+        <div class="dot"></div>
+
+
+        <div class="event-card">
+
+            <div class="date">
+                THE FUTURE
+            </div>
+
+
+            <div class="icon">
+                ♾️
+            </div>
+
+
+            <h2>
+                More To Come
+            </h2>
+
+
+            <p>
+
+                This isn't the end of our story.
+                It's just another beautiful
+                chapter in forever.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =================================
+     FINAL MESSAGE
+================================= -->
+
+<div class="end-message">
+
+
+    <h2>
+        And the best part? ❤️
+    </h2>
+
+
+    <p>
+
+        Our story is still being written...
+        and I want every next chapter
+        to have you in it.
+
+    </p>
+
+
+    <button
+        class="next-btn"
+        onclick="continueStory()"
+    >
+
+        📖 Continue Our Story →
+
+    </button>
+
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+
+/* =================================
+   GO TO STORY
+================================= */
+
+function continueStory(){
+
+    document.body.style.transition =
+        "opacity .8s ease";
+
+    document.body.style.opacity =
+        "0";
+
+
+    setTimeout(function(){
+
+        window.location.href =
+            "./places.html";
+
+    },800);
+
+}
+
+
+
+/* =================================
+   FLOATING HEARTS
+================================= */
+
+function createHeart(){
+
+    const heart =
+        document.createElement("div");
+
+
+    heart.className =
+        "floating-heart";
+
+
+    const hearts =
+        [
+            "❤️",
+            "💕",
+            "💗",
+            "💖",
+            "💘"
+        ];
+
+
+    heart.innerHTML =
+        hearts[
+            Math.floor(
+                Math.random()
+                * hearts.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random()
+        * 100
+        + "vw";
+
+
+    heart.style.fontSize =
+        (
+            14
+            +
+            Math.random()
+            * 18
+        )
+        + "px";
+
+
+    heart.style.animationDuration =
+        (
+            5
+            +
+            Math.random()
+            * 5
+        )
+        + "s";
+
+
+    document.body.appendChild(
+        heart
+    );
+
+
+    setTimeout(function(){
+
+        heart.remove();
+
+    },10000);
+
+}
+
+
+setInterval(
+    createHeart,
+    600
+);
+
+</script>
+
+</body>
+</html>

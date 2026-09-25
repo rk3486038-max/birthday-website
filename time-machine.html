@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Time Machine ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    font-family:Arial,sans-serif;
+    color:white;
+    text-align:center;
+
+    background:
+        linear-gradient(
+            rgba(8,0,25,.82),
+            rgba(20,0,35,.90)
+        ),
+        url("./photos/Chhaya%2010.jpeg");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+/* BACKGROUND CLOCK */
+
+.clock-bg{
+    position:fixed;
+    width:500px;
+    height:500px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:50%;
+
+    box-shadow:
+        0 0 100px rgba(168,85,247,.15),
+        inset 0 0 100px rgba(255,45,117,.08);
+
+    pointer-events:none;
+}
+
+.clock-bg::before,
+.clock-bg::after{
+    content:"";
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform-origin:left center;
+
+    background:rgba(255,150,210,.25);
+}
+
+.clock-bg::before{
+    width:42%;
+    height:2px;
+    animation:rotateClock 12s linear infinite;
+}
+
+.clock-bg::after{
+    width:34%;
+    height:3px;
+    animation:rotateClock 60s linear infinite reverse;
+}
+
+@keyframes rotateClock{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* PAGE */
+
+.page{
+    position:relative;
+    z-index:2;
+
+    min-height:100vh;
+
+    padding:45px 20px 70px;
+}
+
+/* HEADER */
+
+.step{
+    color:#ff8fc7;
+    font-size:14px;
+    letter-spacing:4px;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(2.5rem,8vw,5rem);
+
+    color:#ffd4e8;
+
+    text-shadow:
+        0 0 15px #ff2d75,
+        0 0 35px #a855f7;
+
+    margin-bottom:12px;
+}
+
+.subtitle{
+    color:#f8dce9;
+    font-size:clamp(1rem,3vw,1.2rem);
+    line-height:1.7;
+}
+
+/* TIME MACHINE */
+
+.machine{
+    width:min(850px,94%);
+    margin:40px auto;
+
+    padding:35px 25px;
+
+    border-radius:35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.10),
+            rgba(255,45,117,.06)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.22);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.45);
+}
+
+/* DATE DISPLAY */
+
+.date-display{
+    margin-bottom:25px;
+}
+
+.date-display .date{
+    font-size:clamp(2rem,7vw,4rem);
+
+    font-weight:bold;
+
+    color:#ffb0d4;
+
+    text-shadow:
+        0 0 20px #ff2d75;
+}
+
+.date-display .label{
+    margin-top:8px;
+
+    color:#ead9e5;
+
+    font-size:16px;
+}
+
+/* MEMORY PHOTO */
+
+.photo-frame{
+    width:min(420px,90%);
+    height:280px;
+
+    margin:25px auto;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    border:
+        2px solid rgba(255,255,255,.25);
+
+    box-shadow:
+        0 0 35px rgba(255,45,117,.30);
+
+    background:rgba(0,0,0,.3);
+}
+
+.photo-frame img{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    display:block;
+
+    transition:
+        opacity .5s ease,
+        transform .7s ease;
+}
+
+/* MEMORY CONTENT */
+
+.memory-title{
+    font-size:clamp(1.5rem,5vw,2.3rem);
+
+    color:#fff;
+
+    margin:20px 0 12px;
+}
+
+.memory-text{
+    width:min(650px,95%);
+
+    margin:auto;
+
+    color:#f2dce8;
+
+    line-height:1.8;
+
+    font-size:16px;
+}
+
+/* CONTROLS */
+
+.controls{
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:30px;
+
+    flex-wrap:wrap;
+}
+
+.control-btn{
+    border:none;
+
+    padding:13px 24px;
+
+    border-radius:30px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            45deg,
+            #ff2d75,
+            #a855f7
+        );
+
+    font-size:15px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 20px rgba(255,45,117,.35);
+
+    transition:.3s;
+}
+
+.control-btn:hover{
+    transform:scale(1.06);
+}
+
+.control-btn:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* YEAR LINE */
+
+.timeline{
+    width:min(750px,95%);
+
+    height:5px;
+
+    margin:40px auto 15px;
+
+    border-radius:10px;
+
+    background:
+        rgba(255,255,255,.15);
+
+    position:relative;
+}
+
+.progress{
+    height:100%;
+
+    width:0%;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff2d75,
+            #a855f7
+        );
+
+    transition:
+        width .6s ease;
+}
+
+.timeline-dot{
+    position:absolute;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:17px;
+    height:17px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    box-shadow:
+        0 0 15px #ff4f9a;
+
+    transition:.5s;
+}
+
+/* DESCRIPTION */
+
+.quote{
+    width:min(700px,92%);
+
+    margin:25px auto 35px;
+
+    padding:25px;
+
+    border-radius:25px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    color:#ffe1ec;
+
+    line-height:1.7;
+
+    font-style:italic;
+}
+
+/* CONTINUE */
+
+.continue-btn{
+    border:none;
+
+    padding:16px 34px;
+
+    border-radius:35px;
+
+    background:
+        linear-gradient(
+            45deg,
+            #ff2d75,
+            #a855f7
+        );
+
+    color:white;
+
+    font-size:17px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 30px rgba(255,45,117,.45);
+
+    transition:.3s;
+}
+
+.continue-btn:hover{
+    transform:scale(1.07);
+
+    box-shadow:
+        0 0 45px rgba(255,45,117,.7);
+}
+
+/* HEARTS */
+
+.heart{
+    position:fixed;
+
+    top:-30px;
+
+    pointer-events:none;
+
+    z-index:10;
+
+    animation:fall 4s linear forwards;
+}
+
+@keyframes fall{
+
+    to{
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+
+        opacity:0;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+    .page{
+        padding-top:30px;
+    }
+
+    .machine{
+        padding:25px 15px;
+    }
+
+    .photo-frame{
+        height:250px;
+    }
+
+    .clock-bg{
+        width:330px;
+        height:330px;
+    }
+
+    .control-btn{
+        min-width:125px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="clock-bg"></div>
+
+<div class="page">
+
+    <div class="step">
+        STEP 2 • OUR TIME MACHINE
+    </div>
+
+    <h1>Our Time Machine 🕰️</h1>
+
+    <p class="subtitle">
+        Let's travel through the moments
+        <br>
+        that slowly became our story. ❤️
+    </p>
+
+
+    <div class="machine">
+
+        <div class="date-display">
+
+            <div
+                class="date"
+                id="date">
+                09/02/2026
+            </div>
+
+            <div
+                class="label"
+                id="dateLabel">
+                The Beginning
+            </div>
+
+        </div>
+
+
+        <div class="photo-frame">
+
+            <img
+                id="memoryPhoto"
+                src="./photos/Chhaya%201.jpeg"
+                alt="Chhaya">
+
+        </div>
+
+
+        <h2
+            class="memory-title"
+            id="memoryTitle">
+
+            The Day Our Story Began ❤️
+
+        </h2>
+
+
+        <p
+            class="memory-text"
+            id="memoryText">
+
+            Every beautiful journey has a moment
+            when everything starts to feel different.
+            This is one of those moments I will always
+            keep close to my heart.
+
+        </p>
+
+
+        <div class="controls">
+
+            <button
+                class="control-btn"
+                id="backBtn"
+                onclick="previousMemory()">
+
+                ⏪ Go Back
+
+            </button>
+
+            <button
+                class="control-btn"
+                id="nextBtn"
+                onclick="nextMemory()">
+
+                Go Forward ⏩
+
+            </button>
+
+        </div>
+
+
+        <div class="timeline">
+
+            <div
+                class="progress"
+                id="progress">
+            </div>
+
+            <div
+                class="timeline-dot"
+                style="left:0%;">
+            </div>
+
+            <div
+                class="timeline-dot"
+                style="left:50%;">
+            </div>
+
+            <div
+                class="timeline-dot"
+                style="left:100%;">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="quote">
+
+        "Some moments pass with time...
+        <br>
+        but some moments become the reason
+        we smile whenever we look back." ❤️
+
+    </div>
+
+
+    <button
+        class="continue-btn"
+        onclick="continueStory()">
+
+        🧩 Unlock Our Memories →
+
+    </button>
+
+</div>
+
+
+<script>
+
+/* =========================
+   MEMORY DATA
+========================= */
+
+const memories = [
+
+    {
+        date:"09/02/2026",
+
+        label:"The Beginning",
+
+        photo:"./photos/Chhaya%201.jpeg",
+
+        title:"The Day Our Story Began ❤️",
+
+        text:
+        "Every beautiful journey has a moment when everything starts to feel different. This is one of those moments I will always keep close to my heart."
+    },
+
+    {
+        date:"15/02/2026",
+
+        label:"Our First Conversation",
+
+        photo:"./photos/Chhaya%202.jpeg",
+
+        title:"The First Conversation 💬",
+
+        text:
+        "15 February 2026 — a simple conversation that became one of the most beautiful dates in my story. Sometimes the smallest moments create the biggest memories."
+    },
+
+    {
+        date:"FOREVER",
+
+        label:"The Future",
+
+        photo:"./photos/Chhaya%2010.jpeg",
+
+        title:"Our Story Is Still Being Written ♾️",
+
+        text:
+        "The past gave us memories, the present gives us moments, and the future gives us countless possibilities. I hope we keep creating beautiful memories together."
+    }
+
+];
+
+let currentIndex = 0;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const dateElement =
+    document.getElementById("date");
+
+const dateLabel =
+    document.getElementById("dateLabel");
+
+const memoryPhoto =
+    document.getElementById("memoryPhoto");
+
+const memoryTitle =
+    document.getElementById("memoryTitle");
+
+const memoryText =
+    document.getElementById("memoryText");
+
+const progress =
+    document.getElementById("progress");
+
+const backBtn =
+    document.getElementById("backBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+
+/* =========================
+   UPDATE MEMORY
+========================= */
+
+function updateMemory(){
+
+    const memory =
+        memories[currentIndex];
+
+    dateElement.style.opacity = "0";
+
+    memoryPhoto.style.opacity = "0";
+
+    memoryTitle.style.opacity = "0";
+
+    memoryText.style.opacity = "0";
+
+
+    setTimeout(function(){
+
+        dateElement.innerHTML =
+            memory.date;
+
+        dateLabel.innerHTML =
+            memory.label;
+
+        memoryPhoto.src =
+            memory.photo;
+
+        memoryTitle.innerHTML =
+            memory.title;
+
+        memoryText.innerHTML =
+            memory.text;
+
+
+        dateElement.style.opacity = "1";
+
+        memoryPhoto.style.opacity = "1";
+
+        memoryTitle.style.opacity = "1";
+
+        memoryText.style.opacity = "1";
+
+    },250);
+
+
+    const percentage =
+        (currentIndex /
+        (memories.length - 1)) * 100;
+
+    progress.style.width =
+        percentage + "%";
+
+
+    backBtn.disabled =
+        currentIndex === 0;
+
+    nextBtn.disabled =
+        currentIndex === memories.length - 1;
+
+}
+
+
+/* =========================
+   NEXT
+========================= */
+
+function nextMemory(){
+
+    if(
+        currentIndex <
+        memories.length - 1
+    ){
+
+        currentIndex++;
+
+        updateMemory();
+
+        createHearts(12);
+    }
+
+}
+
+
+/* =========================
+   PREVIOUS
+========================= */
+
+function previousMemory(){
+
+    if(currentIndex > 0){
+
+        currentIndex--;
+
+        updateMemory();
+
+        createHearts(8);
+    }
+
+}
+
+
+/* =========================
+   HEART EFFECT
+========================= */
+
+function createHearts(amount){
+
+    const icons = [
+        "❤️",
+        "💗",
+        "💕",
+        "💖",
+        "✨"
+    ];
+
+    for(
+        let i=0;
+        i<amount;
+        i++
+    ){
+
+        setTimeout(function(){
+
+            const heart =
+                document.createElement("div");
+
+            heart.className =
+                "heart";
+
+            heart.innerHTML =
+                icons[
+                    Math.floor(
+                        Math.random()*icons.length
+                    )
+                ];
+
+            heart.style.left =
+                Math.random()*100 + "vw";
+
+            heart.style.fontSize =
+                (15 + Math.random()*18) + "px";
+
+            heart.style.animationDuration =
+                (2.5 + Math.random()*2) + "s";
+
+            document.body.appendChild(
+                heart
+            );
+
+            setTimeout(function(){
+
+                heart.remove();
+
+            },5000);
+
+        },i*80);
+
+    }
+
+}
+
+
+/* =========================
+   CONTINUE
+========================= */
+
+function continueStory(){
+
+    createHearts(25);
+
+    document.body.style.transition =
+        "opacity .8s ease";
+
+    document.body.style.opacity =
+        "0";
+
+    setTimeout(function(){
+
+        window.location.href =
+            "./unlock-memories.html";
+
+    },800);
+
+}
+
+
+/* =========================
+   INITIAL STATE
+========================= */
+
+updateMemory();
+
+</script>
+
+</body>
+</html>

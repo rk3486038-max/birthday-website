@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Mystery Box 🎁</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#08000f;
+    color:white;
+}
+
+/* Background */
+.background{
+    position:fixed;
+    inset:0;
+
+    background:
+        linear-gradient(
+            rgba(8,0,18,.72),
+            rgba(8,0,18,.9)
+        ),
+        url("./photos/Chhaya%2010.jpeg")
+        center/cover no-repeat;
+
+    transform:scale(1.03);
+    z-index:-3;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,50,150,.18),
+            transparent 48%
+        );
+
+    z-index:-2;
+}
+
+/* Stars */
+.star{
+    position:fixed;
+
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+    background:white;
+
+    opacity:.7;
+
+    animation:
+        twinkle 2s infinite alternate;
+
+    z-index:-1;
+}
+
+@keyframes twinkle{
+    from{
+        opacity:.2;
+        transform:scale(.7);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.5);
+    }
+}
+
+/* Container */
+.container{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:30px 15px;
+}
+
+.card{
+    width:min(900px,96%);
+
+    text-align:center;
+
+    padding:35px 25px 40px;
+
+    border-radius:30px;
+
+    background:rgba(20,5,30,.68);
+
+    border:1px solid rgba(255,130,200,.25);
+
+    box-shadow:
+        0 0 50px rgba(255,40,150,.16),
+        inset 0 0 40px rgba(255,80,170,.04);
+
+    backdrop-filter:blur(13px);
+}
+
+/* Step */
+.step{
+    display:inline-block;
+
+    padding:7px 18px;
+
+    border-radius:30px;
+
+    background:rgba(255,60,150,.1);
+
+    border:1px solid rgba(255,110,190,.35);
+
+    color:#ff9bc7;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(34px,6vw,58px);
+
+    margin-bottom:10px;
+
+    text-shadow:
+        0 0 25px rgba(255,50,150,.75);
+}
+
+.subtitle{
+    color:#e8cbdc;
+
+    font-size:16px;
+
+    margin-bottom:25px;
+}
+
+/* Mystery Area */
+.mystery-area{
+    position:relative;
+
+    width:320px;
+    height:360px;
+
+    margin:0 auto 20px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Glow */
+.box-glow{
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    background:rgba(255,30,140,.16);
+
+    filter:blur(35px);
+
+    animation:
+        glowPulse 2s infinite;
+}
+
+@keyframes glowPulse{
+    0%,100%{
+        transform:scale(.8);
+        opacity:.5;
+    }
+
+    50%{
+        transform:scale(1.2);
+        opacity:1;
+    }
+}
+
+/* Gift */
+.gift{
+    position:relative;
+
+    width:190px;
+    height:155px;
+
+    cursor:pointer;
+
+    transform-style:preserve-3d;
+
+    transition:.4s;
+
+    z-index:3;
+}
+
+.gift:hover{
+    transform:translateY(-8px) scale(1.04);
+}
+
+/* Box body */
+.box-body{
+    position:absolute;
+
+    bottom:0;
+    left:0;
+
+    width:190px;
+    height:125px;
+
+    border-radius:8px 8px 15px 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff237f,
+            #a52cff
+        );
+
+    box-shadow:
+        0 15px 35px rgba(255,30,140,.35);
+}
+
+/* Vertical ribbon */
+.ribbon-v{
+    position:absolute;
+
+    left:50%;
+    transform:translateX(-50%);
+
+    width:34px;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffd1e7,
+            #fff,
+            #ffc4df
+        );
+
+    opacity:.9;
+
+    z-index:2;
+}
+
+/* Horizontal ribbon */
+.ribbon-h{
+    position:absolute;
+
+    left:0;
+    top:45px;
+
+    width:100%;
+    height:30px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffd1e7,
+            #fff,
+            #ffc4df
+        );
+
+    opacity:.9;
+
+    z-index:2;
+}
+
+/* Lid */
+.lid{
+    position:absolute;
+
+    left:-8px;
+    top:5px;
+
+    width:206px;
+    height:45px;
+
+    border-radius:8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4d99,
+            #bb2cff
+        );
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.3);
+
+    transform-origin:center bottom;
+
+    transition:
+        transform 1s ease,
+        top 1s ease;
+
+    z-index:5;
+}
+
+.lid .ribbon{
+    position:absolute;
+
+    left:50%;
+    transform:translateX(-50%);
+
+    width:34px;
+    height:100%;
+
+    background:white;
+
+    opacity:.9;
+}
+
+/* Bow */
+.bow{
+    position:absolute;
+
+    left:50%;
+    top:-27px;
+
+    transform:translateX(-50%);
+
+    width:75px;
+    height:45px;
+
+    z-index:7;
+}
+
+.bow-left,
+.bow-right{
+    position:absolute;
+
+    width:42px;
+    height:32px;
+
+    background:#ff3b91;
+
+    border-radius:
+        50% 50% 15% 50%;
+
+    border:2px solid rgba(255,255,255,.35);
+}
+
+.bow-left{
+    left:0;
+    transform:rotate(25deg);
+}
+
+.bow-right{
+    right:0;
+
+    transform:
+        scaleX(-1)
+        rotate(25deg);
+}
+
+.bow-center{
+    position:absolute;
+
+    left:50%;
+    top:12px;
+
+    transform:translateX(-50%);
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    background:#ff8fc2;
+}
+
+/* Opening */
+.gift.open .lid{
+    transform:
+        translateY(-95px)
+        rotate(-8deg);
+}
+
+.gift.open .bow{
+    transform:
+        translateX(-50%)
+        translateY(-95px)
+        rotate(-8deg);
+    transition:1s;
+}
+
+/* Sparkles */
+.sparkle{
+    position:absolute;
+
+    font-size:24px;
+
+    opacity:0;
+
+    z-index:10;
+}
+
+.gift.open .sparkle{
+    animation:
+        sparkleUp 1.8s forwards;
+}
+
+@keyframes sparkleUp{
+    0%{
+        opacity:0;
+        transform:
+            translateY(20px)
+            scale(.4);
+    }
+
+    30%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        transform:
+            translateY(-180px)
+            scale(1.3);
+    }
+}
+
+/* Hint */
+.hint{
+    color:#ffacd1;
+
+    font-size:14px;
+
+    margin-top:5px;
+
+    letter-spacing:.5px;
+}
+
+/* Surprise Content */
+.surprise{
+    max-width:700px;
+
+    margin:20px auto 0;
+
+    padding:0 15px;
+
+    display:none;
+
+    animation:
+        reveal .8s ease forwards;
+}
+
+@keyframes reveal{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.surprise-title{
+    font-size:28px;
+
+    margin-bottom:15px;
+
+    color:#ff9bc9;
+
+    text-shadow:
+        0 0 15px rgba(255,50,150,.5);
+}
+
+.message{
+    font-size:18px;
+
+    line-height:1.7;
+
+    color:#f3dce8;
+
+    margin-bottom:20px;
+}
+
+/* Photo */
+.photo-frame{
+    width:190px;
+    height:190px;
+
+    margin:20px auto;
+
+    padding:7px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3d91,
+            #9f2cff,
+            #ff8fc4
+        );
+
+    box-shadow:
+        0 0 35px rgba(255,40,150,.35);
+}
+
+.photo-frame img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    display:block;
+}
+
+/* Continue */
+.continue-btn{
+    margin-top:25px;
+
+    padding:15px 35px;
+
+    border:0;
+
+    border-radius:40px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff197d,
+            #9d2cff
+        );
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 25px rgba(255,40,140,.35);
+
+    transition:.3s;
+
+    display:none;
+}
+
+.continue-btn:hover{
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    box-shadow:
+        0 0 38px rgba(255,40,140,.65);
+}
+
+/* Hearts */
+.float-heart{
+    position:fixed;
+
+    bottom:-30px;
+
+    pointer-events:none;
+
+    z-index:20;
+
+    animation:
+        floatUp linear forwards;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:
+            translateY(0)
+            scale(.5);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translateY(-110vh)
+            rotate(25deg)
+            scale(1.3);
+
+        opacity:0;
+    }
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+    .container{
+        padding:20px 10px;
+    }
+
+    .card{
+        padding:28px 14px 35px;
+
+        border-radius:24px;
+    }
+
+    h1{
+        font-size:34px;
+    }
+
+    .subtitle{
+        font-size:14px;
+        line-height:1.5;
+    }
+
+    .mystery-area{
+        transform:scale(.82);
+
+        margin-top:-15px;
+        margin-bottom:-20px;
+    }
+
+    .message{
+        font-size:16px;
+    }
+
+    .surprise-title{
+        font-size:24px;
+    }
+
+    .continue-btn{
+        width:90%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="overlay"></div>
+
+<div class="container">
+
+<div class="card">
+
+<div class="step">
+STEP 6 • MYSTERY BOX
+</div>
+
+<h1>One Last Secret... 🎁</h1>
+
+<p class="subtitle">
+There is something inside this box...
+<br>
+but only you can reveal it. ❤️
+</p>
+
+
+<!-- Mystery Box -->
+
+<div class="mystery-area">
+
+<div class="box-glow"></div>
+
+<div
+    class="gift"
+    id="gift"
+    onclick="openGift()"
+>
+
+<div class="sparkle" style="left:-60px;top:20px;">✨</div>
+<div class="sparkle" style="right:-55px;top:30px;">💖</div>
+<div class="sparkle" style="left:-35px;top:80px;">⭐</div>
+<div class="sparkle" style="right:-35px;top:90px;">💕</div>
+
+<div class="box-body">
+
+<div class="ribbon-v"></div>
+
+<div class="ribbon-h"></div>
+
+</div>
+
+<div class="lid">
+
+<div class="ribbon"></div>
+
+<div class="bow">
+
+<div class="bow-left"></div>
+<div class="bow-right"></div>
+<div class="bow-center"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="hint" id="hint">
+Tap the gift box to open it 🎁
+</div>
+
+
+<!-- Surprise -->
+
+<div class="surprise" id="surprise">
+
+<div class="surprise-title">
+You Found My Secret ❤️
+</div>
+
+<div class="message">
+
+If I could put one thing inside this box,
+it wouldn't be a gift.
+
+It would be every memory,
+every laugh,
+every late-night conversation,
+and every moment that made
+me fall for you a little more.
+
+And somehow...
+
+you are still my favorite surprise. 💗
+
+</div>
+
+<div class="photo-frame">
+
+<img
+src="./photos/Chhaya%2010.jpeg"
+alt="Chhaya"
+>
+
+</div>
+
+<div class="message">
+
+<strong>
+The real surprise was always you. ❤️
+</strong>
+
+<br><br>
+
+Rohit ❤️ Chhaya
+<br>
+09/02/2026 → Forever ♾️
+
+</div>
+
+</div>
+
+
+<button
+id="continueBtn"
+class="continue-btn"
+onclick="continueNext()"
+>
+Let's Play Something ❤️
+</button>
+
+</div>
+</div>
+
+
+<script>
+
+/* Stars */
+
+for(let i=0;i<90;i++){
+
+    const star=
+        document.createElement("div");
+
+    star.className="star";
+
+    star.style.left=
+        Math.random()*100+"%";
+
+    star.style.top=
+        Math.random()*100+"%";
+
+    star.style.animationDelay=
+        Math.random()*3+"s";
+
+    document.body.appendChild(star);
+}
+
+
+/* Gift */
+
+let opened=false;
+
+function openGift(){
+
+    if(opened) return;
+
+    opened=true;
+
+    const gift=
+        document.getElementById("gift");
+
+    const hint=
+        document.getElementById("hint");
+
+    const surprise=
+        document.getElementById("surprise");
+
+    const continueBtn=
+        document.getElementById("continueBtn");
+
+    gift.classList.add("open");
+
+    hint.innerHTML=
+        "Opening your secret... ❤️";
+
+    /* Heart explosion */
+
+    for(let i=0;i<35;i++){
+
+        setTimeout(function(){
+
+            createHeart();
+
+        },i*35);
+
+    }
+
+    /* Reveal */
+
+    setTimeout(function(){
+
+        surprise.style.display="block";
+
+        hint.innerHTML=
+            "A little secret, just for you. 💌";
+
+        continueBtn.style.display=
+            "inline-block";
+
+    },1500);
+}
+
+
+/* Floating Hearts */
+
+function createHeart(){
+
+    const heart=
+        document.createElement("div");
+
+    heart.className=
+        "float-heart";
+
+    const hearts=[
+        "❤️",
+        "💗",
+        "💕",
+        "💖",
+        "💘",
+        "💝"
+    ];
+
+    heart.innerHTML=
+        hearts[
+            Math.floor(
+                Math.random()*hearts.length
+            )
+        ];
+
+    heart.style.left=
+        Math.random()*100+"%";
+
+    heart.style.fontSize=
+        (14+Math.random()*20)+"px";
+
+    heart.style.animationDuration=
+        (4+Math.random()*4)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(function(){
+
+        heart.remove();
+
+    },8000);
+}
+
+
+/* Continuous hearts */
+
+setInterval(function(){
+
+    createHeart();
+
+},1300);
+
+
+/* Continue */
+
+function continueNext(){
+
+    for(let i=0;i<40;i++){
+
+        setTimeout(function(){
+
+            createHeart();
+
+        },i*30);
+
+    }
+
+    setTimeout(function(){
+
+        window.location.href=
+            "./couple-game.html";
+
+    },1800);
+}
+
+</script>
+
+</body>
+</html>

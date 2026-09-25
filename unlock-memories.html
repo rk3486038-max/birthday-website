@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unlock Our Memories ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial,sans-serif;
+    color:white;
+    text-align:center;
+    overflow-x:hidden;
+
+    background:
+        linear-gradient(
+            rgba(15,0,25,.82),
+            rgba(25,0,40,.92)
+        ),
+        url("./photos/Chhaya%2010.jpeg");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+/* STARS */
+
+.stars{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+.star{
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+        0 0 10px white;
+
+    animation:
+        twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+
+    from{
+        opacity:.2;
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.5);
+    }
+
+}
+
+/* PAGE */
+
+.page{
+    position:relative;
+    z-index:2;
+
+    min-height:100vh;
+
+    padding:45px 20px 70px;
+}
+
+/* HEADER */
+
+.step{
+    color:#ff8fc7;
+
+    font-size:14px;
+
+    letter-spacing:4px;
+
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:
+        clamp(2.3rem,8vw,4.8rem);
+
+    color:#ffd3e7;
+
+    text-shadow:
+        0 0 15px #ff2d75,
+        0 0 35px #a855f7;
+
+    margin-bottom:12px;
+}
+
+.subtitle{
+    color:#f6dce8;
+
+    font-size:
+        clamp(1rem,3vw,1.2rem);
+
+    line-height:1.7;
+}
+
+/* LOCK PANEL */
+
+.lock-panel{
+
+    width:min(900px,94%);
+
+    margin:40px auto;
+
+    padding:30px 20px;
+
+    border-radius:35px;
+
+    background:
+        rgba(255,255,255,.09);
+
+    border:
+        1px solid rgba(255,255,255,.20);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.45);
+}
+
+/* PROGRESS */
+
+.progress-text{
+
+    color:#ffd4e7;
+
+    margin-bottom:12px;
+
+    font-size:15px;
+}
+
+.progress-bar{
+
+    width:100%;
+
+    height:8px;
+
+    border-radius:10px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    overflow:hidden;
+
+    margin-bottom:30px;
+}
+
+.progress-fill{
+
+    height:100%;
+
+    width:0%;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff2d75,
+            #a855f7
+        );
+
+    transition:
+        width .6s ease;
+}
+
+/* LOCK GRID */
+
+.lock-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+/* LOCK CARD */
+
+.lock-card{
+
+    padding:25px 18px;
+
+    border-radius:25px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.18);
+
+    transition:.4s;
+}
+
+.lock-card:hover{
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(255,45,117,.20);
+}
+
+.lock-icon{
+
+    font-size:55px;
+
+    margin-bottom:15px;
+}
+
+.lock-card h2{
+
+    font-size:20px;
+
+    margin-bottom:10px;
+
+    color:#fff;
+}
+
+.lock-card p{
+
+    color:#ecdce5;
+
+    line-height:1.6;
+
+    font-size:14px;
+
+    min-height:65px;
+}
+
+/* LOCKED */
+
+.locked{
+
+    filter:grayscale(.3);
+}
+
+/* UNLOCKED */
+
+.unlocked{
+
+    border-color:
+        rgba(255,110,180,.7);
+
+    box-shadow:
+        0 0 30px
+        rgba(255,45,117,.25);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,45,117,.16),
+            rgba(168,85,247,.14)
+        );
+}
+
+/* BUTTON */
+
+.unlock-btn{
+
+    margin-top:18px;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:30px;
+
+    color:white;
+
+    font-weight:bold;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            45deg,
+            #ff2d75,
+            #a855f7
+        );
+
+    box-shadow:
+        0 0 20px
+        rgba(255,45,117,.3);
+
+    transition:.3s;
+}
+
+.unlock-btn:hover{
+
+    transform:scale(1.06);
+
+}
+
+.unlock-btn:disabled{
+
+    opacity:.4;
+
+    cursor:not-allowed;
+
+    transform:none;
+}
+
+/* MEMORY */
+
+.memory{
+
+    display:none;
+
+    margin-top:20px;
+
+    animation:
+        reveal .7s ease;
+}
+
+@keyframes reveal{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(20px)
+            scale(.95);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+.memory img{
+
+    width:100%;
+
+    height:190px;
+
+    border-radius:18px;
+
+    object-fit:contain;
+
+    background:
+        rgba(0,0,0,.25);
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    margin-bottom:12px;
+}
+
+.memory h3{
+
+    color:#ffafd2;
+
+    margin-bottom:8px;
+}
+
+.memory p{
+
+    color:#f3dce8;
+
+    font-size:14px;
+
+    line-height:1.6;
+}
+
+/* CLUE */
+
+.clue{
+
+    margin-top:30px;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,45,117,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+}
+
+.clue-title{
+
+    color:#ff9dca;
+
+    font-size:14px;
+
+    letter-spacing:2px;
+
+    margin-bottom:10px;
+}
+
+.clue p{
+
+    color:#ffe1ec;
+
+    line-height:1.6;
+}
+
+/* SECRET ANSWER */
+
+.answer-area{
+
+    margin-top:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.answer-input{
+
+    width:190px;
+
+    padding:12px 16px;
+
+    border-radius:25px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    outline:none;
+
+    color:white;
+
+    text-align:center;
+
+    background:
+        rgba(0,0,0,.25);
+}
+
+.answer-input::placeholder{
+
+    color:#d9c5d1;
+}
+
+.check-btn{
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:25px;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            45deg,
+            #ff2d75,
+            #a855f7
+        );
+}
+
+/* RESULT */
+
+.result{
+
+    min-height:25px;
+
+    margin-top:12px;
+
+    color:#ffb9d8;
+
+    font-size:14px;
+}
+
+/* FINAL */
+
+.final-message{
+
+    display:none;
+
+    width:min(700px,94%);
+
+    margin:35px auto;
+
+    padding:30px 20px;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,45,117,.15),
+            rgba(168,85,247,.14)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.22);
+
+    box-shadow:
+        0 0 45px
+        rgba(255,45,117,.20);
+
+    animation:
+        reveal .8s ease;
+}
+
+.final-message h2{
+
+    color:#ffafd2;
+
+    font-size:2rem;
+
+    margin-bottom:15px;
+}
+
+.final-message p{
+
+    color:#f8dfeb;
+
+    line-height:1.8;
+}
+
+/* CONTINUE */
+
+.continue-btn{
+
+    display:none;
+
+    border:none;
+
+    padding:16px 34px;
+
+    border-radius:35px;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            45deg,
+            #ff2d75,
+            #a855f7
+        );
+
+    box-shadow:
+        0 0 30px
+        rgba(255,45,117,.45);
+
+    transition:.3s;
+}
+
+.continue-btn:hover{
+
+    transform:scale(1.07);
+
+}
+
+/* HEARTS */
+
+.falling-heart{
+
+    position:fixed;
+
+    top:-40px;
+
+    font-size:24px;
+
+    pointer-events:none;
+
+    z-index:100;
+
+    animation:
+        fall 4s linear forwards;
+}
+
+@keyframes fall{
+
+    to{
+
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+
+        opacity:0;
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    .lock-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .lock-card{
+
+        padding:25px 15px;
+    }
+
+    .memory img{
+
+        height:220px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div
+    class="stars"
+    id="stars">
+</div>
+
+
+<div class="page">
+
+    <div class="step">
+        STEP 3 • UNLOCK OUR MEMORIES
+    </div>
+
+    <h1>
+        Unlock Our Memories 🔐
+    </h1>
+
+    <p class="subtitle">
+
+        Some memories are too special
+        to be opened all at once...
+        <br>
+
+        Solve the little clues
+        and unlock them one by one. ❤️
+
+    </p>
+
+
+    <div class="lock-panel">
+
+        <div class="progress-text">
+
+            Memories Unlocked:
+            <strong id="progressText">
+                0 / 3
+            </strong>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill"
+                id="progressFill">
+            </div>
+
+        </div>
+
+
+        <div class="lock-grid">
+
+
+            <!-- MEMORY 1 -->
+
+            <div
+                class="lock-card locked"
+                id="card1">
+
+                <div
+                    class="lock-icon"
+                    id="icon1">
+
+                    🔒
+
+                </div>
+
+                <h2>
+                    The Beginning
+                </h2>
+
+                <p>
+                    A special date is hiding
+                    behind this lock.
+                </p>
+
+                <div class="clue">
+
+                    <div class="clue-title">
+                        CLUE
+                    </div>
+
+                    <p>
+                        The date when our
+                        engagement happened.
+                    </p>
+
+                </div>
+
+                <div class="answer-area">
+
+                    <input
+                        class="answer-input"
+                        id="answer1"
+                        placeholder="DD/MM/YYYY">
+
+                    <button
+                        class="check-btn"
+                        onclick="checkAnswer(1)">
+
+                        Unlock
+
+                    </button>
+
+                </div>
+
+                <div
+                    class="result"
+                    id="result1">
+                </div>
+
+
+                <div
+                    class="memory"
+                    id="memory1">
+
+                    <img
+                        src="./photos/Chhaya%201.jpeg"
+                        alt="Chhaya">
+
+                    <h3>
+                        It Started Here ❤️
+                    </h3>
+
+                    <p>
+                        09 February 2026 —
+                        one date that became
+                        a beautiful part of our story.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 2 -->
+
+            <div
+                class="lock-card locked"
+                id="card2">
+
+                <div
+                    class="lock-icon"
+                    id="icon2">
+
+                    🔒
+
+                </div>
+
+                <h2>
+                    First Conversation
+                </h2>
+
+                <p>
+                    A simple conversation
+                    became a beautiful memory.
+                </p>
+
+                <div class="clue">
+
+                    <div class="clue-title">
+                        CLUE
+                    </div>
+
+                    <p>
+                        What was the date
+                        of our first conversation?
+                    </p>
+
+                </div>
+
+                <div class="answer-area">
+
+                    <input
+                        class="answer-input"
+                        id="answer2"
+                        placeholder="DD/MM/YYYY">
+
+                    <button
+                        class="check-btn"
+                        onclick="checkAnswer(2)">
+
+                        Unlock
+
+                    </button>
+
+                </div>
+
+                <div
+                    class="result"
+                    id="result2">
+                </div>
+
+
+                <div
+                    class="memory"
+                    id="memory2">
+
+                    <img
+                        src="./photos/Chhaya%202.jpeg"
+                        alt="Chhaya">
+
+                    <h3>
+                        The Conversation 💬
+                    </h3>
+
+                    <p>
+                        15 February 2026 —
+                        a simple conversation
+                        that became something special.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 3 -->
+
+            <div
+                class="lock-card locked"
+                id="card3">
+
+                <div
+                    class="lock-icon"
+                    id="icon3">
+
+                    🔒
+
+                </div>
+
+                <h2>
+                    Forever
+                </h2>
+
+                <p>
+                    The final lock doesn't need
+                    a date... it needs a promise.
+                </p>
+
+                <div class="clue">
+
+                    <div class="clue-title">
+                        CLUE
+                    </div>
+
+                    <p>
+                        Complete this:
+                        <br>
+                        "Rohit ❤️ Chhaya = ____"
+                    </p>
+
+                </div>
+
+                <div class="answer-area">
+
+                    <input
+                        class="answer-input"
+                        id="answer3"
+                        placeholder="Your answer">
+
+                    <button
+                        class="check-btn"
+                        onclick="checkAnswer(3)">
+
+                        Unlock
+
+                    </button>
+
+                </div>
+
+                <div
+                    class="result"
+                    id="result3">
+                </div>
+
+
+                <div
+                    class="memory"
+                    id="memory3">
+
+                    <img
+                        src="./photos/Chhaya%2010.jpeg"
+                        alt="Chhaya">
+
+                    <h3>
+                        Forever & Always ♾️
+                    </h3>
+
+                    <p>
+                        Some stories don't need
+                        an ending. They simply
+                        keep creating beautiful
+                        chapters together.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FINAL MESSAGE -->
+
+    <div
+        class="final-message"
+        id="finalMessage">
+
+        <h2>
+            All Memories Unlocked! 🔓❤️
+        </h2>
+
+        <p>
+
+            You found every little piece
+            of our story.
+
+            <br><br>
+
+            But the most beautiful memory
+            is not behind these locks...
+
+            <br><br>
+
+            <strong>
+                It's every moment we haven't
+                lived yet. 💕
+            </strong>
+
+        </p>
+
+    </div>
+
+
+    <button
+        class="continue-btn"
+        id="continueBtn"
+        onclick="continueStory()">
+
+        🫀 Feel The Heartbeat →
+
+    </button>
+
+</div>
+
+
+<script>
+
+/* =========================
+   CREATE STARS
+========================= */
+
+const stars =
+    document.getElementById("stars");
+
+for(let i=0;i<90;i++){
+
+    const star =
+        document.createElement("div");
+
+    star.className = "star";
+
+    star.style.left =
+        Math.random()*100 + "%";
+
+    star.style.top =
+        Math.random()*100 + "%";
+
+    star.style.animationDelay =
+        Math.random()*2 + "s";
+
+    stars.appendChild(star);
+
+}
+
+
+/* =========================
+   ANSWERS
+========================= */
+
+const answers = {
+
+    1:[
+        "09/02/2026",
+        "09-02-2026",
+        "09022026"
+    ],
+
+    2:[
+        "15/02/2026",
+        "15-02-2026",
+        "15022026"
+    ],
+
+    3:[
+        "forever",
+        "love",
+        "together",
+        "always",
+        "forever always"
+    ]
+
+};
+
+
+let unlocked = 0;
+
+
+/* =========================
+   CHECK ANSWER
+========================= */
+
+function checkAnswer(number){
+
+    const input =
+        document.getElementById(
+            "answer" + number
+        );
+
+    const result =
+        document.getElementById(
+            "result" + number
+        );
+
+    const value =
+        input.value
+        .trim()
+        .toLowerCase();
+
+    if(
+        answers[number].includes(value)
+    ){
+
+        const card =
+            document.getElementById(
+                "card" + number
+            );
+
+        const icon =
+            document.getElementById(
+                "icon" + number
+            );
+
+        const memory =
+            document.getElementById(
+                "memory" + number
+            );
+
+
+        if(
+            !card.classList.contains(
+                "unlocked"
+            )
+        ){
+
+            unlocked++;
+
+        }
+
+
+        card.classList.remove(
+            "locked"
+        );
+
+        card.classList.add(
+            "unlocked"
+        );
+
+        icon.innerHTML =
+            "🔓";
+
+        memory.style.display =
+            "block";
+
+        result.innerHTML =
+            "✨ Memory unlocked! ❤️";
+
+        result.style.color =
+            "#8fffc1";
+
+        input.disabled =
+            true;
+
+        createHeartRain(20);
+
+        updateProgress();
+
+
+        if(unlocked === 3){
+
+            setTimeout(function(){
+
+                document.getElementById(
+                    "finalMessage"
+                ).style.display =
+                    "block";
+
+                document.getElementById(
+                    "continueBtn"
+                ).style.display =
+                    "inline-block";
+
+                createHeartRain(35);
+
+            },700);
+
+        }
+
+    }else{
+
+        result.innerHTML =
+            "💭 Not quite... try again.";
+
+        result.style.color =
+            "#ff9dbf";
+
+    }
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function updateProgress(){
+
+    document.getElementById(
+        "progressText"
+    ).innerHTML =
+        unlocked + " / 3";
+
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        (unlocked / 3 * 100) + "%";
+
+}
+
+
+/* =========================
+   HEART RAIN
+========================= */
+
+function createHeartRain(amount){
+
+    const icons = [
+        "❤️",
+        "💗",
+        "💕",
+        "💖",
+        "✨"
+    ];
+
+    for(
+        let i=0;
+        i<amount;
+        i++
+    ){
+
+        setTimeout(function(){
+
+            const heart =
+                document.createElement(
+                    "div"
+                );
+
+            heart.className =
+                "falling-heart";
+
+            heart.innerHTML =
+                icons[
+                    Math.floor(
+                        Math.random()*icons.length
+                    )
+                ];
+
+            heart.style.left =
+                Math.random()*100 + "vw";
+
+            heart.style.animationDuration =
+                (2 + Math.random()*3) + "s";
+
+            document.body.appendChild(
+                heart
+            );
+
+            setTimeout(function(){
+
+                heart.remove();
+
+            },5000);
+
+        },i*70);
+
+    }
+
+}
+
+
+/* =========================
+   CONTINUE
+========================= */
+
+function continueStory(){
+
+    createHeartRain(40);
+
+    document.body.style.transition =
+        "opacity .8s ease";
+
+    document.body.style.opacity =
+        "0";
+
+    setTimeout(function(){
+
+        window.location.href =
+            "./heartbeat-love.html";
+
+    },800);
+
+}
+
+</script>
+
+</body>
+</html>

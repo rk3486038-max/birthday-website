@@ -1,0 +1,1078 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Letter For You ❤️</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            color: white;
+
+            overflow-x: hidden;
+
+            /* Dark area behind the complete photo */
+            background-color: #120014;
+
+            /*
+                IMPORTANT:
+                contain = complete photo visible
+                No cropping
+            */
+            background-image:
+                url("./photos/Chhaya%2010.jpeg");
+
+            background-repeat: no-repeat;
+
+            background-position:
+                center center;
+
+            background-size:
+                contain;
+
+            background-attachment:
+                fixed;
+        }
+
+
+        /* ==========================================
+           VERY LIGHT OVERLAY
+           Photo remains clearly visible
+        ========================================== */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0, 0, 0, 0.08);
+
+            z-index: -1;
+
+            pointer-events: none;
+        }
+
+
+        /* ==========================================
+           FLOATING HEARTS
+        ========================================== */
+
+        .heart {
+
+            position: fixed;
+
+            bottom: -50px;
+
+            font-size: 22px;
+
+            opacity: 0.75;
+
+            pointer-events: none;
+
+            z-index: 20;
+
+            animation:
+                floatHeart linear infinite;
+        }
+
+
+        @keyframes floatHeart {
+
+            0% {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+                opacity: 0;
+            }
+
+            20% {
+
+                opacity: 0.8;
+            }
+
+            100% {
+
+                transform:
+                    translateY(-110vh)
+                    rotate(360deg);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* ==========================================
+           MAIN CONTAINER
+        ========================================== */
+
+        .container {
+
+            width: 100%;
+
+            max-width: 850px;
+
+            margin: 0 auto;
+
+            padding:
+                55px 20px 50px;
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        /* ==========================================
+           TOP HEADING
+        ========================================== */
+
+        .heading {
+
+            text-align: center;
+
+            margin-bottom: 40px;
+
+            padding:
+                22px 20px;
+
+            border-radius: 25px;
+
+            /*
+                Heading gets a small glass
+                background so it stays readable.
+            */
+
+            background:
+                rgba(20, 0, 25, 0.55);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.22);
+
+            backdrop-filter:
+                blur(7px);
+
+            -webkit-backdrop-filter:
+                blur(7px);
+
+            box-shadow:
+                0 15px 45px
+                rgba(0,0,0,0.35);
+        }
+
+
+        .small-title {
+
+            font-size: 13px;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+
+            opacity: 0.9;
+
+            margin-bottom: 15px;
+        }
+
+
+        .heading h1 {
+
+            font-family: Georgia, serif;
+
+            font-style: italic;
+
+            font-size:
+                clamp(40px, 8vw, 70px);
+
+            line-height: 1.1;
+
+            text-shadow:
+                0 0 25px
+                rgba(255,70,140,0.85);
+        }
+
+
+        .heading p {
+
+            margin-top: 15px;
+
+            opacity: 0.9;
+
+            font-size: 16px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ==========================================
+           LETTER CARD
+        ========================================== */
+
+        .letter {
+
+            position: relative;
+
+            padding:
+                50px 45px;
+
+            border-radius: 28px;
+
+            /*
+                DARK BACKGROUND ONLY
+                INSIDE LETTER
+            */
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(15, 0, 20, 0.93),
+                    rgba(45, 5, 40, 0.90)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.30);
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 25px 80px
+                rgba(0,0,0,0.75);
+
+            overflow: hidden;
+        }
+
+
+        /* ==========================================
+           PINK GLOW
+        ========================================== */
+
+        .letter::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+
+            height: 280px;
+
+            top: -140px;
+
+            right: -100px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,60,150,0.28),
+                    transparent 70%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* ==========================================
+           PURPLE GLOW
+        ========================================== */
+
+        .letter::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+
+            height: 280px;
+
+            bottom: -140px;
+
+            left: -100px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(150,50,255,0.20),
+                    transparent 70%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* ==========================================
+           DEAR CHHAYA
+        ========================================== */
+
+        .dear {
+
+            position: relative;
+
+            z-index: 3;
+
+            font-family:
+                Georgia, serif;
+
+            font-size: 29px;
+
+            font-style: italic;
+
+            margin-bottom: 30px;
+
+            color: #ffb5d1;
+
+            text-shadow:
+                0 0 15px
+                rgba(255,100,170,0.65);
+        }
+
+
+        /* ==========================================
+           LETTER CONTENT
+        ========================================== */
+
+        .letter-content {
+
+            position: relative;
+
+            z-index: 3;
+
+            font-family:
+                "Segoe Print",
+                "Comic Sans MS",
+                cursive;
+
+            font-size: 17px;
+
+            line-height: 2;
+
+            color:
+                rgba(255,255,255,0.97);
+
+            text-shadow:
+                0 2px 5px
+                rgba(0,0,0,0.55);
+
+            min-height:
+                450px;
+        }
+
+
+        /* ==========================================
+           SIGNATURE
+        ========================================== */
+
+        .signature {
+
+            position: relative;
+
+            z-index: 3;
+
+            margin-top: 40px;
+
+            text-align: right;
+        }
+
+
+        .signature-label {
+
+            font-family:
+                Georgia, serif;
+
+            font-size: 14px;
+
+            opacity: 0.75;
+
+            margin-bottom: 5px;
+        }
+
+
+        .signature-text {
+
+            font-family:
+                "Brush Script MT",
+                "Segoe Script",
+                cursive;
+
+            font-size: 40px;
+
+            font-style: italic;
+
+            color: #ff9fc2;
+
+            text-shadow:
+                0 0 18px
+                rgba(255,100,160,0.75);
+        }
+
+
+        .signature-heart {
+
+            font-size: 25px;
+        }
+
+
+        /* ==========================================
+           DIVIDER
+        ========================================== */
+
+        .divider {
+
+            text-align: center;
+
+            margin:
+                45px 0 25px;
+
+            font-size: 20px;
+
+            opacity: 0.9;
+
+            letter-spacing: 8px;
+
+            text-shadow:
+                0 0 15px
+                rgba(255,70,140,0.8);
+        }
+
+
+        /* ==========================================
+           FINAL MESSAGE
+        ========================================== */
+
+        .final-message {
+
+            text-align: center;
+
+            margin-top: 40px;
+
+            margin-bottom: 35px;
+
+            padding:
+                25px 20px;
+
+            border-radius: 25px;
+
+            background:
+                rgba(20,0,20,0.55);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            backdrop-filter:
+                blur(7px);
+
+            -webkit-backdrop-filter:
+                blur(7px);
+
+            box-shadow:
+                0 15px 45px
+                rgba(0,0,0,0.35);
+        }
+
+
+        .final-message h2 {
+
+            font-family:
+                Georgia, serif;
+
+            font-style: italic;
+
+            font-size:
+                clamp(25px, 5vw, 38px);
+
+            line-height: 1.3;
+
+            margin-bottom: 15px;
+
+            text-shadow:
+                0 0 18px
+                rgba(255,80,150,0.75);
+        }
+
+
+        .final-message p {
+
+            opacity: 0.9;
+
+            line-height: 1.8;
+        }
+
+
+        /* ==========================================
+           NEXT BUTTON
+        ========================================== */
+
+        .button-section {
+
+            text-align: center;
+
+            margin-top: 35px;
+        }
+
+
+        .next-btn {
+
+            border: none;
+
+            padding:
+                17px 35px;
+
+            border-radius: 50px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff4f81,
+                    #b83280
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 12px 35px
+                rgba(255,70,130,0.45);
+
+            transition:
+                0.3s ease;
+        }
+
+
+        .next-btn:hover {
+
+            transform:
+                translateY(-4px)
+                scale(1.04);
+
+            box-shadow:
+                0 18px 50px
+                rgba(255,70,130,0.7);
+        }
+
+
+        .next-btn:active {
+
+            transform:
+                scale(0.97);
+        }
+
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 35px;
+
+            padding-bottom: 20px;
+
+            opacity: 0.9;
+
+            font-size: 13px;
+
+            text-shadow:
+                0 2px 6px black;
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 600px) {
+
+            body {
+
+                /*
+                    Keep complete image visible
+                */
+
+                background-size:
+                    contain;
+
+                background-position:
+                    center top;
+
+                background-attachment:
+                    scroll;
+            }
+
+
+            .container {
+
+                padding:
+                    30px 14px 40px;
+            }
+
+
+            .heading {
+
+                padding:
+                    20px 15px;
+
+                margin-bottom:
+                    25px;
+
+                border-radius:
+                    22px;
+            }
+
+
+            .heading h1 {
+
+                font-size:
+                    40px;
+            }
+
+
+            .heading p {
+
+                font-size:
+                    14px;
+            }
+
+
+            .letter {
+
+                padding:
+                    35px 22px;
+
+                border-radius:
+                    22px;
+            }
+
+
+            .dear {
+
+                font-size:
+                    24px;
+
+                margin-bottom:
+                    25px;
+            }
+
+
+            .letter-content {
+
+                font-size:
+                    15px;
+
+                line-height:
+                    1.9;
+
+                min-height:
+                    500px;
+            }
+
+
+            .signature {
+
+                margin-top:
+                    35px;
+            }
+
+
+            .signature-text {
+
+                font-size:
+                    34px;
+            }
+
+
+            .final-message {
+
+                padding:
+                    22px 15px;
+            }
+
+
+            .final-message h2 {
+
+                font-size:
+                    27px;
+            }
+
+
+            .final-message p {
+
+                font-size:
+                    14px;
+            }
+
+
+            .next-btn {
+
+                width:
+                    90%;
+
+                max-width:
+                    330px;
+            }
+        }
+
+
+        /* ==========================================
+           SMALL PHONES
+        ========================================== */
+
+        @media (max-width: 380px) {
+
+            .container {
+
+                padding-left:
+                    10px;
+
+                padding-right:
+                    10px;
+            }
+
+
+            .heading h1 {
+
+                font-size:
+                    35px;
+            }
+
+
+            .letter {
+
+                padding:
+                    30px 18px;
+            }
+
+
+            .letter-content {
+
+                font-size:
+                    14px;
+
+                line-height:
+                    1.85;
+            }
+
+
+            .dear {
+
+                font-size:
+                    23px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         FLOATING HEARTS
+    ========================================== -->
+
+    <div class="heart"
+         style="left:5%; animation-duration:9s;">
+        ❤️
+    </div>
+
+    <div class="heart"
+         style="left:16%; animation-duration:12s; animation-delay:2s;">
+        💕
+    </div>
+
+    <div class="heart"
+         style="left:30%; animation-duration:10s; animation-delay:1s;">
+        💗
+    </div>
+
+    <div class="heart"
+         style="left:45%; animation-duration:13s; animation-delay:3s;">
+        ❤️
+    </div>
+
+    <div class="heart"
+         style="left:60%; animation-duration:9s;">
+        💖
+    </div>
+
+    <div class="heart"
+         style="left:75%; animation-duration:12s; animation-delay:2s;">
+        💕
+    </div>
+
+    <div class="heart"
+         style="left:88%; animation-duration:10s; animation-delay:4s;">
+        ❤️
+    </div>
+
+
+    <!-- ==========================================
+         MAIN CONTAINER
+    ========================================== -->
+
+    <main class="container">
+
+
+        <!-- ======================================
+             HEADING
+        ======================================= -->
+
+        <section class="heading">
+
+            <div class="small-title">
+                From My Heart
+            </div>
+
+            <h1>
+                A Letter For You 💌
+            </h1>
+
+            <p>
+                There are some things
+                that are easier to write than say...
+            </p>
+
+        </section>
+
+
+        <!-- ======================================
+             LETTER
+        ======================================= -->
+
+        <section class="letter">
+
+
+            <div class="dear">
+                Dear Chhaya ❤️
+            </div>
+
+
+            <div
+                class="letter-content"
+                id="letterContent">
+            </div>
+
+
+            <!-- SIGNATURE -->
+
+            <div class="signature">
+
+                <div class="signature-label">
+                    With all my love,
+                </div>
+
+                <div class="signature-text">
+
+                    Rohit
+
+                    <span class="signature-heart">
+                        ❤️
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ======================================
+             DIVIDER
+        ======================================= -->
+
+        <div class="divider">
+            ❤️ • ❤️ • ❤️
+        </div>
+
+
+        <!-- ======================================
+             FINAL MESSAGE
+        ======================================= -->
+
+        <section class="final-message">
+
+            <h2>
+                You are one of my favourite parts of life. ❤️
+            </h2>
+
+            <p>
+                And if I could choose one thing again and again,
+                <br>
+                I would choose more moments with you.
+            </p>
+
+        </section>
+
+
+        <!-- ======================================
+             NEXT BUTTON
+        ======================================= -->
+
+        <section class="button-section">
+
+            <button
+                class="next-btn"
+                onclick="goToPlaylist()">
+
+                Our Songs 🎵 →
+
+            </button>
+
+        </section>
+
+
+        <div class="footer">
+
+            Made with love,
+            especially for Chhaya ❤️
+
+        </div>
+
+
+    </main>
+
+
+    <script>
+
+        /* ==========================================
+           LETTER TEXT
+        ========================================== */
+
+        const text = `
+Chhaya, I don't know if words can ever completely explain what you mean to me.
+
+But today, I just want you to know that having you in my life has made so many ordinary moments feel special.
+
+Your smile, your little things, your presence, and even the simplest conversations with you have become memories that I want to keep close to my heart.
+
+I may not always have the perfect words, and I may not always know how to express everything I feel.
+
+But one thing I know for sure...
+
+I care about you deeply, and I want to keep creating beautiful memories with you.
+
+On your special day, I don't just wish you happiness for today.
+
+I wish you a life full of smiles, dreams coming true, peaceful moments, and everything your heart deserves.
+
+And if I get to be a small part of that journey, I will consider myself very lucky.
+
+Thank you for being you.
+
+Happy Birthday, Chhaya. ❤️
+
+With all my love,
+`;
+
+
+        const container =
+            document.getElementById(
+                "letterContent"
+            );
+
+
+        let index = 0;
+
+
+        /* ==========================================
+           TYPING EFFECT
+        ========================================== */
+
+        function typeLetter() {
+
+            if (index < text.length) {
+
+                container.innerHTML =
+                    text
+                    .substring(
+                        0,
+                        index + 1
+                    )
+                    .replace(
+                        /\n/g,
+                        "<br>"
+                    );
+
+                index++;
+
+                setTimeout(
+                    typeLetter,
+                    22
+                );
+
+            } else {
+
+                container.innerHTML =
+                    text.replace(
+                        /\n/g,
+                        "<br>"
+                    );
+            }
+        }
+
+
+        /* Start typing */
+
+        setTimeout(
+            typeLetter,
+            900
+        );
+
+
+        /* ==========================================
+           NEXT PAGE
+        ========================================== */
+
+        function goToPlaylist() {
+
+            window.location.href =
+                "playlist.html";
+
+        }
+
+    </script>
+
+</body>
+</html>
+```

@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Love Meter ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#08000f;
+    color:white;
+}
+
+/* BACKGROUND */
+
+.background{
+    position:fixed;
+    inset:0;
+    background:
+        linear-gradient(
+            rgba(8,0,18,.68),
+            rgba(8,0,18,.9)
+        ),
+        url("./photos/Chhaya%2010.jpeg")
+        center/cover no-repeat;
+    transform:scale(1.03);
+    z-index:-3;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,40,150,.2),
+            transparent 48%
+        );
+    z-index:-2;
+}
+
+/* STARS */
+
+.star{
+    position:fixed;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:white;
+    opacity:.7;
+    animation:
+        twinkle 2s infinite alternate;
+    z-index:-1;
+}
+
+@keyframes twinkle{
+    from{
+        opacity:.2;
+        transform:scale(.7);
+    }
+    to{
+        opacity:1;
+        transform:scale(1.4);
+    }
+}
+
+/* CONTAINER */
+
+.container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px 15px;
+}
+
+.card{
+    width:min(850px,96%);
+    padding:35px 25px 40px;
+    text-align:center;
+    border-radius:30px;
+    background:rgba(20,5,30,.7);
+    border:1px solid rgba(255,130,200,.25);
+    box-shadow:
+        0 0 50px rgba(255,40,150,.16),
+        inset 0 0 40px rgba(255,80,170,.04);
+    backdrop-filter:blur(13px);
+}
+
+/* STEP */
+
+.step{
+    display:inline-block;
+    padding:7px 18px;
+    border-radius:30px;
+    background:rgba(255,60,150,.1);
+    border:1px solid rgba(255,110,190,.35);
+    color:#ff9bc7;
+    font-size:12px;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(34px,6vw,58px);
+    margin-bottom:10px;
+    text-shadow:
+        0 0 25px rgba(255,50,150,.75);
+}
+
+.subtitle{
+    color:#e8cbdc;
+    font-size:16px;
+    line-height:1.6;
+    margin-bottom:28px;
+}
+
+/* METER */
+
+.meter-wrapper{
+    position:relative;
+    width:280px;
+    height:280px;
+    margin:10px auto 25px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Outer circle */
+
+.meter{
+    position:relative;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:
+        conic-gradient(
+            #ff197d 0deg,
+            #ff197d 0deg,
+            rgba(255,255,255,.08) 0deg
+        );
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow:
+        0 0 30px rgba(255,40,150,.15);
+    transition:
+        background .15s,
+        box-shadow .4s;
+}
+
+/* Inner circle */
+
+.meter::before{
+    content:"";
+    position:absolute;
+    width:205px;
+    height:205px;
+    border-radius:50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(40,5,45,.95),
+            rgba(10,0,18,.98)
+        );
+    box-shadow:
+        inset 0 0 30px rgba(255,40,150,.12);
+}
+
+/* Percentage */
+
+.percent{
+    position:relative;
+    z-index:2;
+    font-size:50px;
+    font-weight:bold;
+    color:#ff9ac7;
+    text-shadow:
+        0 0 18px rgba(255,50,150,.8);
+}
+
+.percent small{
+    font-size:20px;
+}
+
+/* Center Heart */
+
+.center-heart{
+    position:absolute;
+    z-index:3;
+    top:50%;
+    left:50%;
+    transform:
+        translate(-50%,20px);
+    font-size:55px;
+    opacity:.75;
+    pointer-events:none;
+    filter:
+        drop-shadow(
+            0 0 15px #ff197d
+        );
+    animation:
+        heartbeat .9s infinite;
+}
+
+@keyframes heartbeat{
+
+    0%,100%{
+        transform:
+            translate(-50%,20px)
+            scale(1);
+    }
+
+    30%{
+        transform:
+            translate(-50%,20px)
+            scale(1.18);
+    }
+
+    50%{
+        transform:
+            translate(-50%,20px)
+            scale(1);
+    }
+
+    70%{
+        transform:
+            translate(-50%,20px)
+            scale(1.1);
+    }
+
+}
+
+/* Instruction */
+
+.instruction{
+    color:#ffb1d1;
+    font-size:14px;
+    margin-bottom:20px;
+    letter-spacing:.5px;
+}
+
+/* PRESS BUTTON */
+
+.love-button{
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    border:2px solid rgba(255,150,210,.45);
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,50,150,.3),
+            rgba(255,30,120,.08)
+        );
+    color:white;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+    box-shadow:
+        0 0 25px rgba(255,30,140,.25);
+    transition:.2s;
+    user-select:none;
+    touch-action:none;
+}
+
+.love-button:hover{
+    transform:scale(1.04);
+    box-shadow:
+        0 0 40px rgba(255,30,140,.5);
+}
+
+.love-button:active{
+    transform:scale(.96);
+}
+
+.love-button span{
+    display:block;
+    font-size:42px;
+    margin-bottom:5px;
+}
+
+/* Status */
+
+.status{
+    min-height:30px;
+    margin-top:22px;
+    color:#f2d7e4;
+    font-size:17px;
+    line-height:1.5;
+}
+
+/* Final message */
+
+.final-message{
+    display:none;
+    margin:25px auto 0;
+    max-width:650px;
+    padding:28px 20px;
+    border-radius:22px;
+    background:
+        rgba(255,50,150,.08);
+    border:
+        1px solid
+        rgba(255,100,180,.25);
+    animation:
+        reveal .8s ease forwards;
+}
+
+@keyframes reveal{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(20px)
+            scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+.final-heart{
+    font-size:75px;
+    filter:
+        drop-shadow(
+            0 0 25px #ff197d
+        );
+    animation:
+        heartbeat .9s infinite;
+}
+
+.final-message h2{
+    font-size:30px;
+    margin:12px 0;
+    color:#ff9bc7;
+    text-shadow:
+        0 0 15px rgba(255,50,150,.6);
+}
+
+.final-message p{
+    color:#ecd5e0;
+    font-size:17px;
+    line-height:1.75;
+}
+
+/* Continue */
+
+.continue-btn{
+    margin-top:25px;
+    padding:15px 35px;
+    border:0;
+    border-radius:40px;
+    background:
+        linear-gradient(
+            135deg,
+            #ff197d,
+            #9d2cff
+        );
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:
+        0 0 25px rgba(255,40,140,.35);
+    transition:.3s;
+    display:none;
+}
+
+.continue-btn:hover{
+    transform:
+        translateY(-3px)
+        scale(1.03);
+    box-shadow:
+        0 0 40px rgba(255,40,140,.65);
+}
+
+/* FLOATING HEARTS */
+
+.float-heart{
+    position:fixed;
+    bottom:-30px;
+    pointer-events:none;
+    z-index:20;
+    animation:
+        floatUp linear forwards;
+}
+
+@keyframes floatUp{
+
+    0%{
+        transform:
+            translateY(0)
+            scale(.5);
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translateY(-110vh)
+            rotate(25deg)
+            scale(1.3);
+        opacity:0;
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .container{
+        padding:18px 10px;
+    }
+
+    .card{
+        padding:28px 14px 35px;
+        border-radius:24px;
+    }
+
+    h1{
+        font-size:34px;
+    }
+
+    .subtitle{
+        font-size:14px;
+    }
+
+    .meter-wrapper{
+        transform:scale(.9);
+        margin-top:-5px;
+        margin-bottom:-5px;
+    }
+
+    .instruction{
+        font-size:13px;
+    }
+
+    .love-button{
+        width:150px;
+        height:150px;
+    }
+
+    .final-message h2{
+        font-size:25px;
+    }
+
+    .final-message p{
+        font-size:15px;
+    }
+
+    .continue-btn{
+        width:90%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="overlay"></div>
+
+<div class="container">
+
+<div class="card">
+
+<div class="step">
+STEP 8 • LOVE METER
+</div>
+
+<h1>How Much Do We Love? ❤️</h1>
+
+<p class="subtitle">
+There is only one way to find out...
+<br>
+Hold the heart and fill our love meter. 💕
+</p>
+
+<!-- LOVE METER -->
+
+<div class="meter-wrapper">
+
+<div
+class="meter"
+id="meter"
+>
+
+<div
+class="percent"
+id="percent"
+>
+0<small>%</small>
+</div>
+
+</div>
+
+<div class="center-heart">
+❤️
+</div>
+
+</div>
+
+<div class="instruction">
+Press & hold the heart below ❤️
+</div>
+
+<!-- BUTTON -->
+
+<button
+class="love-button"
+id="loveButton"
+>
+
+<span>❤️</span>
+HOLD ME
+
+</button>
+
+<div
+class="status"
+id="status"
+>
+Our love is waiting... 💗
+</div>
+
+<!-- FINAL -->
+
+<div
+class="final-message"
+id="finalMessage"
+>
+
+<div class="final-heart">
+❤️
+</div>
+
+<h2>
+Infinite Love ♾️
+</h2>
+
+<p>
+100% is not enough.
+Because what we have
+doesn't really have a limit.
+
+It isn't 100%.
+It isn't 1000%.
+
+It's simply...
+
+<strong>
+Rohit ❤️ Chhaya
+</strong>
+
+<br><br>
+
+09/02/2026 → Forever ♾️
+
+</p>
+
+</div>
+
+<button
+class="continue-btn"
+id="continueBtn"
+onclick="continueNext()"
+>
+
+Our Final Surprise ❤️
+
+</button>
+
+</div>
+</div>
+
+
+<script>
+
+/* STARS */
+
+for(let i=0;i<90;i++){
+
+    const star=
+        document.createElement("div");
+
+    star.className="star";
+
+    star.style.left=
+        Math.random()*100+"%";
+
+    star.style.top=
+        Math.random()*100+"%";
+
+    star.style.animationDelay=
+        Math.random()*3+"s";
+
+    document.body.appendChild(star);
+}
+
+
+/* LOVE METER */
+
+const meter=
+document.getElementById("meter");
+
+const percent=
+document.getElementById("percent");
+
+const button=
+document.getElementById("loveButton");
+
+const status=
+document.getElementById("status");
+
+const finalMessage=
+document.getElementById("finalMessage");
+
+const continueBtn=
+document.getElementById("continueBtn");
+
+
+let love=0;
+let holding=false;
+let timer=null;
+
+
+/* UPDATE */
+
+function updateMeter(){
+
+    const degrees=
+        love*3.6;
+
+    meter.style.background=
+        `conic-gradient(
+            #ff197d 0deg,
+            #ff197d ${degrees}deg,
+            rgba(255,255,255,.08)
+            ${degrees}deg,
+            rgba(255,255,255,.08)
+            360deg
+        )`;
+
+    percent.innerHTML=
+        love+
+        "<small>%</small>";
+
+
+    if(love<20){
+
+        status.textContent=
+            "A little spark is growing... ✨";
+
+    }else if(love<40){
+
+        status.textContent=
+            "Our story is warming up... 💗";
+
+    }else if(love<60){
+
+        status.textContent=
+            "Now we're getting serious... ❤️";
+
+    }else if(love<80){
+
+        status.textContent=
+            "My heart is getting fuller... 💕";
+
+    }else if(love<100){
+
+        status.textContent=
+            "Almost there... don't stop! 💖";
+
+    }else{
+
+        status.textContent=
+            "Our love has reached infinity! ♾️";
+
+    }
+
+}
+
+
+/* START HOLD */
+
+function startHolding(){
+
+    if(love>=100) return;
+
+    if(holding) return;
+
+    holding=true;
+
+    button.style.boxShadow=
+        "0 0 50px rgba(255,30,140,.7)";
+
+
+    timer=setInterval(
+
+        function(){
+
+            if(love < 100){
+
+                love++;
+
+                updateMeter();
+
+
+                if(love % 5 === 0){
+
+                    createHeart();
+
+                }
+
+
+                /* FIX:
+                   100% reached hote hi
+                   completion trigger hoga
+                */
+
+                if(love === 100){
+
+                    stopHolding();
+
+                    completeLove();
+
+                }
+
+            }
+
+        },
+
+        35
+
+    );
+
+}
+
+
+/* STOP HOLD */
+
+function stopHolding(){
+
+    holding=false;
+
+    clearInterval(timer);
+
+    timer=null;
+
+    button.style.boxShadow=
+        "0 0 25px rgba(255,30,140,.25)";
+
+}
+
+
+/* COMPLETE */
+
+function completeLove(){
+
+    love=100;
+
+    updateMeter();
+
+    button.innerHTML=
+        "<span>💖</span>100% LOVE";
+
+    button.style.cursor=
+        "default";
+
+    button.disabled=true;
+
+    meter.style.boxShadow=
+        "0 0 60px rgba(255,30,140,.65)";
+
+    finalMessage.style.display=
+        "block";
+
+
+    setTimeout(
+
+        function(){
+
+            continueBtn.style.display=
+                "inline-block";
+
+        },
+
+        1000
+
+    );
+
+
+    heartExplosion(80);
+
+}
+
+
+/* MOUSE */
+
+button.addEventListener(
+    "mousedown",
+    startHolding
+);
+
+document.addEventListener(
+    "mouseup",
+    stopHolding
+);
+
+
+/* TOUCH */
+
+button.addEventListener(
+    "touchstart",
+    function(event){
+
+        event.preventDefault();
+
+        startHolding();
+
+    },
+    {passive:false}
+);
+
+button.addEventListener(
+    "touchend",
+    function(event){
+
+        event.preventDefault();
+
+        stopHolding();
+
+    },
+    {passive:false}
+);
+
+
+/* HEART */
+
+function createHeart(){
+
+    const heart=
+        document.createElement("div");
+
+    heart.className=
+        "float-heart";
+
+
+    const hearts=[
+
+        "❤️",
+        "💗",
+        "💕",
+        "💖",
+        "💘",
+        "💝"
+
+    ];
+
+
+    heart.innerHTML=
+        hearts[
+            Math.floor(
+                Math.random()*hearts.length
+            )
+        ];
+
+
+    heart.style.left=
+        Math.random()*100+"%";
+
+    heart.style.fontSize=
+        (14+Math.random()*22)+"px";
+
+    heart.style.animationDuration=
+        (3+Math.random()*4)+"s";
+
+
+    document.body.appendChild(
+        heart
+    );
+
+
+    setTimeout(
+
+        function(){
+
+            heart.remove();
+
+        },
+
+        8000
+
+    );
+
+}
+
+
+/* EXPLOSION */
+
+function heartExplosion(amount){
+
+    for(
+
+        let i=0;
+
+        i<amount;
+
+        i++
+
+    ){
+
+        setTimeout(
+
+            function(){
+
+                createHeart();
+
+            },
+
+            i*25
+
+        );
+
+    }
+
+}
+
+
+/* BACKGROUND HEARTS */
+
+setInterval(
+
+    function(){
+
+        createHeart();
+
+    },
+
+    1300
+
+);
+
+
+/* NEXT */
+
+function continueNext(){
+
+    heartExplosion(50);
+
+    setTimeout(
+
+        function(){
+
+            window.location.href=
+                "./final.html";
+
+        },
+
+        1800
+
+    );
+
+}
+
+
+/* INITIAL */
+
+updateMeter();
+
+</script>
+
+</body>
+</html>

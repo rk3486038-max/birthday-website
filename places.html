@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Little World ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    font-family:Arial,sans-serif;
+    overflow-x:hidden;
+}
+
+/* =========================
+   BLURRED BACKGROUND
+========================= */
+
+.blur-bg{
+    position:fixed;
+    inset:-35px;
+
+    width:calc(100% + 70px);
+    height:calc(100% + 70px);
+
+    object-fit:cover;
+    object-position:center;
+
+    filter:blur(25px) brightness(.38);
+
+    transform:scale(1.08);
+
+    z-index:-3;
+}
+
+
+/* =========================
+   MAIN PHOTO - NO CROP
+========================= */
+
+.main-photo{
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    width:100%;
+    height:100%;
+
+    transform:translate(-50%,-50%);
+
+    object-fit:contain;
+    object-position:center;
+
+    filter:brightness(.70);
+
+    z-index:-2;
+}
+
+
+/* =========================
+   OVERLAY
+========================= */
+
+.overlay{
+    position:fixed;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,30,100,.08),
+            rgba(0,0,0,.62)
+        );
+
+    z-index:-1;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    min-height:100vh;
+
+    padding:
+        30px
+        15px
+        50px;
+
+    display:flex;
+    justify-content:center;
+}
+
+.content{
+    width:min(900px,95%);
+    text-align:center;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.badge{
+    display:inline-block;
+
+    padding:8px 17px;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,80,140,.15);
+
+    color:#ffabc7;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    margin-bottom:14px;
+}
+
+h1{
+    color:white;
+
+    font-size:
+        clamp(
+            32px,
+            6vw,
+            55px
+        );
+
+    text-shadow:
+        0 0 25px
+        rgba(255,50,120,.55);
+
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:
+        rgba(255,255,255,.78);
+
+    font-size:15px;
+
+    line-height:1.6;
+
+    margin-bottom:30px;
+}
+
+
+/* =========================
+   MAP
+========================= */
+
+.map{
+
+    position:relative;
+
+    width:100%;
+
+    height:540px;
+
+    border-radius:35px;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(255,80,150,.18),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(140,70,255,.15),
+            transparent 25%
+        ),
+
+        rgba(10,0,18,.65);
+
+    border:
+        1px solid
+        rgba(255,255,255,.16);
+
+    backdrop-filter:blur(14px);
+
+    -webkit-backdrop-filter:blur(14px);
+
+    box-shadow:
+        0 25px 80px
+        rgba(0,0,0,.55);
+}
+
+
+/* MAP GRID */
+
+.map::before{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        45px 45px;
+
+    pointer-events:none;
+}
+
+
+/* ROAD LINES */
+
+.road{
+    position:absolute;
+
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,120,170,.35),
+            transparent
+        );
+
+    transform-origin:left center;
+}
+
+.road.one{
+    width:75%;
+    left:10%;
+    top:35%;
+    transform:rotate(12deg);
+}
+
+.road.two{
+    width:65%;
+    left:25%;
+    top:70%;
+    transform:rotate(-18deg);
+}
+
+.road.three{
+    width:60%;
+    left:15%;
+    top:55%;
+    transform:rotate(-48deg);
+}
+
+
+/* =========================
+   LOCATION PIN
+========================= */
+
+.pin{
+
+    position:absolute;
+
+    width:62px;
+    height:62px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        rgba(255,30,100,.18);
+
+    border:
+        1px solid
+        rgba(255,130,170,.7);
+
+    box-shadow:
+        0 0 15px
+        rgba(255,0,100,.35);
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    z-index:5;
+
+    animation:pulse 2.2s infinite;
+}
+
+.pin:hover{
+
+    transform:
+        scale(1.15);
+
+    background:
+        rgba(255,30,100,.35);
+
+    box-shadow:
+        0 0 30px
+        rgba(255,0,100,.65);
+}
+
+.pin span{
+    font-size:28px;
+}
+
+
+@keyframes pulse{
+
+    0%,100%{
+        box-shadow:
+            0 0 10px
+            rgba(255,0,100,.3);
+    }
+
+    50%{
+        box-shadow:
+            0 0 30px
+            rgba(255,0,100,.7);
+    }
+}
+
+
+/* PIN POSITIONS */
+
+.pin1{
+    left:13%;
+    top:22%;
+}
+
+.pin2{
+    left:68%;
+    top:18%;
+}
+
+.pin3{
+    left:45%;
+    top:43%;
+}
+
+.pin4{
+    left:18%;
+    top:67%;
+}
+
+.pin5{
+    left:72%;
+    top:70%;
+}
+
+
+/* =========================
+   PIN LABEL
+========================= */
+
+.pin-label{
+
+    position:absolute;
+
+    margin-top:85px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    white-space:nowrap;
+
+    color:white;
+
+    font-size:12px;
+
+    background:
+        rgba(10,0,15,.75);
+
+    padding:
+        6px
+        10px;
+
+    border-radius:20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+}
+
+
+/* =========================
+   POPUP
+========================= */
+
+.popup{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    background:
+        rgba(0,0,0,.72);
+
+    backdrop-filter:blur(8px);
+
+    z-index:20;
+}
+
+.popup-card{
+
+    width:min(500px,94%);
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25,0,30,.97),
+            rgba(55,5,45,.96)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,.7);
+
+    animation:popupIn .4s ease;
+}
+
+@keyframes popupIn{
+
+    from{
+        opacity:0;
+        transform:scale(.85);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.popup-icon{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.popup-card h2{
+    color:white;
+    margin-bottom:12px;
+}
+
+.popup-card p{
+    color:
+        rgba(255,255,255,.78);
+
+    line-height:1.7;
+
+    font-size:15px;
+}
+
+.close-btn{
+
+    margin-top:22px;
+
+    padding:
+        12px
+        25px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,255,255,.1);
+
+    color:white;
+
+    cursor:pointer;
+}
+
+
+/* =========================
+   CONTINUE BUTTON
+========================= */
+
+.next-btn{
+
+    margin-top:28px;
+
+    padding:
+        15px
+        30px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff2f75,
+            #ff0066
+        );
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 30px
+        rgba(255,0,100,.4);
+
+    transition:.3s;
+}
+
+.next-btn:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.04);
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.floating-heart{
+
+    position:fixed;
+
+    bottom:-30px;
+
+    pointer-events:none;
+
+    animation:
+        floatUp
+        linear
+        forwards;
+
+    z-index:30;
+}
+
+@keyframes floatUp{
+
+    from{
+        transform:
+            translateY(0)
+            scale(.7);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:.7;
+    }
+
+    to{
+        transform:
+            translateY(-110vh)
+            translateX(40px)
+            scale(1.2);
+
+        opacity:0;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:650px){
+
+    .map{
+        height:500px;
+        border-radius:25px;
+    }
+
+    .pin{
+        width:53px;
+        height:53px;
+    }
+
+    .pin span{
+        font-size:24px;
+    }
+
+    .pin-label{
+        font-size:10px;
+        margin-top:73px;
+    }
+
+    .main-photo{
+        object-fit:contain;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- BACKGROUND PHOTO -->
+
+<img
+src="./photos/Chhaya%2010.jpeg"
+class="blur-bg"
+alt=""
+
+>
+
+<!-- MAIN PHOTO - NO CROP -->
+
+<img
+src="./photos/Chhaya%2010.jpeg"
+class="main-photo"
+alt="Chhaya"
+
+>
+
+<div class="overlay"></div>
+
+<div class="container">
+
+<div class="content">
+
+<div class="badge">
+    🗺️ OUR LITTLE WORLD
+</div>
+
+
+<h1>
+    Places In Our Story
+</h1>
+
+
+<p class="subtitle">
+
+    Every place has a memory.<br>
+
+    Click the little hearts to discover them. ❤️
+
+</p>
+
+
+
+<!-- MAP -->
+
+<div class="map">
+
+
+    <div class="road one"></div>
+
+    <div class="road two"></div>
+
+    <div class="road three"></div>
+
+
+
+    <!-- PIN 1 -->
+
+    <div
+        class="pin pin1"
+        onclick="showMemory(1)"
+    >
+
+        <span>💍</span>
+
+        <div class="pin-label">
+            Engagement
+        </div>
+
+    </div>
+
+
+
+    <!-- PIN 2 -->
+
+    <div
+        class="pin pin2"
+        onclick="showMemory(2)"
+    >
+
+        <span>💬</span>
+
+        <div class="pin-label">
+            First Talk
+        </div>
+
+    </div>
+
+
+
+    <!-- PIN 3 -->
+
+    <div
+        class="pin pin3"
+        onclick="showMemory(3)"
+    >
+
+        <span>❤️</span>
+
+        <div class="pin-label">
+            Our Moment
+        </div>
+
+    </div>
+
+
+
+    <!-- PIN 4 -->
+
+    <div
+        class="pin pin4"
+        onclick="showMemory(4)"
+    >
+
+        <span>📸</span>
+
+        <div class="pin-label">
+            Memories
+        </div>
+
+    </div>
+
+
+
+    <!-- PIN 5 -->
+
+    <div
+        class="pin pin5"
+        onclick="showMemory(5)"
+    >
+
+        <span>♾️</span>
+
+        <div class="pin-label">
+            Forever
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- CONTINUE -->
+
+<button
+    class="next-btn"
+    onclick="continueStory()"
+>
+
+    📖 Continue Our Story →
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =========================
+     POPUP
+========================= -->
+
+<div
+    class="popup"
+    id="popup"
+    onclick="closeOutside(event)"
+>
+
+<div
+    class="popup-card"
+    onclick="event.stopPropagation()"
+>
+
+    <div
+        class="popup-icon"
+        id="popupIcon"
+    >
+        ❤️
+    </div>
+
+
+    <h2 id="popupTitle">
+        Our Memory
+    </h2>
+
+
+    <p id="popupText">
+        A beautiful memory.
+    </p>
+
+
+    <button
+        class="close-btn"
+        onclick="closePopup()"
+    >
+
+        Close ❤️
+
+    </button>
+
+</div>
+
+</div>
+
+<script>
+
+
+/* =========================
+   MEMORY DATA
+========================= */
+
+const memories = {
+
+    1:{
+        icon:"💍",
+        title:"Our Engagement",
+        text:
+        "09 February 2026 — a day that became one of the most beautiful chapters of our journey. A promise, a moment, and two hearts choosing each other. ❤️"
+    },
+
+    2:{
+        icon:"💬",
+        title:"Our First Conversation",
+        text:
+        "15 February 2026 — the beginning of conversations that slowly became a beautiful part of our everyday life. 💕"
+    },
+
+    3:{
+        icon:"❤️",
+        title:"Our Special Moment",
+        text:
+        "Some moments don't need a special place. They become special simply because we experienced them together."
+    },
+
+    4:{
+        icon:"📸",
+        title:"Our Memories",
+        text:
+        "Every photo holds a little piece of our story — smiles, moments, laughter and memories that we can always look back on."
+    },
+
+    5:{
+        icon:"♾️",
+        title:"Forever",
+        text:
+        "There may be many places we visit and many memories we create, but the place I want to keep forever is right beside you. ❤️"
+    }
+
+};
+
+
+/* =========================
+   SHOW MEMORY
+========================= */
+
+function showMemory(number){
+
+    const memory =
+        memories[number];
+
+    document.getElementById(
+        "popupIcon"
+    ).innerHTML =
+        memory.icon;
+
+
+    document.getElementById(
+        "popupTitle"
+    ).innerHTML =
+        memory.title;
+
+
+    document.getElementById(
+        "popupText"
+    ).innerHTML =
+        memory.text;
+
+
+    document.getElementById(
+        "popup"
+    ).style.display =
+        "flex";
+}
+
+
+/* =========================
+   CLOSE POPUP
+========================= */
+
+function closePopup(){
+
+    document.getElementById(
+        "popup"
+    ).style.display =
+        "none";
+}
+
+
+function closeOutside(event){
+
+    if(
+        event.target.id === "popup"
+    ){
+        closePopup();
+    }
+}
+
+
+/* =========================
+   NEXT PAGE
+========================= */
+
+function continueStory(){
+
+    document.body.style.transition =
+        "opacity .8s ease";
+
+    document.body.style.opacity =
+        "0";
+
+
+    setTimeout(function(){
+
+        window.location.href =
+            "./chat.html";
+
+    },800);
+
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+function createHeart(){
+
+    const heart =
+        document.createElement("div");
+
+
+    heart.className =
+        "floating-heart";
+
+
+    const hearts =
+        [
+            "❤️",
+            "💕",
+            "💗",
+            "💖",
+            "💘"
+        ];
+
+
+    heart.innerHTML =
+        hearts[
+            Math.floor(
+                Math.random()
+                * hearts.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random()
+        * 100
+        + "vw";
+
+
+    heart.style.fontSize =
+        (
+            14
+            +
+            Math.random()
+            * 18
+        )
+        + "px";
+
+
+    heart.style.animationDuration =
+        (
+            5
+            +
+            Math.random()
+            * 5
+        )
+        + "s";
+
+
+    document.body.appendChild(
+        heart
+    );
+
+
+    setTimeout(function(){
+
+        heart.remove();
+
+    },10000);
+
+}
+
+
+setInterval(
+    createHeart,
+    600
+);
+
+</script>
+
+</body>
+</html>

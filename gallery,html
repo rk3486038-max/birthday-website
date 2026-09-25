@@ -1,0 +1,735 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Memory Gallery ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    font-family:Arial, sans-serif;
+    overflow-x:hidden;
+    color:white;
+}
+
+/* ================= BACKGROUND ================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    overflow:hidden;
+    background:#09000f;
+}
+
+.bg-blur{
+    position:absolute;
+    inset:-30px;
+    width:calc(100% + 60px);
+    height:calc(100% + 60px);
+    object-fit:cover;
+    filter:blur(18px) brightness(.38);
+    transform:scale(1.08);
+}
+
+.bg-main{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    opacity:.28;
+}
+
+/* Dark overlay */
+.overlay{
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at center,
+        rgba(255,50,130,.12),
+        rgba(0,0,0,.75) 70%);
+}
+
+/* ================= PARTICLES ================= */
+
+.particle{
+    position:fixed;
+    width:4px;
+    height:4px;
+    background:#fff;
+    border-radius:50%;
+    opacity:.6;
+    animation:floatParticle linear infinite;
+    z-index:-1;
+}
+
+@keyframes floatParticle{
+    0%{
+        transform:translateY(110vh) scale(.5);
+        opacity:0;
+    }
+    20%{opacity:.8;}
+    80%{opacity:.8;}
+    100%{
+        transform:translateY(-10vh) scale(1.3);
+        opacity:0;
+    }
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    width:100%;
+    min-height:100vh;
+    padding:45px 20px 70px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* ================= TITLE ================= */
+
+.badge{
+    padding:8px 18px;
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:30px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    font-size:12px;
+    letter-spacing:3px;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:clamp(38px,7vw,75px);
+    text-align:center;
+    font-family:Georgia,serif;
+    font-style:italic;
+    text-shadow:
+        0 0 15px rgba(255,80,150,.7),
+        0 0 40px rgba(255,50,130,.4);
+}
+
+.subtitle{
+    margin-top:12px;
+    text-align:center;
+    max-width:650px;
+    color:#ffdce9;
+    font-size:16px;
+    line-height:1.7;
+}
+
+/* ================= GALLERY ================= */
+
+.gallery{
+    width:100%;
+    max-width:1100px;
+    margin-top:55px;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:35px;
+    align-items:center;
+}
+
+/* Polaroid */
+
+.card{
+    position:relative;
+    padding:12px 12px 48px;
+    background:rgba(255,255,255,.96);
+    border-radius:4px;
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.45),
+        0 0 25px rgba(255,70,150,.12);
+
+    transform:rotate(-3deg);
+    transition:.45s ease;
+    cursor:pointer;
+}
+
+.card:nth-child(2){
+    transform:rotate(3deg) translateY(15px);
+}
+
+.card:nth-child(3){
+    transform:rotate(-2deg);
+}
+
+.card:nth-child(4){
+    transform:rotate(4deg) translateY(10px);
+}
+
+.card:nth-child(5){
+    transform:rotate(-4deg);
+}
+
+.card:nth-child(6){
+    transform:rotate(2deg) translateY(15px);
+}
+
+.card:nth-child(7){
+    transform:rotate(-2deg);
+}
+
+.card:nth-child(8){
+    transform:rotate(4deg) translateY(10px);
+}
+
+.card:nth-child(9){
+    transform:rotate(-3deg);
+}
+
+.card:nth-child(10){
+    transform:rotate(2deg);
+}
+
+.card:hover{
+    transform:
+        rotate(0deg)
+        translateY(-15px)
+        scale(1.05);
+
+    z-index:10;
+
+    box-shadow:
+        0 30px 60px rgba(0,0,0,.6),
+        0 0 35px rgba(255,80,160,.35);
+}
+
+.photo{
+    width:100%;
+    height:270px;
+    background:#111;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    background:#111;
+}
+
+.caption{
+    position:absolute;
+    bottom:13px;
+    left:0;
+    width:100%;
+    text-align:center;
+    color:#222;
+    font-family:"Brush Script MT",cursive;
+    font-size:20px;
+}
+
+/* ================= CENTER MESSAGE ================= */
+
+.center-message{
+    grid-column:1/-1;
+    text-align:center;
+    margin:25px auto 10px;
+    padding:25px;
+    max-width:700px;
+}
+
+.center-message .heart{
+    font-size:45px;
+    animation:pulse 1.5s infinite;
+}
+
+.center-message p{
+    margin-top:12px;
+    font-family:Georgia,serif;
+    font-size:25px;
+    font-style:italic;
+    color:#ffe4ef;
+}
+
+@keyframes pulse{
+    0%,100%{
+        transform:scale(1);
+        text-shadow:0 0 10px #ff4f91;
+    }
+    50%{
+        transform:scale(1.2);
+        text-shadow:
+            0 0 25px #ff4f91,
+            0 0 45px #ff4f91;
+    }
+}
+
+/* ================= BUTTON ================= */
+
+.continue-btn{
+    margin-top:55px;
+    padding:15px 35px;
+    border:none;
+    border-radius:35px;
+
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+
+    background:
+        linear-gradient(135deg,#ff3f88,#9c27b0);
+
+    box-shadow:
+        0 10px 30px rgba(255,50,130,.35);
+
+    cursor:pointer;
+    transition:.3s;
+}
+
+.continue-btn:hover{
+    transform:translateY(-4px) scale(1.04);
+    box-shadow:
+        0 15px 40px rgba(255,50,130,.55);
+}
+
+/* ================= LIGHTBOX ================= */
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.88);
+    backdrop-filter:blur(12px);
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    z-index:100;
+    padding:25px;
+}
+
+.lightbox.active{
+    display:flex;
+}
+
+.lightbox img{
+    max-width:95%;
+    max-height:90vh;
+    object-fit:contain;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 0 50px rgba(255,80,160,.35);
+}
+
+.close{
+    position:absolute;
+    top:20px;
+    right:25px;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.3);
+
+    background:rgba(255,255,255,.1);
+    color:white;
+
+    font-size:25px;
+    cursor:pointer;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+    .container{
+        padding:35px 14px 60px;
+    }
+
+    .gallery{
+        grid-template-columns:repeat(2,1fr);
+        gap:20px;
+    }
+
+    .photo{
+        height:190px;
+    }
+
+    .card{
+        padding:8px 8px 38px;
+    }
+
+    .caption{
+        font-size:16px;
+        bottom:9px;
+    }
+
+    .center-message p{
+        font-size:20px;
+    }
+}
+
+@media(max-width:520px){
+
+    h1{
+        font-size:42px;
+    }
+
+    .subtitle{
+        font-size:14px;
+    }
+
+    .gallery{
+        grid-template-columns:1fr 1fr;
+        gap:14px;
+    }
+
+    .photo{
+        height:170px;
+    }
+
+    .card{
+        padding:6px 6px 35px;
+    }
+
+    .caption{
+        font-size:15px;
+    }
+
+    .center-message{
+        padding:10px;
+    }
+
+    .center-message p{
+        font-size:18px;
+    }
+
+    .continue-btn{
+        width:90%;
+        max-width:320px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= BACKGROUND ================= -->
+
+<div class="background">
+
+    <img
+        class="bg-blur"
+        src="./photos/Chhaya%2010.jpeg"
+        alt=""
+    >
+
+    <img
+        class="bg-main"
+        src="./photos/Chhaya%2010.jpeg"
+        alt=""
+    >
+
+    <div class="overlay"></div>
+
+</div>
+
+<!-- ================= PARTICLES ================= -->
+
+<script>
+
+for(let i=0;i<45;i++){
+
+    const p=document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left=Math.random()*100+"%";
+
+    p.style.animationDuration=
+        (6+Math.random()*8)+"s";
+
+    p.style.animationDelay=
+        (-Math.random()*10)+"s";
+
+    p.style.width=
+        p.style.height=
+        (2+Math.random()*4)+"px";
+
+    document.body.appendChild(p);
+}
+
+</script>
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+    <div class="badge">
+        STEP 7 • OUR MEMORIES
+    </div>
+
+    <h1>Our Memory Gallery 📸</h1>
+
+    <div class="subtitle">
+        Some pictures are just photographs...
+        <br>
+        But some pictures hold an entire story. ❤️
+    </div>
+
+    <!-- ================= GALLERY ================= -->
+
+    <div class="gallery">
+
+        <div class="card"
+             onclick="openPhoto('./photos/Chhaya%201.jpeg')">
+
+            <div class="photo">
+                <img src="./photos/Chhaya%201.jpeg" alt="Memory 1">
+            </div>
+
+            <div class="caption">
+                The Beginning ❤️
+            </div>
+
+        </div>
+
+
+        <div class="card"
+             onclick="openPhoto('./photos/Chhaya%202.jpeg')">
+
+            <div class="photo">
+                <img src="./photos/Chhaya%202.jpeg" alt="Memory 2">
+            </div>
+
+            <div class="caption">
+                A Beautiful Moment ✨
+            </div>
+
+        </div>
+
+
+        <div class="card"
+             onclick="openPhoto('./photos/Chhaya%203.jpeg')">
+
+            <div class="photo">
+                <img src="./photos/Chhaya%203.jpeg" alt="Memory 3">
+            </div>
+
+            <div class="caption">
+                Your Smile 💕
+            </div>
+
+        </div>
+
+
+        <div class="card"
+             onclick="openPhoto('./photos/Chhaya%204.jpeg')">
+
+            <div class="photo">
+                <img src="./photos/Chhaya%204.jpeg" alt="Memory 4">
+            </div>
+
+            <div class="caption">
+                My Favorite Memory 🌸
+            </div>
+
+        </div>
+
+
+        <div class="card"
+             onclick="openPhoto('./photos/Chhaya%205.jpeg')">
+
+            <div class="photo">
+                <img src="./photos/Chhaya%205.jpeg" alt="Memory 5">
+            </div>
+
+            <div class="caption">
+                Just You ❤️
+            </div>
+
+        </div>
+
+
+        <!-- CENTER MESSAGE -->
+
+        <div class="center-message">
+
+            <div class="heart">
+                ❤️
+            </div>
+
+            <p>
+                "Every picture reminds me
+                why I chose you."
+            </p>
+
+        </div>
+
+
+        <div class="card"
+             onclick="openPhoto('./photos/Chhaya%206.jpeg')">
+
+            <div class="photo">
+                <img src="./photos/Chhaya%206.jpeg" alt="Memory 6">
+            </div>
+
+            <div class="caption">
+                Another Chapter 📖
+            </div>
+
+        </div>
+
+
+        <div class="card"
+             onclick="openPhoto('./photos/Chhaya%207.jpeg')">
+
+            <div class="photo">
+                <img src="./photos/Chhaya%207.jpeg" alt="Memory 7">
+            </div>
+
+            <div class="caption">
+                Your Happiness ✨
+            </div>
+
+        </div>
+
+
+        <div class="card"
+             onclick="openPhoto('./photos/Chhaya%208.jpeg')">
+
+            <div class="photo">
+                <img src="./photos/Chhaya%208.jpeg" alt="Memory 8">
+            </div>
+
+            <div class="caption">
+                Us ❤️
+            </div>
+
+        </div>
+
+
+        <div class="card"
+             onclick="openPhoto('./photos/Chhaya%209.jpeg')">
+
+            <div class="photo">
+                <img src="./photos/Chhaya%209.jpeg" alt="Memory 9">
+            </div>
+
+            <div class="caption">
+                Forever Memories 💫
+            </div>
+
+        </div>
+
+
+        <div class="card"
+             onclick="openPhoto('./photos/Chhaya%2010.jpeg')">
+
+            <div class="photo">
+                <img src="./photos/Chhaya%2010.jpeg" alt="Memory 10">
+            </div>
+
+            <div class="caption">
+                My Forever ❤️
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= CONTINUE ================= -->
+
+    <button
+        class="continue-btn"
+        onclick="goNext()">
+
+        Continue Our Story ❤️ →
+    </button>
+
+</div>
+
+
+<!-- ================= LIGHTBOX ================= -->
+
+<div
+    class="lightbox"
+    id="lightbox"
+    onclick="closePhoto()">
+
+    <button
+        class="close"
+        onclick="closePhoto()">
+
+        ×
+
+    </button>
+
+    <img
+        id="lightboxImage"
+        src=""
+        alt="Full Memory"
+        onclick="event.stopPropagation()"
+    >
+
+</div>
+
+
+<script>
+
+/* ================= PHOTO VIEW ================= */
+
+function openPhoto(src){
+
+    document.getElementById("lightboxImage").src=src;
+
+    document
+        .getElementById("lightbox")
+        .classList.add("active");
+}
+
+function closePhoto(){
+
+    document
+        .getElementById("lightbox")
+        .classList.remove("active");
+}
+
+
+/* ================= NEXT PAGE ================= */
+
+function goNext(){
+
+    window.location.href="./story.html";
+
+}
+
+
+/* ================= ESC KEY ================= */
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+        closePhoto();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+```

@@ -1,0 +1,14 @@
+.chhaya-background {
+    position: fixed;
+    top: 80px;
+    left: 0;
+
+    width: 100%;
+    height: calc(100% - 80px);
+
+    object-fit: cover;
+    object-position: center center;
+
+    z-index: -20;
+    display: block;
+}

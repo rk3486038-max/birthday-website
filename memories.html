@@ -1,0 +1,1145 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Memories ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(circle at top left, #ff4f81, transparent 35%),
+                radial-gradient(circle at bottom right, #8e44ad, transparent 35%),
+                linear-gradient(135deg, #120014, #25001f, #100014);
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            font-size: 22px;
+            animation: floatHeart linear infinite;
+            opacity: 0.7;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1150px;
+            margin: auto;
+            padding: 50px 20px;
+        }
+
+        /* Heading */
+        .heading {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .small {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.75;
+            margin-bottom: 12px;
+        }
+
+        .heading h1 {
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: clamp(42px, 8vw, 75px);
+            margin-bottom: 15px;
+            text-shadow: 0 0 25px rgba(255, 80, 150, 0.7);
+        }
+
+        .heading p {
+            font-size: 17px;
+            line-height: 1.7;
+            opacity: 0.85;
+        }
+
+        /* =========================
+           MEMORY GRID
+        ========================= */
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .memory-card {
+            position: relative;
+
+            /* Same box size */
+            height: 480px;
+
+            overflow: hidden;
+
+            border-radius: 25px;
+
+            background: rgba(255,255,255,0.08);
+
+            border: 1px solid rgba(255,255,255,0.2);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.4);
+
+            opacity: 0;
+
+            transform: translateY(60px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.6s ease,
+                box-shadow 0.5s ease;
+        }
+
+        .memory-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .memory-card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 30px 70px rgba(255,70,150,0.3);
+        }
+
+        /* =========================
+           PHOTO BACKGROUND
+        ========================= */
+
+        .photo-bg {
+            position: absolute;
+
+            inset: -25px;
+
+            width: calc(100% + 50px);
+            height: calc(100% + 50px);
+
+            object-fit: cover;
+
+            filter: blur(25px) brightness(0.55);
+
+            transform: scale(1.08);
+
+            z-index: 0;
+        }
+
+        /* =========================
+           MAIN PHOTO
+           NO CROPPING
+        ========================= */
+
+        .memory-photo {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            width: 100%;
+            height: 100%;
+
+            transform: translate(-50%, -50%);
+
+            /* IMPORTANT */
+            object-fit: contain;
+
+            object-position: center center;
+
+            z-index: 1;
+
+            display: block;
+
+            filter: brightness(0.96);
+
+            transition:
+                transform 0.7s ease;
+        }
+
+        .memory-card:hover .memory-photo {
+            transform:
+                translate(-50%, -50%)
+                scale(1.035);
+        }
+
+        /* =========================
+           OVERLAY
+        ========================= */
+
+        .overlay {
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            padding: 100px 25px 25px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(0,0,0,0.92)
+                );
+
+            z-index: 2;
+
+            pointer-events: none;
+        }
+
+        .memory-number {
+            font-size: 12px;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 8px;
+        }
+
+        .overlay h2 {
+            font-family: Georgia, serif;
+            font-size: 28px;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .overlay p {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        /* =========================
+           QUOTE
+        ========================= */
+
+        .quote {
+            max-width: 850px;
+
+            margin: 65px auto 40px;
+
+            padding: 45px 25px;
+
+            text-align: center;
+
+            background: rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.18);
+
+            border-radius: 28px;
+
+            backdrop-filter: blur(12px);
+        }
+
+        .quote-heart {
+            font-size: 42px;
+            margin-bottom: 15px;
+
+            animation:
+                heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+        }
+
+        .quote p {
+            font-family: Georgia, serif;
+
+            font-size:
+                clamp(22px, 4vw, 32px);
+
+            font-style: italic;
+
+            line-height: 1.5;
+        }
+
+        .quote span {
+            display: block;
+
+            margin-top: 18px;
+
+            font-size: 14px;
+
+            opacity: 0.6;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .continue-section {
+            text-align: center;
+
+            margin:
+                45px 0 20px;
+        }
+
+        .continue-btn {
+
+            border: none;
+
+            padding:
+                17px 34px;
+
+            border-radius:
+                50px;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff4f81,
+                    #b83280
+                );
+
+            box-shadow:
+                0 12px 35px
+                rgba(255,70,130,0.35);
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .continue-btn:hover {
+
+            transform:
+                translateY(-4px)
+                scale(1.04);
+
+            box-shadow:
+                0 18px 45px
+                rgba(255,70,130,0.5);
+        }
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 35px;
+
+            padding-bottom: 25px;
+
+            opacity: 0.5;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           LIGHTBOX
+        ========================= */
+
+        .lightbox {
+
+            position: fixed;
+
+            inset: 0;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(0,0,0,0.94);
+
+            z-index: 9999;
+
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+
+            max-width: 95%;
+
+            max-height: 90vh;
+
+            width: auto;
+
+            height: auto;
+
+            object-fit: contain;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 0 60px
+                rgba(255,70,150,0.35);
+        }
+
+        .close {
+
+            position: absolute;
+
+            top: 15px;
+
+            right: 25px;
+
+            font-size: 42px;
+
+            color: white;
+
+            cursor: pointer;
+
+            z-index: 10000;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .container {
+                padding: 35px 15px;
+            }
+
+            .memory-grid {
+
+                grid-template-columns:
+                    1fr;
+
+                gap: 22px;
+            }
+
+            .memory-card {
+
+                height: 470px;
+            }
+
+            .heading {
+
+                margin-bottom: 30px;
+            }
+
+            .heading p {
+
+                font-size: 15px;
+            }
+
+            .overlay h2 {
+
+                font-size: 25px;
+            }
+
+            .quote {
+
+                margin-top: 45px;
+            }
+
+            .continue-btn {
+
+                width: 90%;
+
+                max-width: 330px;
+            }
+        }
+
+        @media (max-width: 400px) {
+
+            .memory-card {
+
+                height: 440px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- Floating Hearts -->
+
+    <div class="heart"
+         style="left:5%; animation-duration:8s;">
+        ❤️
+    </div>
+
+    <div class="heart"
+         style="left:15%; animation-duration:11s; animation-delay:2s;">
+        💕
+    </div>
+
+    <div class="heart"
+         style="left:28%; animation-duration:9s; animation-delay:1s;">
+        💗
+    </div>
+
+    <div class="heart"
+         style="left:42%; animation-duration:12s; animation-delay:3s;">
+        ❤️
+    </div>
+
+    <div class="heart"
+         style="left:57%; animation-duration:10s;">
+        💖
+    </div>
+
+    <div class="heart"
+         style="left:70%; animation-duration:13s; animation-delay:2s;">
+        💕
+    </div>
+
+    <div class="heart"
+         style="left:84%; animation-duration:9s; animation-delay:4s;">
+        ❤️
+    </div>
+
+    <div class="heart"
+         style="left:94%; animation-duration:12s;">
+        💗
+    </div>
+
+
+    <div class="container">
+
+
+        <!-- Heading -->
+
+        <section class="heading">
+
+            <div class="small">
+                A Few Pieces Of Our Story
+            </div>
+
+            <h1>
+                Our Memories 📸
+            </h1>
+
+            <p>
+
+                Every picture has a story...
+
+                <br>
+
+                and every story has you. ❤️
+
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             10 PHOTO GALLERY
+        ========================= -->
+
+        <section class="memory-grid">
+
+
+            <!-- PHOTO 1 -->
+
+            <div class="memory-card">
+
+                <img
+                    class="photo-bg"
+                    src="./photos/Chhaya%201.jpeg"
+                    alt=""
+                >
+
+                <img
+                    class="memory-photo"
+                    src="./photos/Chhaya%201.jpeg"
+                    alt="Chhaya Memory 1"
+                >
+
+                <div class="overlay">
+
+                    <div class="memory-number">
+                        MEMORY 01
+                    </div>
+
+                    <h2>
+                        That Beautiful Smile ❤️
+                    </h2>
+
+                    <p>
+                        One smile from you is enough
+                        to make my entire day beautiful.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 2 -->
+
+            <div class="memory-card">
+
+                <img
+                    class="photo-bg"
+                    src="./photos/Chhaya%202.jpeg"
+                    alt=""
+                >
+
+                <img
+                    class="memory-photo"
+                    src="./photos/Chhaya%202.jpeg"
+                    alt="Chhaya Memory 2"
+                >
+
+                <div class="overlay">
+
+                    <div class="memory-number">
+                        MEMORY 02
+                    </div>
+
+                    <h2>
+                        My Favourite Person 💕
+                    </h2>
+
+                    <p>
+                        Somehow, every picture of you
+                        becomes my favourite.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 3 -->
+
+            <div class="memory-card">
+
+                <img
+                    class="photo-bg"
+                    src="./photos/Chhaya%203.jpeg"
+                    alt=""
+                >
+
+                <img
+                    class="memory-photo"
+                    src="./photos/Chhaya%203.jpeg"
+                    alt="Chhaya Memory 3"
+                >
+
+                <div class="overlay">
+
+                    <div class="memory-number">
+                        MEMORY 03
+                    </div>
+
+                    <h2>
+                        You Make Everything Better 🌸
+                    </h2>
+
+                    <p>
+                        Life feels a little more beautiful
+                        whenever you are around.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 4 -->
+
+            <div class="memory-card">
+
+                <img
+                    class="photo-bg"
+                    src="./photos/Chhaya%204.jpeg"
+                    alt=""
+                >
+
+                <img
+                    class="memory-photo"
+                    src="./photos/Chhaya%204.jpeg"
+                    alt="Chhaya Memory 4"
+                >
+
+                <div class="overlay">
+
+                    <div class="memory-number">
+                        MEMORY 04
+                    </div>
+
+                    <h2>
+                        Beautiful You ✨
+                    </h2>
+
+                    <p>
+                        There is something special about
+                        the way you make ordinary moments beautiful.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 5 -->
+
+            <div class="memory-card">
+
+                <img
+                    class="photo-bg"
+                    src="./photos/Chhaya%205.jpeg"
+                    alt=""
+                >
+
+                <img
+                    class="memory-photo"
+                    src="./photos/Chhaya%205.jpeg"
+                    alt="Chhaya Memory 5"
+                >
+
+                <div class="overlay">
+
+                    <div class="memory-number">
+                        MEMORY 05
+                    </div>
+
+                    <h2>
+                        A Moment To Remember 💗
+                    </h2>
+
+                    <p>
+                        Some moments are too beautiful
+                        to ever forget.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 6 -->
+
+            <div class="memory-card">
+
+                <img
+                    class="photo-bg"
+                    src="./photos/Chhaya%206.jpeg"
+                    alt=""
+                >
+
+                <img
+                    class="memory-photo"
+                    src="./photos/Chhaya%206.jpeg"
+                    alt="Chhaya Memory 6"
+                >
+
+                <div class="overlay">
+
+                    <div class="memory-number">
+                        MEMORY 06
+                    </div>
+
+                    <h2>
+                        My Happy Place ❤️
+                    </h2>
+
+                    <p>
+                        Your presence brings a happiness
+                        that words cannot explain.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 7 -->
+
+            <div class="memory-card">
+
+                <img
+                    class="photo-bg"
+                    src="./photos/Chhaya%207.jpeg"
+                    alt=""
+                >
+
+                <img
+                    class="memory-photo"
+                    src="./photos/Chhaya%207.jpeg"
+                    alt="Chhaya Memory 7"
+                >
+
+                <div class="overlay">
+
+                    <div class="memory-number">
+                        MEMORY 07
+                    </div>
+
+                    <h2>
+                        Always Beautiful 🌷
+                    </h2>
+
+                    <p>
+                        No matter the moment,
+                        you always look beautiful to me.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 8 -->
+
+            <div class="memory-card">
+
+                <img
+                    class="photo-bg"
+                    src="./photos/Chhaya%208.jpeg"
+                    alt=""
+                >
+
+                <img
+                    class="memory-photo"
+                    src="./photos/Chhaya%208.jpeg"
+                    alt="Chhaya Memory 8"
+                >
+
+                <div class="overlay">
+
+                    <div class="memory-number">
+                        MEMORY 08
+                    </div>
+
+                    <h2>
+                        Another Beautiful Memory 💖
+                    </h2>
+
+                    <p>
+                        A simple picture,
+                        but a memory I want to keep forever.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 9 -->
+
+            <div class="memory-card">
+
+                <img
+                    class="photo-bg"
+                    src="./photos/Chhaya%209.jpeg"
+                    alt=""
+                >
+
+                <img
+                    class="memory-photo"
+                    src="./photos/Chhaya%209.jpeg"
+                    alt="Chhaya Memory 9"
+                >
+
+                <div class="overlay">
+
+                    <div class="memory-number">
+                        MEMORY 09
+                    </div>
+
+                    <h2>
+                        Forever In My Heart 💘
+                    </h2>
+
+                    <p>
+                        Every memory with you
+                        has a permanent place in my heart.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 10 -->
+
+            <div class="memory-card">
+
+                <img
+                    class="photo-bg"
+                    src="./photos/Chhaya%2010.jpeg"
+                    alt=""
+                >
+
+                <img
+                    class="memory-photo"
+                    src="./photos/Chhaya%2010.jpeg"
+                    alt="Chhaya Memory 10"
+                >
+
+                <div class="overlay">
+
+                    <div class="memory-number">
+                        MEMORY 10
+                    </div>
+
+                    <h2>
+                        The One I Love ❤️
+                    </h2>
+
+                    <p>
+                        Ten pictures, countless feelings,
+                        and one very special person — you.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- Quote -->
+
+        <section class="quote">
+
+            <div class="quote-heart">
+                ❤️
+            </div>
+
+            <p>
+
+                "I don't need a thousand memories...
+                I just need you in all of them."
+
+            </p>
+
+            <span>
+
+                — For Chhaya, with love from Rohit
+
+            </span>
+
+        </section>
+
+
+        <!-- Continue -->
+
+        <section class="continue-section">
+
+            <button
+                class="continue-btn"
+                onclick="goToLetter()">
+
+                Continue To My Letter 💌 →
+
+            </button>
+
+        </section>
+
+
+        <div class="footer">
+
+            Made with ❤️ by Rohit
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         LIGHTBOX
+    ========================= -->
+
+    <div
+        class="lightbox"
+        id="lightbox">
+
+        <div
+            class="close"
+            onclick="closeLightbox()">
+
+            ×
+
+        </div>
+
+        <img
+            id="lightboxImage"
+            src=""
+            alt="Full Memory">
+
+    </div>
+
+
+    <script>
+
+        /* =========================
+           SCROLL ANIMATION
+        ========================= */
+
+        const cards =
+            document.querySelectorAll(".memory-card");
+
+
+        const observer =
+            new IntersectionObserver(
+
+                (entries) => {
+
+                    entries.forEach((entry) => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target
+                                .classList
+                                .add("show");
+
+                        }
+
+                    });
+
+                },
+
+                {
+                    threshold: 0.15
+                }
+
+            );
+
+
+        cards.forEach((card) => {
+
+            observer.observe(card);
+
+        });
+
+
+        /* =========================
+           FULLSCREEN PHOTO
+        ========================= */
+
+        const lightbox =
+            document.getElementById(
+                "lightbox"
+            );
+
+
+        const lightboxImage =
+            document.getElementById(
+                "lightboxImage"
+            );
+
+
+        document
+            .querySelectorAll(
+                ".memory-photo"
+            )
+            .forEach((img) => {
+
+                img.addEventListener(
+                    "click",
+                    function () {
+
+                        lightboxImage.src =
+                            this.src;
+
+                        lightbox.classList
+                            .add("active");
+
+                    }
+                );
+
+            });
+
+
+        function closeLightbox() {
+
+            lightbox.classList
+                .remove("active");
+
+            lightboxImage.src = "";
+
+        }
+
+
+        /* ESC KEY */
+
+        document.addEventListener(
+            "keydown",
+            function(e) {
+
+                if (
+                    e.key === "Escape"
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           NEXT PAGE
+        ========================= */
+
+        function goToLetter() {
+
+            window.location.href =
+                "letter.html";
+
+        }
+
+    </script>
+
+</body>
+</html>
+```

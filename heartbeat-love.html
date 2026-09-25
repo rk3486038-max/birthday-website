@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heartbeat of Love ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#08000d;
+    color:white;
+    min-height:100vh;
+    position:relative;
+}
+
+/* Background */
+.background{
+    position:fixed;
+    inset:0;
+    background:
+        linear-gradient(rgba(10,0,18,.72),rgba(10,0,18,.86)),
+        url("./photos/Chhaya%2010.jpeg") center/cover no-repeat;
+    filter:blur(1px);
+    transform:scale(1.03);
+    z-index:-3;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle at center,
+        rgba(255,40,130,.15),
+        transparent 45%),
+        linear-gradient(
+        rgba(5,0,15,.3),
+        rgba(5,0,15,.75)
+        );
+    z-index:-2;
+}
+
+/* Stars */
+.star{
+    position:fixed;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    opacity:.7;
+    animation:twinkle 2s infinite alternate;
+    z-index:-1;
+}
+
+@keyframes twinkle{
+    from{opacity:.2;transform:scale(.7);}
+    to{opacity:1;transform:scale(1.4);}
+}
+
+/* Main */
+.container{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px 15px;
+}
+
+.card{
+    width:min(900px,96%);
+    text-align:center;
+    padding:35px 25px 40px;
+    border-radius:30px;
+    background:rgba(20,5,30,.62);
+    border:1px solid rgba(255,120,190,.25);
+    box-shadow:
+        0 0 40px rgba(255,0,130,.15),
+        inset 0 0 40px rgba(255,0,130,.04);
+    backdrop-filter:blur(12px);
+}
+
+.step{
+    display:inline-block;
+    padding:7px 18px;
+    border-radius:30px;
+    background:rgba(255,70,150,.12);
+    border:1px solid rgba(255,100,180,.35);
+    color:#ff9dcc;
+    font-size:13px;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(32px,6vw,58px);
+    margin-bottom:10px;
+    text-shadow:0 0 25px rgba(255,60,150,.8);
+}
+
+.subtitle{
+    color:#e9cddd;
+    font-size:17px;
+    margin-bottom:28px;
+}
+
+/* Heart Area */
+.heart-zone{
+    position:relative;
+    width:260px;
+    height:260px;
+    margin:10px auto 25px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.pulse-ring{
+    position:absolute;
+    width:170px;
+    height:170px;
+    border:1px solid rgba(255,70,150,.5);
+    border-radius:50%;
+    animation:pulseRing 1.2s infinite;
+}
+
+.pulse-ring:nth-child(2){
+    animation-delay:.3s;
+}
+
+.pulse-ring:nth-child(3){
+    animation-delay:.6s;
+}
+
+@keyframes pulseRing{
+    0%{
+        transform:scale(.6);
+        opacity:.8;
+    }
+    100%{
+        transform:scale(1.5);
+        opacity:0;
+    }
+}
+
+.big-heart{
+    font-size:110px;
+    filter:drop-shadow(0 0 25px #ff197d);
+    animation:heartbeat .9s infinite;
+    cursor:pointer;
+    user-select:none;
+    z-index:2;
+}
+
+@keyframes heartbeat{
+    0%,100%{transform:scale(1);}
+    15%{transform:scale(1.18);}
+    30%{transform:scale(1);}
+    45%{transform:scale(1.13);}
+    60%{transform:scale(1);}
+}
+
+/* ECG */
+.ecg-box{
+    width:100%;
+    max-width:720px;
+    height:100px;
+    margin:0 auto 25px;
+    overflow:hidden;
+    border-radius:15px;
+    background:rgba(0,0,0,.3);
+    border:1px solid rgba(255,80,160,.2);
+    position:relative;
+}
+
+.ecg-line{
+    position:absolute;
+    top:50%;
+    left:-100%;
+    width:200%;
+    height:100%;
+    background:
+    linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 44%,
+        rgba(255,60,150,.1) 44%,
+        rgba(255,60,150,.1) 46%,
+        transparent 46%
+    );
+}
+
+svg{
+    width:100%;
+    height:100%;
+}
+
+path{
+    fill:none;
+    stroke:#ff4c9a;
+    stroke-width:3;
+    stroke-linecap:round;
+    filter:drop-shadow(0 0 7px #ff2d86);
+    stroke-dasharray:1000;
+    stroke-dashoffset:1000;
+    animation:draw 2.2s linear infinite;
+}
+
+@keyframes draw{
+    to{
+        stroke-dashoffset:0;
+    }
+}
+
+/* Text */
+.message{
+    max-width:650px;
+    margin:0 auto 22px;
+    font-size:24px;
+    line-height:1.5;
+    font-weight:bold;
+}
+
+.message span{
+    color:#ff73ae;
+    text-shadow:0 0 15px rgba(255,70,150,.8);
+}
+
+.small-text{
+    color:#d7baca;
+    font-size:15px;
+    line-height:1.7;
+    max-width:600px;
+    margin:auto;
+}
+
+/* Counter */
+.counter{
+    margin:25px auto;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 22px;
+    border-radius:30px;
+    background:rgba(255,50,140,.09);
+    border:1px solid rgba(255,100,180,.25);
+    color:#ffc1dc;
+}
+
+.counter strong{
+    color:#fff;
+    font-size:20px;
+}
+
+/* Button */
+.continue-btn{
+    margin-top:28px;
+    border:none;
+    padding:15px 35px;
+    border-radius:40px;
+    font-size:16px;
+    font-weight:bold;
+    color:white;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ff197d,#9d2cff);
+    box-shadow:0 0 25px rgba(255,40,140,.35);
+    transition:.3s;
+}
+
+.continue-btn:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 0 35px rgba(255,40,140,.65);
+}
+
+/* Floating Hearts */
+.float-heart{
+    position:fixed;
+    bottom:-30px;
+    font-size:20px;
+    pointer-events:none;
+    animation:floatUp linear forwards;
+    z-index:5;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(0) scale(.7);
+        opacity:0;
+    }
+    15%{opacity:1;}
+    to{
+        transform:translateY(-110vh) rotate(25deg) scale(1.3);
+        opacity:0;
+    }
+}
+
+/* Tap message */
+.tap-message{
+    margin-top:10px;
+    color:#ff9bc6;
+    font-size:13px;
+    letter-spacing:1px;
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+    .card{
+        padding:28px 16px 32px;
+        border-radius:24px;
+    }
+
+    h1{
+        font-size:34px;
+    }
+
+    .subtitle{
+        font-size:14px;
+    }
+
+    .heart-zone{
+        width:220px;
+        height:220px;
+    }
+
+    .big-heart{
+        font-size:90px;
+    }
+
+    .pulse-ring{
+        width:145px;
+        height:145px;
+    }
+
+    .message{
+        font-size:20px;
+    }
+
+    .small-text{
+        font-size:14px;
+    }
+
+    .ecg-box{
+        height:80px;
+    }
+
+    .continue-btn{
+        width:90%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="overlay"></div>
+
+<div class="container">
+
+<div class="card">
+
+<div class="step">STEP 4 • HEARTBEAT</div>
+
+<h1>Heartbeat of Love ❤️</h1>
+
+<p class="subtitle">
+Some hearts beat for life...<br>
+Mine beats a little differently for you.
+</p>
+
+<div class="heart-zone">
+
+<div class="pulse-ring"></div>
+<div class="pulse-ring"></div>
+<div class="pulse-ring"></div>
+
+<div class="big-heart" onclick="heartClicked()">
+❤️
+</div>
+
+</div>
+
+<div class="tap-message">
+Tap the heart ❤️
+</div>
+
+<div class="ecg-box">
+
+<svg viewBox="0 0 1000 100" preserveAspectRatio="none">
+<path d="
+M0 50
+L180 50
+L200 50
+L210 20
+L220 80
+L230 50
+L390 50
+L410 50
+L420 25
+L430 75
+L440 50
+L610 50
+L630 50
+L640 18
+L650 82
+L660 50
+L820 50
+L840 50
+L850 25
+L860 75
+L870 50
+L1000 50
+"/>
+</svg>
+
+</div>
+
+<div class="message">
+“My heart has a rhythm...<br>
+but it changes whenever <span>you</span> are around. ❤️”
+</div>
+
+<p class="small-text">
+Every heartbeat carries a little piece of my love for you.
+And if forever had a sound...
+I think it would sound exactly like this. 💗
+</p>
+
+<div class="counter">
+❤️ Heartbeats felt:
+<strong id="count">0</strong>
+</div>
+
+<br>
+
+<button class="continue-btn" onclick="continueNext()">
+Continue Our Story 💌
+</button>
+
+</div>
+</div>
+
+<script>
+
+/* Stars */
+for(let i=0;i<90;i++){
+
+    const star=document.createElement("div");
+
+    star.className="star";
+
+    star.style.left=Math.random()*100+"%";
+    star.style.top=Math.random()*100+"%";
+
+    star.style.animationDelay=(Math.random()*3)+"s";
+
+    document.body.appendChild(star);
+}
+
+
+/* Heartbeat counter */
+let count=0;
+
+setInterval(function(){
+
+    count++;
+
+    document.getElementById("count").textContent=count;
+
+},900);
+
+
+/* Click heart */
+function heartClicked(){
+
+    count += 10;
+
+    document.getElementById("count").textContent=count;
+
+    for(let i=0;i<12;i++){
+
+        createHeart();
+
+    }
+
+}
+
+
+/* Floating hearts */
+function createHeart(){
+
+    const heart=document.createElement("div");
+
+    heart.className="float-heart";
+
+    const hearts=["❤️","💗","💕","💖","💘"];
+
+    heart.innerHTML=
+        hearts[Math.floor(Math.random()*hearts.length)];
+
+    heart.style.left=Math.random()*100+"%";
+
+    heart.style.animationDuration=
+        (4+Math.random()*4)+"s";
+
+    heart.style.fontSize=
+        (14+Math.random()*18)+"px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(function(){
+
+        heart.remove();
+
+    },8000);
+}
+
+
+/* Continuous hearts */
+setInterval(function(){
+
+    createHeart();
+
+},1000);
+
+
+/* Continue */
+function continueNext(){
+
+    for(let i=0;i<35;i++){
+
+        setTimeout(function(){
+
+            createHeart();
+
+        },i*35);
+
+    }
+
+    setTimeout(function(){
+
+        window.location.href="./future-letter.html";
+
+    },1800);
+
+}
+
+</script>
+
+</body>
+</html>

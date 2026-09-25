@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Chhaya ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial, sans-serif;
+    color:white;
+    overflow-x:hidden;
+    background:#08000f;
+}
+
+/* ================= BACKGROUND ================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-10;
+}
+
+.background img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+
+    filter:
+        brightness(.35)
+        saturate(1.2)
+        blur(1px);
+
+    transform:scale(1.04);
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,45,117,.18),
+            rgba(5,0,15,.78)
+        );
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:30px 20px;
+
+    position:relative;
+}
+
+.small-text{
+    font-size:1.1rem;
+    color:#ffd6e8;
+
+    letter-spacing:3px;
+
+    margin-bottom:15px;
+
+    animation:
+        fadeUp 1.2s ease;
+}
+
+.hero h1{
+    font-size:
+        clamp(3rem,10vw,7rem);
+
+    line-height:1.05;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff5caa,
+            #fff,
+            #ffd1e7,
+            #ff5caa
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    text-shadow:
+        0 0 30px
+        rgba(255,80,160,.7);
+
+    animation:
+        titleGlow 2s infinite alternate;
+}
+
+.hero h2{
+    margin-top:20px;
+
+    font-size:
+        clamp(1.4rem,4vw,2.4rem);
+
+    color:#fff0f7;
+
+    font-weight:normal;
+
+    animation:
+        fadeUp 1.5s ease;
+}
+
+@keyframes titleGlow{
+
+    from{
+        filter:brightness(1);
+    }
+
+    to{
+        filter:brightness(1.35);
+    }
+
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* ================= PHOTO ================= */
+
+.photo-frame{
+
+    width:
+        min(330px,75vw);
+
+    height:
+        min(420px,85vw);
+
+    margin-top:35px;
+
+    padding:7px;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4f9a,
+            #b45cff,
+            #ffdb99
+        );
+
+    box-shadow:
+        0 0 45px
+        rgba(255,60,150,.55);
+
+    animation:
+        photoFloat 4s ease-in-out infinite;
+}
+
+.photo-frame img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+    display:block;
+}
+
+@keyframes photoFloat{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(-1deg);
+    }
+
+    50%{
+        transform:
+            translateY(-12px)
+            rotate(1deg);
+    }
+
+}
+
+/* ================= MESSAGE ================= */
+
+.message-section{
+
+    width:
+        min(900px,90%);
+
+    margin:
+        50px auto 100px;
+
+    padding:
+        45px 30px;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,255,255,.09);
+
+    border:
+        1px solid
+        rgba(255,255,255,.22);
+
+    backdrop-filter:
+        blur(12px);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.4);
+
+    text-align:center;
+}
+
+.message-section h2{
+
+    font-size:
+        clamp(2rem,6vw,3.5rem);
+
+    color:#ff9dce;
+
+    margin-bottom:25px;
+}
+
+.message-section p{
+
+    max-width:750px;
+
+    margin:auto;
+
+    color:#ffe4ef;
+
+    font-size:1.08rem;
+
+    line-height:2;
+
+}
+
+.signature{
+
+    margin-top:30px;
+
+    font-size:1.7rem;
+
+    color:#ff8fc7;
+
+    font-family:
+        cursive;
+}
+
+/* ================= PROMISE ================= */
+
+.promise{
+
+    width:
+        min(850px,90%);
+
+    margin:0 auto 80px;
+
+    text-align:center;
+}
+
+.promise h2{
+
+    font-size:
+        clamp(2rem,6vw,3.2rem);
+
+    color:white;
+
+    margin-bottom:35px;
+}
+
+.promise-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
+}
+
+.promise-card{
+
+    padding:25px 15px;
+
+    border-radius:22px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    transition:.3s;
+}
+
+.promise-card:hover{
+
+    transform:
+        translateY(-8px);
+
+    background:
+        rgba(255,45,117,.15);
+}
+
+.promise-card .icon{
+
+    font-size:2.8rem;
+
+    margin-bottom:12px;
+}
+
+.promise-card h3{
+
+    margin-bottom:8px;
+
+    color:#ffb1d4;
+}
+
+.promise-card p{
+
+    color:#e7d8df;
+
+    line-height:1.5;
+}
+
+/* ================= FINAL MESSAGE ================= */
+
+.final-message{
+
+    text-align:center;
+
+    padding:
+        80px 20px 120px;
+}
+
+.final-message h2{
+
+    font-size:
+        clamp(2.5rem,8vw,5rem);
+
+    color:#ff7fbc;
+
+    text-shadow:
+        0 0 30px
+        rgba(255,60,150,.8);
+
+    margin-bottom:20px;
+}
+
+.final-message p{
+
+    font-size:1.2rem;
+
+    color:#ffe1ed;
+
+    margin-bottom:35px;
+}
+
+.replay-btn{
+
+    padding:
+        15px 32px;
+
+    border:none;
+
+    border-radius:35px;
+
+    background:
+        linear-gradient(
+            45deg,
+            #ff2d75,
+            #a855f7
+        );
+
+    color:white;
+
+    font-size:1.05rem;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 25px
+        rgba(255,45,117,.55);
+
+    transition:.3s;
+}
+
+.replay-btn:hover{
+
+    transform:
+        scale(1.08);
+
+}
+
+/* ================= FALLING HEARTS ================= */
+
+.falling{
+
+    position:fixed;
+
+    top:-50px;
+
+    z-index:20;
+
+    pointer-events:none;
+
+    animation:
+        falling linear forwards;
+}
+
+@keyframes falling{
+
+    to{
+
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+
+        opacity:0;
+    }
+}
+
+/* ================= FIREWORK ================= */
+
+.firework{
+
+    position:fixed;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    pointer-events:none;
+
+    z-index:30;
+
+    box-shadow:
+        0 0 10px #fff,
+        0 0 20px #ff4f9a,
+        0 0 35px #a855f7;
+
+    animation:
+        firework 1s ease-out forwards;
+}
+
+@keyframes firework{
+
+    from{
+
+        transform:
+            translate(0,0)
+            scale(1);
+
+        opacity:1;
+    }
+
+    to{
+
+        transform:
+            translate(
+                var(--x),
+                var(--y)
+            )
+            scale(.2);
+
+        opacity:0;
+    }
+
+}
+
+/* ================= HEART PULSE ================= */
+
+.big-heart{
+
+    font-size:70px;
+
+    margin-top:20px;
+
+    animation:
+        heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.2);
+    }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    .promise-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .message-section{
+
+        padding:
+            35px 20px;
+
+    }
+
+    .message-section p{
+
+        font-size:1rem;
+
+        line-height:1.8;
+
+    }
+
+    .photo-frame{
+
+        height:
+            min(450px,110vw);
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+
+<div class="background">
+
+```
+<img
+    src="photos/Chhaya%2010.jpeg"
+    alt="Chhaya">
+
+<div class="overlay"></div>
+```
+
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+```
+<div class="small-text">
+    AFTER ALL THE SURPRISES...
+</div>
+
+<h1>
+    Happy Birthday<br>
+    Chhaya ❤️
+</h1>
+
+<h2>
+    You are one of the most beautiful
+    parts of my story.
+</h2>
+
+
+<div class="photo-frame">
+
+    <img
+        src="photos/Chhaya%2010.jpeg"
+        alt="Chhaya">
+
+</div>
+
+<div class="big-heart">
+    ❤️
+</div>
+```
+
+</section>
+
+<!-- LETTER -->
+
+<section class="message-section">
+
+```
+<h2>
+    A Final Message For You 💌
+</h2>
+
+<p>
+
+    Chhaya, today is your special day,
+    but honestly, I feel lucky because
+    I get to celebrate someone who has
+    become so special to me.
+
+    <br><br>
+
+    From the little moments to the
+    beautiful memories we have created,
+    every moment with you means something
+    to me.
+
+    <br><br>
+
+    I may not always have the perfect
+    words to explain everything I feel,
+    but I hope you always know one thing...
+
+    <br><br>
+
+    <strong>
+        You are truly special to me. ❤️
+    </strong>
+
+    <br><br>
+
+    I hope your life is filled with
+    happiness, success, peace,
+    beautiful memories and countless
+    reasons to smile.
+
+    <br><br>
+
+    And I hope that somewhere in all
+    those beautiful moments,
+    I get to be there with you.
+
+</p>
+
+
+<div class="signature">
+    With all my love,<br>
+    Rohit ❤️
+</div>
+```
+
+</section>
+
+<!-- PROMISES -->
+
+<section class="promise">
+
+```
+<h2>
+    Three Little Promises ❤️
+</h2>
+
+
+<div class="promise-grid">
+
+
+    <div class="promise-card">
+
+        <div class="icon">
+            😊
+        </div>
+
+        <h3>
+            Keep Smiling
+        </h3>
+
+        <p>
+            Your smile deserves
+            to stay forever.
+        </p>
+
+    </div>
+
+
+    <div class="promise-card">
+
+        <div class="icon">
+            💕
+        </div>
+
+        <h3>
+            Keep Making Memories
+        </h3>
+
+        <p>
+            There are still so many
+            beautiful moments ahead.
+        </p>
+
+    </div>
+
+
+    <div class="promise-card">
+
+        <div class="icon">
+            ♾️
+        </div>
+
+        <h3>
+            Keep Being You
+        </h3>
+
+        <p>
+            Never change the beautiful
+            person you are.
+        </p>
+
+    </div>
+
+
+</div>
+```
+
+</section>
+
+<!-- FINAL -->
+
+<section class="final-message">
+
+```
+<h2>
+    Forever & Always ❤️
+</h2>
+
+<p>
+    Happy Birthday once again, Chhaya.
+    <br>
+    May your smile always shine brighter
+    than every star in the sky. ✨
+</p>
+
+
+<button
+    class="replay-btn"
+    onclick="replayJourney()">
+
+    🔄 Replay Our Journey
+
+</button>
+```
+
+</section>
+
+<script>
+
+/* =========================
+   FALLING HEARTS
+========================= */
+
+function createHeart(){
+
+    const heart =
+        document.createElement(
+            "div"
+        );
+
+    heart.className =
+        "falling";
+
+    const icons = [
+        "❤️",
+        "💗",
+        "💕",
+        "💖",
+        "💘",
+        "🌹"
+    ];
+
+    heart.innerHTML =
+        icons[
+            Math.floor(
+                Math.random() *
+                icons.length
+            )
+        ];
+
+    heart.style.left =
+        Math.random()*100 + "vw";
+
+    heart.style.fontSize =
+        (15 + Math.random()*25) +
+        "px";
+
+    heart.style.animationDuration =
+        (4 + Math.random()*5) +
+        "s";
+
+    document.body.appendChild(
+        heart
+    );
+
+    setTimeout(
+        function(){
+
+            heart.remove();
+
+        },
+        9000
+    );
+}
+
+setInterval(
+    createHeart,
+    500
+);
+
+
+/* =========================
+   FIREWORKS
+========================= */
+
+function createFirework(){
+
+    const centerX =
+        Math.random()*window.innerWidth;
+
+    const centerY =
+        100 +
+        Math.random() *
+        (window.innerHeight*.55);
+
+
+    for(
+        let i=0;
+        i<35;
+        i++
+    ){
+
+        const particle =
+            document.createElement(
+                "div"
+            );
+
+        particle.className =
+            "firework";
+
+        particle.style.left =
+            centerX + "px";
+
+        particle.style.top =
+            centerY + "px";
+
+
+        const angle =
+            Math.random() *
+            Math.PI *
+            2;
+
+        const distance =
+            50 +
+            Math.random()*140;
+
+        const x =
+            Math.cos(angle) *
+            distance;
+
+        const y =
+            Math.sin(angle) *
+            distance;
+
+
+        particle.style.setProperty(
+            "--x",
+            x + "px"
+        );
+
+        particle.style.setProperty(
+            "--y",
+            y + "px"
+        );
+
+
+        document.body.appendChild(
+            particle
+        );
+
+
+        setTimeout(
+            function(){
+
+                particle.remove();
+
+            },
+            1000
+        );
+
+    }
+
+}
+
+
+/* Start fireworks */
+
+setInterval(
+    createFirework,
+    1800
+);
+
+
+/* =========================
+   REPLAY
+========================= */
+
+function replayJourney(){
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =========================
+   INITIAL FIREWORKS
+========================= */
+
+setTimeout(
+    createFirework,
+    800
+);
+
+setTimeout(
+    createFirework,
+    1600
+);
+
+</script>
+
+</body>
+</html>
