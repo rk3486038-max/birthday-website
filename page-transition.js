@@ -5,86 +5,62 @@
 
   const style = document.createElement("style");
   style.textContent = `
-    #globalPageTransition {
+    #pageTransition {
       position: fixed;
       inset: 0;
-      z-index: 2147483647;
-      pointer-events: none;
-      opacity: 0;
-      background:
-        radial-gradient(circle at center, rgba(255,105,180,.25), transparent 45%),
-        linear-gradient(135deg, #160b24, #4b1238, #100b20);
+      z-index: 999999;
       display: grid;
       place-items: center;
-      transition: opacity .55s ease;
+      background: linear-gradient(135deg, #170b24, #5c1648, #160b24);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 550ms ease;
     }
 
-    #globalPageTransition.active {
+    #pageTransition.active {
       opacity: 1;
     }
 
-    #globalPageTransition .transition-heart {
-      color: #ff8fc7;
-      font-size: clamp(48px, 10vw, 100px);
-      text-shadow: 0 0 25px #ff69b4, 0 0 60px #ff1493;
-      animation: birthdayHeartPulse .8s ease-in-out infinite alternate;
+    #pageTransition span {
+      color: #ff9acb;
+      font-size: 90px;
+      text-shadow: 0 0 25px #ff1493;
+      animation: heartBeat 700ms infinite alternate;
     }
 
-    @keyframes birthdayHeartPulse {
-      from { transform: scale(.8); }
-      to { transform: scale(1.18); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      #globalPageTransition,
-      #globalPageTransition .transition-heart {
-        transition: none;
-        animation: none;
-      }
+    @keyframes heartBeat {
+      to { transform: scale(1.2); }
     }
   `;
+
   document.head.appendChild(style);
 
   const overlay = document.createElement("div");
-  overlay.id = "globalPageTransition";
-  overlay.setAttribute("aria-hidden", "true");
-  overlay.innerHTML = '<div class="transition-heart">♥</div>';
+  overlay.id = "pageTransition";
+  overlay.innerHTML = "<span>♥</span>";
   document.body.appendChild(overlay);
 
-  let transitioning = false;
-
-  function playTransition(destination) {
-    if (transitioning) return;
-    transitioning = true;
-    overlay.classList.add("active");
-
-    window.setTimeout(() => {
-      window.location.href = destination;
-    }, 550);
-  }
+  let navigating = false;
 
   document.addEventListener("click", (event) => {
     const link = event.target.closest("a[href]");
     if (!link || event.defaultPrevented) return;
-    if (event.button !== 0 || event.metaKey || event.ctrlKey ||
+    if (event.button !== 0 || event.ctrlKey || event.metaKey ||
         event.shiftKey || event.altKey || link.target === "_blank" ||
         link.hasAttribute("download")) return;
 
-    const destination = new URL(link.href, window.location.href);
+    const url = new URL(link.href, location.href);
 
-    if (destination.origin !== window.location.origin) return;
-    if (destination.pathname === window.location.pathname &&
-        destination.search === window.location.search &&
-        destination.hash) return;
-
-    if (!/\.(html?)$/i.test(destination.pathname)) return;
+    if (url.origin !== location.origin) return;
+    if (!/\.html?$/i.test(url.pathname)) return;
 
     event.preventDefault();
-    playTransition(destination.href);
-  });
-
-  // Fallback for navigation started directly by JavaScript.
-  window.addEventListener("beforeunload", () => {
+    if (navigating) return;
+    navigating = true;
     overlay.classList.add("active");
+
+    setTimeout(() => {
+      location.href = url.href;
+    }, 550);
   });
 })();
