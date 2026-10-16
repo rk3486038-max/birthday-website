@@ -28,10 +28,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup GitHub Pages
+      - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Prepare website and inject transitions
+      - name: Prepare website
         run: |
           mkdir -p _site
           rsync -av --exclude='.git' --exclude='.github' --exclude='_site' ./ _site/
@@ -42,18 +42,16 @@ jobs:
 
           root = Path("_site")
 
-          for html_file in root.rglob("*.html"):
-              content = html_file.read_text(encoding="utf-8")
+          for file in root.rglob("*.html"):
+              content = file.read_text(encoding="utf-8")
 
               if "page-transition.js" in content:
                   continue
 
-              relative_js = "./page-transition.js"
-              depth = len(html_file.relative_to(root).parts) - 1
-              if depth:
-                  relative_js = "../" * depth + "page-transition.js"
+              depth = len(file.relative_to(root).parts) - 1
+              script = "../" * depth + "page-transition.js"
+              tag = f'<script src="{script}"></script>'
 
-              tag = f'<script src="{relative_js}"></script>'
               updated, count = re.subn(
                   r"</body\s*>",
                   tag + "\n</body>",
@@ -63,17 +61,14 @@ jobs:
               )
 
               if count:
-                  html_file.write_text(updated, encoding="utf-8")
-                  print(f"Injected script into {html_file}")
-              else:
-                  print(f"No closing body tag: {html_file}")
+                  file.write_text(updated, encoding="utf-8")
           PY
 
-      - name: Upload website
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
-      - name: Deploy website
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
