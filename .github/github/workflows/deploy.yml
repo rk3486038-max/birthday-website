@@ -34,23 +34,27 @@ jobs:
       - name: Prepare website
         run: |
           mkdir -p _site
-          rsync -av --exclude='.git' --exclude='.github' --exclude='_site' ./ _site/
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='_site' \
+            ./ _site/
 
           python3 - <<'PY'
           from pathlib import Path
           import re
 
           root = Path("_site")
+          script_path = "/birthday-website/page-transition.js"
 
           for file in root.rglob("*.html"):
               content = file.read_text(encoding="utf-8")
 
+              # Avoid adding the script more than once
               if "page-transition.js" in content:
                   continue
 
-              depth = len(file.relative_to(root).parts) - 1
-              script = "../" * depth + "page-transition.js"
-              tag = f'<script src="{script}"></script>'
+              tag = f'<script src="{script_path}"></script>'
 
               updated, count = re.subn(
                   r"</body\s*>",
@@ -62,7 +66,20 @@ jobs:
 
               if count:
                   file.write_text(updated, encoding="utf-8")
+                  print(f"Added transition script: {file}")
+              else:
+                  print(f"WARNING: No closing body tag found: {file}")
           PY
+
+      - name: Verify transition script
+        run: |
+          test -f _site/page-transition.js || {
+            echo "ERROR: page-transition.js missing from repository root"
+            exit 1
+          }
+
+          echo "Transition script found."
+          find _site -name "*.html" -print
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
